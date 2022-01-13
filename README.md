@@ -1,0 +1,2 @@
+# MTGDeckMaker
+ For learning purposes
