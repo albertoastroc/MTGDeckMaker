@@ -7,6 +7,10 @@
         <entry key="app/src/main/res/drawable-v24/loading_img.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2864583333333333" />
+        <entry key="app/src/main/res/layout/fragment_database_decks.xml" value="0.20364583333333333" />
+        <entry key="app/src/main/res/layout/fragment_edit_deck.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_search_results.xml" value="0.42715502952806533" />
+        <entry key="app/src/main/res/layout/saved_decks_list_item.xml" value="0.20364583333333333" />
       </map>
     </option>
   </component>

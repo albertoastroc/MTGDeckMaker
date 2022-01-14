@@ -1,9 +1,11 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -46,8 +48,12 @@ class EditDeckFragment : Fragment() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
 
-
-
+        //Hide the soft keyboard when this fragment disappears
+        val imm : InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken , 0)
+    }
 
 }

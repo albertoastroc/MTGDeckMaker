@@ -13,7 +13,7 @@
     <string name="about">About this app</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="card_name">Card Name</string>
+    <string name="card_name">Enter Card Name</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="save">Add to deck</string>

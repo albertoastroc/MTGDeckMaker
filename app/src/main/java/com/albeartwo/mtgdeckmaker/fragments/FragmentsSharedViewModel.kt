@@ -1,11 +1,14 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,9 +24,11 @@ import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,8 +71,6 @@ class SharedViewModel @Inject constructor(
                     val dbId = card.let { repository.dbInsertCardCardTable(it) }
                     val deckCardRelation = DeckCardCrossRef(currentDeckId , dbId , oracleId)
                     deckCardRelation.let { repository.dbInsertDeckCardCrossRef(it) }
-
-                } else {
 
                 }
             }
@@ -143,7 +146,6 @@ class ResultListFragment : Fragment() {
         }
 
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
-            Toast.makeText(context , singleCardData.name , Toast.LENGTH_LONG).show()
             sharedViewModel._singleCardData.value = singleCardData
             view?.findNavController()?.navigate(
                 ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
@@ -155,6 +157,13 @@ class ResultListFragment : Fragment() {
 
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        //Hide the soft keyboard when this fragment disappears
+        val imm : InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken , 0)
+    }
 }
 
 @AndroidEntryPoint
@@ -166,6 +175,8 @@ class DisplayCardFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
+
+
 
         val binding = FragmentDisplayCardBinding.inflate(inflater)
 
