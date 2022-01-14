@@ -1,6 +1,6 @@
 # MTGDeckMaker
 
-This app was created for learning purposes and here I keep track of things I'm working on and looking to add.
+This app was created for testing purposes and use this README to track ideas.
 
 - DeckCardList
 
