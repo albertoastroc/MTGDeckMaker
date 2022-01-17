@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gas Price Checker</string>
+    <string name="app_name">MTG Deck Maker</string>
     <string name="API_KEY">apikey 3NS2rbZOXQHk6PkzvGYCUn:7reAA9dJlSrlCJZ3Mud0B8</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
