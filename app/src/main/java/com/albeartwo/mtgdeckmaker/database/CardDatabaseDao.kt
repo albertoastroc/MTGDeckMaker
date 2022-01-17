@@ -16,7 +16,10 @@ interface CardDatabaseDao {
     fun getDecksList() : LiveData<List<Deck>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_id = :deckId )")
-    suspend fun exists(oracleId : String , deckId : Int): Boolean
+    suspend fun cardExists(oracleId : String , deckId : Int): Boolean
+
+    @Query("SELECT EXISTS (SELECT 1 FROM deck_table WHERE UPPER (deck_name) LIKE (:deckName))")
+    suspend fun deckExists(deckName : String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeckCardCrossRef(crossRef : DeckCardCrossRef)

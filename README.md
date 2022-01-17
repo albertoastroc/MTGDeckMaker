@@ -22,11 +22,7 @@ remove type from list item, use recycler view categories to group cards
 
 - Detail Fragment
 
-add viewmodel
-
 -Dependency Injection
-
-set up for network api
 
 -Repository
 

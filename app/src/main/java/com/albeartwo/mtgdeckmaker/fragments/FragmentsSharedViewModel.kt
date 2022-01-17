@@ -216,8 +216,8 @@ class DisplayCardFragment : Fragment() {
 
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         sharedViewModel._singleCardData.value = null
 
     }
