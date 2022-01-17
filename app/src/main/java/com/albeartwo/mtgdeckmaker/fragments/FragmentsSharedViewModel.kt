@@ -129,11 +129,11 @@ class ResultListFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? , savedInstanceState : Bundle?
     ) : View {
 
-        sharedViewModel._cardList.value = null
-
-        sharedViewModel.currentDeckId = ResultListFragmentArgs.fromBundle(requireArguments()).currentDeckId
+//            sharedViewModel._cardList.value = null
 
         val binding = FragmentSearchResultsBinding.inflate(inflater)
+
+        sharedViewModel.currentDeckId = ResultListFragmentArgs.fromBundle(requireArguments()).currentDeckId
 
         binding.lifecycleOwner = this
 
@@ -175,8 +175,6 @@ class DisplayCardFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
-
-
 
         val binding = FragmentDisplayCardBinding.inflate(inflater)
 

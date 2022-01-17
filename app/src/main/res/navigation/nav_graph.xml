@@ -17,7 +17,7 @@
             android:id="@+id/action_resultList_to_displayCardFragment"
             app:destination="@id/displayCardFragment"
             app:popUpTo="@id/resultList"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <argument
             android:name="currentDeckId"
             app:argType="integer" />
