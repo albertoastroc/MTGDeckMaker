@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_deck.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/fragment_search_results.xml" value="0.42715502952806533" />
         <entry key="app/src/main/res/layout/saved_decks_list_item.xml" value="0.20364583333333333" />
+        <entry key="app/src/main/res/menu/edit_deck_menu.xml" value="0.3640625" />
       </map>
     </option>
   </component>

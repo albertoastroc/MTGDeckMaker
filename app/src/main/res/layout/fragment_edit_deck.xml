@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:text="@string/save_new_deck"
+            android:text="Save Button"
             android:textColor="@color/white" />
 
 

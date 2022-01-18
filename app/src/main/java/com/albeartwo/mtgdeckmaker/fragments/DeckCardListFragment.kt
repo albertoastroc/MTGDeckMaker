@@ -1,12 +1,11 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.albeartwo.mtgdeckmaker.R
 import com.albeartwo.mtgdeckmaker.adapters.DeckCardListAdapter
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDeckCardListBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.DeckCardListViewModel
@@ -22,6 +21,8 @@ class DeckCardListFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
+
+        setHasOptionsMenu(true)
 
         val binding = FragmentDeckCardListBinding.inflate(inflater)
 
@@ -76,6 +77,27 @@ class DeckCardListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
+
+        if (viewModel.deckId != null){
+
+            when (item.itemId){
+
+                R.id.editDeckItem -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId !!))
+
+            }
+
+        }
+
+
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
+        inflater.inflate(R.menu.edit_deck_menu, menu)
     }
 
 }

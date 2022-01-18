@@ -12,6 +12,9 @@ interface CardDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeck(deck : Deck)
 
+    @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_id = :deckId")
+    suspend fun changeDeckName(deckName : String, deckId : Int)
+
     @Query("SELECT * from deck_table ORDER BY deck_id DESC")
     fun getDecksList() : LiveData<List<Deck>>
 

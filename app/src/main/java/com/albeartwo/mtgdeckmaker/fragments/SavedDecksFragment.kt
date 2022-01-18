@@ -42,7 +42,7 @@ class SavedDecksFragment : Fragment() {
 
         binding.savedDecksFab.setOnClickListener {
 
-            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToEditDeckFragment())
+            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToEditDeckFragment(0))
 
         }
 

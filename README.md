@@ -6,8 +6,6 @@ This app was created for testing purposes and use this README to track ideas.
 
 - Saved Decks
 
-prevent duplicate deck names
-
 - Home Fragment
 
 - Edit Deck Fragment

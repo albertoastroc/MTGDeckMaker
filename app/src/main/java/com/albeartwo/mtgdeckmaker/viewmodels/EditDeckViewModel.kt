@@ -16,6 +16,16 @@ class EditDeckViewModel @Inject constructor(
     private val repository : Repository
 ) : ViewModel() {
 
+    fun changeDeckName(deck : Deck){
+
+        viewModelScope.launch {
+
+            repository.updateDeckName(deck.deckName, deck.deckId)
+
+        }
+
+    }
+
     fun insertDeck(deck : Deck) {
 
         viewModelScope.launch {

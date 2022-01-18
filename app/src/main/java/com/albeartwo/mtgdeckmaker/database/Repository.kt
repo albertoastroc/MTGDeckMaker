@@ -30,7 +30,7 @@ class Repository @Inject constructor(
 
     suspend fun dbSubtractOneCardQuantity(cardDbId : Long) : Int = cardDatabaseDao.minusOneCardQuantity(cardDbId)
 
-    fun getSingleCardCount(cardDbId : Long) : LiveData<Card> = cardDatabaseDao.getSingleCardCount(cardDbId)
+    suspend fun updateDeckName(deckName : String, deckId : Int) = cardDatabaseDao.changeDeckName(deckName, deckId)
 
     fun nwGetSearchResultsList(inputText : String) = CardApi.retrofitService.getCardListResults(inputText)
 

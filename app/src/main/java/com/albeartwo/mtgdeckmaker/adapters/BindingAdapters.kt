@@ -39,6 +39,7 @@ fun countAdapter(textView : TextView , data : List<DeckWithCards>?) {
     var total = 0
 
     val cardListForCardCounter = data?.first()?.cards
+    val deckName = data?.first()?.deck?.deckName
 
     if (cardListForCardCounter != null){
 
@@ -54,9 +55,9 @@ fun countAdapter(textView : TextView , data : List<DeckWithCards>?) {
 
     when (total){
 
-        0 -> textView.text = "Deck is empty"
-        1 -> textView.text = "1 card in deck"
-        else -> textView.text = "$total cards in deck"
+        0 -> textView.text = "$deckName is empty"
+        1 -> textView.text = "1 card in $deckName"
+        else -> textView.text = "$total cards in $deckName"
 
     }
 }
