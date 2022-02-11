@@ -8,9 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "card_table")
 data class Card(
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "card_db_id")
-    var cardDbId : Long,
+
 
     @ColumnInfo(name = "oracle_id")
     var oracleId : String = "",
@@ -39,6 +37,14 @@ data class Card(
     var thumbnailUrl : String = ""
 
 )
+
+{
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "card_db_id")
+    var cardDbId : Int? = null
+
+}
 
 //Problem cards
 

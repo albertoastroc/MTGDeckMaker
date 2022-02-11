@@ -127,3 +127,5 @@ app/src/.DS_Store
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 *.lock
 *.lock
+*.bin
+*.lock

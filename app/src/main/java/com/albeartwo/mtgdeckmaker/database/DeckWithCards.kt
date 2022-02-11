@@ -8,7 +8,7 @@ data class DeckWithCards(
 
     @Embedded val deck : Deck ,
     @Relation(
-         parentColumn = "deck_id",
+         parentColumn = "deck_db_id",
          entityColumn = "card_db_id",
          associateBy = Junction(DeckCardCrossRef::class)
      )
