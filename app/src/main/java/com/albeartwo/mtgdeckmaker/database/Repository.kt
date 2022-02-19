@@ -10,7 +10,7 @@ class Repository @Inject constructor(
 
     suspend fun dbInsertCardCardTable(card : Card) : Long = cardDatabaseDao.insertCard(card)
 
-    suspend fun dbDeleteCardFromCardTable(cardDbId : Long) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
+    suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
 
     suspend fun dbCardExists(oracleId : String , deckId : Int): Boolean = cardDatabaseDao.cardExists(oracleId, deckId)
 
@@ -26,9 +26,9 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteCrossRef(oracleId : String, deckId : Int) = cardDatabaseDao.deleteFromCrossRef(oracleId, deckId)
 
-    suspend fun dbAddOneCardQuantity(cardDbId : Long) : Int = cardDatabaseDao.plusOneCardQuantity(cardDbId)
+    suspend fun dbAddOneCardQuantity(cardDbId : Int?) : Int = cardDatabaseDao.plusOneCardQuantity(cardDbId)
 
-    suspend fun dbSubtractOneCardQuantity(cardDbId : Long) : Int = cardDatabaseDao.minusOneCardQuantity(cardDbId)
+    suspend fun dbSubtractOneCardQuantity(cardDbId : Int?) : Int = cardDatabaseDao.minusOneCardQuantity(cardDbId)
 
     suspend fun updateDeckName(deckName : String, deckId : Int) = cardDatabaseDao.changeDeckName(deckName, deckId)
 

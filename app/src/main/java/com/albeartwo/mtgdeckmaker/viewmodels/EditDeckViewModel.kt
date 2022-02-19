@@ -20,7 +20,7 @@ class EditDeckViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            repository.updateDeckName(deck.deckName, deck.deckId)
+            deck.deckId?.let { repository.updateDeckName(deck.deckName, it) }
 
         }
 

@@ -34,7 +34,7 @@ class SavedDecksFragment : Fragment() {
 
             findNavController().navigate(
                 SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment(
-                    singleDeckData.deckId
+                    singleDeckData.deckId !!
                 )
             )
             viewModel._singleDeck.value = singleDeckData

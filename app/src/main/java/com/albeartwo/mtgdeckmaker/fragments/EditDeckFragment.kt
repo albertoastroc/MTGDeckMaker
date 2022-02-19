@@ -14,7 +14,6 @@ import com.albeartwo.mtgdeckmaker.viewmodels.EditDeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit_deck.*
 
-
 @AndroidEntryPoint
 class EditDeckFragment : Fragment() {
 
@@ -43,7 +42,7 @@ class EditDeckFragment : Fragment() {
             binding.saveButton.setOnClickListener {
 
                 val deckName = deckNameEditText.text.toString()
-                val deck = Deck(deckId, deckName)
+                val deck = Deck(deckName)
                 viewModel.changeDeckName(deck)
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
@@ -57,7 +56,7 @@ class EditDeckFragment : Fragment() {
             binding.saveButton.setOnClickListener(){
 
                 val deckName = deckNameEditText.text.toString()
-                val deck  = Deck(0, deckName)
+                val deck  = Deck(deckName)
                 viewModel.insertDeck(deck)
 
 

@@ -12,13 +12,13 @@ interface CardDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeck(deck : Deck)
 
-    @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_id = :deckId")
+    @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_db_id = :deckId")
     suspend fun changeDeckName(deckName : String, deckId : Int)
 
-    @Query("SELECT * from deck_table ORDER BY deck_id DESC")
+    @Query("SELECT * from deck_table ORDER BY deck_db_id DESC")
     fun getDecksList() : LiveData<List<Deck>>
 
-    @Query("SELECT EXISTS (SELECT 1 FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_id = :deckId )")
+    @Query("SELECT EXISTS (SELECT 1 FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId )")
     suspend fun cardExists(oracleId : String , deckId : Int): Boolean
 
     @Query("SELECT EXISTS (SELECT 1 FROM deck_table WHERE UPPER (deck_name) LIKE (:deckName))")
@@ -27,24 +27,24 @@ interface CardDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeckCardCrossRef(crossRef : DeckCardCrossRef)
 
-    @Query("DELETE FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_id = :deckId")
+    @Query("DELETE FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId")
     suspend fun deleteFromCrossRef(oracleId : String, deckId : Int)
 
     @Transaction
-    @Query("SELECT * FROM deck_table WHERE deck_id = :deckId")
+    @Query("SELECT * FROM deck_table WHERE deck_db_id = :deckId")
     fun getCardsOfDeck(deckId : Int) : LiveData<List<DeckWithCards>>
 
     @Query("SELECT * FROM card_table WHERE card_db_id = :cardDbId")
     fun getSingleCardCount(cardDbId : Long) : LiveData<Card>
 
     @Query("UPDATE card_table SET card_count = card_count + 1 WHERE card_db_id = :cardDbId")
-    suspend fun plusOneCardQuantity(cardDbId : Long) : Int
+    suspend fun plusOneCardQuantity(cardDbId : kotlin.Int?) : Int
 
     @Query("UPDATE card_table SET card_count = CASE WHEN card_count >= 1 THEN card_count -1 ELSE card_count END WHERE card_db_id = :cardDbId")
-    suspend fun minusOneCardQuantity(cardDbId : Long) : Int
+    suspend fun minusOneCardQuantity(cardDbId : kotlin.Int?) : Int
 
     @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")
-    suspend fun removeFromDatabase(cardDbId : Long) : Int
+    suspend fun removeFromDatabase(cardDbId : kotlin.Int?) : Int
 
 
 }

@@ -11,7 +11,7 @@ class UtilityClass() {
 
             val oracleId = data.oracle_id
 
-            val newCard = Card(0 , oracleId , 1)
+            val newCard = Card(oracleId , 1)
             newCard.cardName = data.name.toString()
             newCard.oracleText = data.oracle_text.toString()
             newCard.power = data.power.toString()
