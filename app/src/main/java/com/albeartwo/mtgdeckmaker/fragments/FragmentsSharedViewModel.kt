@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.CardListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.CardListener
+import com.albeartwo.mtgdeckmaker.database.Card
 import com.albeartwo.mtgdeckmaker.database.DeckCardCrossRef
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding

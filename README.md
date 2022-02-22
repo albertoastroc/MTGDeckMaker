@@ -1,6 +1,6 @@
 # MTGDeckMaker
 
-This app was created for testing purposes and use this README to track ideas.
+Checklist
 
 - DeckCardList
 
@@ -11,12 +11,14 @@ This app was created for testing purposes and use this README to track ideas.
 - Edit Deck Fragment
 
 Allow editing deck name of already saved deck
+add confirmation dialog when trying to delete deck
 
 - ResultList Fragment
 
 - DeckCardList Fragment
 
 remove type from list item, use recycler view categories to group cards
+remove all cards in deck from database
 
 - Detail Fragment
 

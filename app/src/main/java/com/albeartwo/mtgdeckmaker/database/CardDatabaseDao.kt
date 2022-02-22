@@ -27,8 +27,29 @@ interface CardDatabaseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeckCardCrossRef(crossRef : DeckCardCrossRef)
 
+    //deletes one card from cross ref
     @Query("DELETE FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId")
     suspend fun deleteFromCrossRef(oracleId : String, deckId : Int)
+
+    //deletes one card from card table
+    @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")
+    suspend fun removeFromDatabase(cardDbId : kotlin.Int?) : Int
+
+    //gets ids for cards to be deleted
+    @Query("SELECT card_db_id FROM deck_card_cross_ref WHERE deck_db_id = :deckId")
+    suspend fun getCardDbIdsToDelete(deckId : Int) : Array<Int>
+
+    //deletes multiple cards from card table
+    @Query("DELETE FROM card_table WHERE card_db_id in (:idList)")
+    suspend fun deleteDeckContentsFromCardTable(idList : Array<Int>)
+
+    //deletes multiple cards from cross ref
+    @Query("DELETE FROM deck_card_cross_ref WHERE card_db_id in (:idList)")
+    suspend fun deleteDeckContentsFromCrossRef(idList : Array<Int>)
+
+    //deletes deck from deck table
+    @Query("DELETE FROM deck_table WHERE deck_db_id is (:deckId)")
+    suspend fun deleteDeckFromDeckTable(deckId : Int)
 
     @Transaction
     @Query("SELECT * FROM deck_table WHERE deck_db_id = :deckId")
@@ -43,8 +64,7 @@ interface CardDatabaseDao {
     @Query("UPDATE card_table SET card_count = CASE WHEN card_count >= 1 THEN card_count -1 ELSE card_count END WHERE card_db_id = :cardDbId")
     suspend fun minusOneCardQuantity(cardDbId : kotlin.Int?) : Int
 
-    @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")
-    suspend fun removeFromDatabase(cardDbId : kotlin.Int?) : Int
+
 
 
 }

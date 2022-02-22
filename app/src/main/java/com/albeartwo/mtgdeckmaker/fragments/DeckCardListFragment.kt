@@ -72,7 +72,7 @@ class DeckCardListFragment : Fragment() {
 
             when (item.itemId) {
 
-                R.id.editDeckItem -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId !!))
+                R.id.deckCardListItem -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId !!))
 
             }
         }
@@ -83,7 +83,7 @@ class DeckCardListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
-        inflater.inflate(R.menu.edit_deck_menu , menu)
+        inflater.inflate(R.menu.deck_card_list_menu , menu)
     }
 
 }

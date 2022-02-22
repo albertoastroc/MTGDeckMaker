@@ -1,5 +1,6 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
+import android.util.Log.d
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.albeartwo.mtgdeckmaker.database.Deck
@@ -10,12 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class EditDeckViewModel @Inject constructor(
     private val repository : Repository
 ) : ViewModel() {
 
+    //TODO not working properly i think
     fun changeDeckName(deck : Deck){
 
         viewModelScope.launch {
@@ -34,6 +37,16 @@ class EditDeckViewModel @Inject constructor(
 
                 repository.dbInsertDeck(deck)
             }
+        }
+
+    }
+
+    fun deleteDeck(deckId : Int) {
+
+        viewModelScope.launch {
+
+            repository.dbDeleteDeck(deckId)
+
         }
 
     }

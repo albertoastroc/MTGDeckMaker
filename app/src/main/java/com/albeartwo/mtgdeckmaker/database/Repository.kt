@@ -32,6 +32,21 @@ class Repository @Inject constructor(
 
     suspend fun updateDeckName(deckName : String, deckId : Int) = cardDatabaseDao.changeDeckName(deckName, deckId)
 
+    suspend fun dbDeleteDeck(deckId : Int) {
+
+        val ids = cardDatabaseDao.getCardDbIdsToDelete(deckId)
+        cardDatabaseDao.deleteDeckContentsFromCardTable(ids)
+        cardDatabaseDao.deleteDeckContentsFromCrossRef(ids)
+        cardDatabaseDao.deleteDeckFromDeckTable(deckId)
+
+    }
+
+    suspend fun dbDeleteDeckContentsFromCardTable(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCardTable(idList)
+
+    suspend fun dbDeleteDeckContentsFromCrossRef(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCrossRef(idList)
+
+    suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
+
     fun nwGetSearchResultsList(inputText : String) = CardApi.retrofitService.getCardListResults(inputText)
 
     fun nwGetArtCropImage(cardName : String) = CardApi.retrofitService.getCardImage(cardName)

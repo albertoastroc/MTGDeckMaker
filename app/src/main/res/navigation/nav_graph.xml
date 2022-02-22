@@ -80,6 +80,6 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.albeartwo.mtgdeckmaker.fragments.AboutFragment"
-        android:label="fragment_about"
+        android:label="About"
         tools:layout="@layout/fragment_about" />
 </navigation>
