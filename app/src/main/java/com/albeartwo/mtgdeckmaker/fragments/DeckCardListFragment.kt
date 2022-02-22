@@ -40,40 +40,27 @@ class DeckCardListFragment : Fragment() {
                 "plus_one"  -> viewModel.cardQuantAddOne(card)
                 "minus_one" -> {
                     if (card.cardCount == 1) {
-
                         viewModel.removeFromDatabase(card)
-
                     } else {
-
                         viewModel.cardQuantMinusOne(card)
-
                     }
 
                 }
-
                 "root"      -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToDisplayCardFragment(card.cardName))
-
             }
-
             viewModel._singleCard.value = card
-
-
         })
 
+        //Opens fragment that searches for cards
         binding.deckCardListFab.setOnClickListener {
 
-            if (viewModel.deckId != null){
-
+            if (viewModel.deckId != null) {
                 findNavController().navigate(
                     DeckCardListFragmentDirections.actionDeckCardListFragmentToResultList(
                         viewModel.deckId !!
                     )
                 )
-
             }
-
-
-
         }
 
         return binding.root
@@ -81,14 +68,13 @@ class DeckCardListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item : MenuItem) : Boolean {
 
-        if (viewModel.deckId != null){
+        if (viewModel.deckId != null) {
 
-            when (item.itemId){
+            when (item.itemId) {
 
                 R.id.editDeckItem -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId !!))
 
             }
-
         }
 
 
@@ -97,7 +83,7 @@ class DeckCardListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
-        inflater.inflate(R.menu.edit_deck_menu, menu)
+        inflater.inflate(R.menu.edit_deck_menu , menu)
     }
 
 }

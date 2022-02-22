@@ -19,25 +19,17 @@ class DeckCardListViewModel @Inject constructor (
 
     internal val _singleCard = MutableLiveData<Card>()
 
-    val singleCard : LiveData<Card>
-        get() = _singleCard
-
     fun cardQuantAddOne(card : Card){
 
         viewModelScope.launch {
-
             repository.dbAddOneCardQuantity(card.cardDbId)
 
         }
-
-
-
     }
 
     fun cardQuantMinusOne(card : Card){
 
         viewModelScope.launch {
-
             repository.dbSubtractOneCardQuantity(card.cardDbId)
 
         }
@@ -49,8 +41,7 @@ class DeckCardListViewModel @Inject constructor (
     fun removeFromDatabase(card : Card){
 
         viewModelScope.launch {
-
-            if ( deckId != null) {
+            if (deckId != null) {
 
                 repository.dbDeleteCardFromCardTable(card.cardDbId)
                 repository.dbDeleteCrossRef(card.oracleId , deckId)

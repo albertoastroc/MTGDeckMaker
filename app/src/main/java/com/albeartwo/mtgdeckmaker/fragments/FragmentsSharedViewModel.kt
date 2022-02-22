@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,14 +22,12 @@ import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 import retrofit2.Call
 import retrofit2.Callback
+import javax.inject.Inject
 
 
 @HiltViewModel
@@ -100,17 +96,13 @@ class SharedViewModel @Inject constructor(
 
     fun getSingleCard(cardName : String) {
 
-
         repository.nwGetArtCropImage(cardName).enqueue(
             object : Callback<Data> {
                 override fun onResponse(
                     call : Call<Data> ,
                     response : retrofit2.Response<Data>
                 ) {
-
                     _singleCardData.value = response.body()
-
-
                 }
 
                 override fun onFailure(call : Call<Data> , t : Throwable) {
@@ -128,8 +120,6 @@ class ResultListFragment : Fragment() {
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? , savedInstanceState : Bundle?
     ) : View {
-
-//            sharedViewModel._cardList.value = null
 
         val binding = FragmentSearchResultsBinding.inflate(inflater)
 
@@ -180,9 +170,7 @@ class DisplayCardFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        binding.viewModel = sharedViewModel as SharedViewModel
-
-
+        binding.viewModel = sharedViewModel
 
         val args = DisplayCardFragmentArgs.fromBundle(requireArguments()).fromFragment
 
