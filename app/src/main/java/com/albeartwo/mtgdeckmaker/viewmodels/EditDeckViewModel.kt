@@ -19,14 +19,11 @@ class EditDeckViewModel @Inject constructor(
 ) : ViewModel() {
 
     //TODO not working properly i think
-    fun changeDeckName(deck : Deck){
+    fun changeDeckName(deckName : String, deckId : Int){
 
         viewModelScope.launch {
-
-            deck.deckId?.let { repository.updateDeckName(deck.deckName, it) }
-
+            repository.updateDeckName(deckName, deckId)
         }
-
     }
 
     fun insertDeck(deck : Deck) {
@@ -38,7 +35,6 @@ class EditDeckViewModel @Inject constructor(
                 repository.dbInsertDeck(deck)
             }
         }
-
     }
 
     fun deleteDeck(deckId : Int) {
@@ -48,8 +44,5 @@ class EditDeckViewModel @Inject constructor(
             repository.dbDeleteDeck(deckId)
 
         }
-
     }
-
-
 }

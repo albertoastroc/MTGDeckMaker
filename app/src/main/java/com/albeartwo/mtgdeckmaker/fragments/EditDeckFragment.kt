@@ -47,13 +47,9 @@ class EditDeckFragment : Fragment() {
             binding.saveButton.setOnClickListener {
 
                 val deckName = deckNameEditText.text.toString()
-                val deck = Deck(deckName)
-                viewModel.changeDeckName(deck)
+                viewModel.changeDeckName(deckName, deckId)
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
-
-                //show trash icon
-
             }
 
         } else {
