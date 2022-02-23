@@ -20,6 +20,7 @@ class EditDeckFragment : Fragment() {
 
     private val viewModel : EditDeckViewModel by viewModels()
     private var deckId = 0
+    private var newDeck : Boolean = true
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
@@ -39,6 +40,8 @@ class EditDeckFragment : Fragment() {
         //Checks if deck is being edited or new deck is being added
         if (deckId != 0) {
 
+            newDeck = false
+
             binding.saveButton.text = "Change Deck Name"
 
             binding.saveButton.setOnClickListener {
@@ -55,6 +58,8 @@ class EditDeckFragment : Fragment() {
 
         } else {
 
+            newDeck = true
+
             binding.saveButton.text = "Save New Deck"
 
             binding.saveButton.setOnClickListener() {
@@ -63,11 +68,7 @@ class EditDeckFragment : Fragment() {
                 val deck = Deck(deckName)
                 viewModel.insertDeck(deck)
 
-
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
-
-                //hide trash icon
-
             }
 
         }
@@ -95,7 +96,12 @@ class EditDeckFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
+
+
         inflater.inflate(R.menu.edit_deck_menu , menu)
+        if (newDeck) {
+            menu.findItem(R.id.editDeckItem).isVisible = false
+        }
     }
 
 
