@@ -84,15 +84,17 @@ class EditDeckFragment : Fragment() {
     override fun onOptionsItemSelected(item : MenuItem) : Boolean {
 
         when (item.itemId) {
-            R.id.editDeckItem -> viewModel.deleteDeck(deckId)
+            R.id.editDeckItem -> {
 
+                viewModel.deleteDeck(deckId)
+                findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+            }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
-
 
         inflater.inflate(R.menu.edit_deck_menu , menu)
         if (newDeck) {

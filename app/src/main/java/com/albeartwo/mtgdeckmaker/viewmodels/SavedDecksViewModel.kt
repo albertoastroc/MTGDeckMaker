@@ -14,8 +14,4 @@ class SavedDecksViewModel @Inject constructor (
     val decks = repository.dbGetDecksList()
 
     internal val _singleDeck = MutableLiveData<Deck>()
-
-    val singleDeck : LiveData<Deck>
-        get() = _singleDeck
-
 }

@@ -23,7 +23,6 @@ class DeckCardListViewModel @Inject constructor (
 
         viewModelScope.launch {
             repository.dbAddOneCardQuantity(card.cardDbId)
-
         }
     }
 
@@ -31,11 +30,7 @@ class DeckCardListViewModel @Inject constructor (
 
         viewModelScope.launch {
             repository.dbSubtractOneCardQuantity(card.cardDbId)
-
         }
-
-
-
     }
 
     fun removeFromDatabase(card : Card){
@@ -45,11 +40,7 @@ class DeckCardListViewModel @Inject constructor (
 
                 repository.dbDeleteCardFromCardTable(card.cardDbId)
                 repository.dbDeleteCrossRef(card.oracleId , deckId)
-
             }
-
         }
-
     }
-
 }
