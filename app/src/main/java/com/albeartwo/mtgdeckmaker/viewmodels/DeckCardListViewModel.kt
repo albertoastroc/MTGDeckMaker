@@ -8,10 +8,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DeckCardListViewModel @Inject constructor (
+class DeckCardListViewModel @Inject constructor(
     private var repository : Repository ,
     savedStateHandle : SavedStateHandle
-) : ViewModel()  {
+) : ViewModel() {
 
     val deckId : Int? = savedStateHandle["currentDeckId"]
 
@@ -19,21 +19,21 @@ class DeckCardListViewModel @Inject constructor (
 
     internal val _singleCard = MutableLiveData<Card>()
 
-    fun cardQuantAddOne(card : Card){
+    fun cardQuantAddOne(card : Card) {
 
         viewModelScope.launch {
             repository.dbAddOneCardQuantity(card.cardDbId)
         }
     }
 
-    fun cardQuantMinusOne(card : Card){
+    fun cardQuantMinusOne(card : Card) {
 
         viewModelScope.launch {
             repository.dbSubtractOneCardQuantity(card.cardDbId)
         }
     }
 
-    fun removeFromDatabase(card : Card){
+    fun removeFromDatabase(card : Card) {
 
         viewModelScope.launch {
             if (deckId != null) {

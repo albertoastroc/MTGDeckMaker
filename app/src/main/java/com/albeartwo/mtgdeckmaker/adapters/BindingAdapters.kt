@@ -1,6 +1,5 @@
 package com.albeartwo.mtgdeckmaker.adapters
 
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -14,26 +13,26 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 
 @BindingAdapter("cardListData")
-fun bindCardRecyclerView(recyclerView: RecyclerView , data: List<Data>?) {
+fun bindCardRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
 
     val adapter = recyclerView.adapter as CardListAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("deckListData")
-fun bindDeckRecyclerView(recyclerView: RecyclerView , data: List<Deck>?) {
+fun bindDeckRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
 
     val adapter = recyclerView.adapter as DecksListAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("deckCardsListData")
-fun bindDeckCardsRecyclerView(recyclerView: RecyclerView , data: List<DeckWithCards>?) {
+fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWithCards>?) {
 
     val adapter = recyclerView.adapter as DeckCardListAdapter
-    val cardList = data?.first()?.cards?.sortedBy {
-            card -> card.typeLine
-            card.cardName}
+    val cardList = data?.first()?.cards?.sortedWith(
+        compareBy({ it.power } , { it.typeLine })
+    )
     adapter.submitList(cardList)
 }
 
@@ -45,25 +44,24 @@ fun countAdapter(textView : TextView , data : List<DeckWithCards>?) {
     val cardListForCardCounter = data?.first()?.cards
     val deckName = data?.first()?.deck?.deckName
 
-    if (cardListForCardCounter != null){
+    if (cardListForCardCounter != null) {
 
-        for ((index, cardCount) in cardListForCardCounter.withIndex()) {
-
+        for ((index , cardCount) in cardListForCardCounter.withIndex()) {
             val currentCardCount = cardListForCardCounter[index].cardCount
             total += currentCardCount
         }
     }
 
-    when (total){
+    when (total) {
 
-        0 -> textView.text = "$deckName is empty"
-        1 -> textView.text = "1 card in $deckName"
+        0    -> textView.text = "$deckName is empty"
+        1    -> textView.text = "1 card in $deckName"
         else -> textView.text = "$total cards in $deckName"
     }
 }
 
 @BindingAdapter("imageUrl")
-fun bindImage(imgView : ImageView , imgUrl : String?){
+fun bindImage(imgView : ImageView , imgUrl : String?) {
 
     imgUrl?.let {
 
@@ -77,7 +75,7 @@ fun bindImage(imgView : ImageView , imgUrl : String?){
 }
 
 @BindingAdapter("thumbnail")
-fun bindThumbnail(imgView : ImageView, imgUrl : String?){
+fun bindThumbnail(imgView : ImageView , imgUrl : String?) {
 
     imgUrl?.let {
 

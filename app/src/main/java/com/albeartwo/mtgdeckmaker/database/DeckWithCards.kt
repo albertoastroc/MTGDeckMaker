@@ -8,10 +8,10 @@ data class DeckWithCards(
 
     @Embedded val deck : Deck ,
     @Relation(
-         parentColumn = "deck_db_id",
-         entityColumn = "card_db_id",
-         associateBy = Junction(DeckCardCrossRef::class)
-     )
+        parentColumn = "deck_db_id" ,
+        entityColumn = "card_db_id" ,
+        associateBy = Junction(DeckCardCrossRef::class)
+    )
     val cards : List<Card>
 
-    )
+)

@@ -3,7 +3,7 @@ package com.albeartwo.mtgdeckmaker.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
-@Database(entities = [Card::class, Deck::class, DeckCardCrossRef::class], version = 18, exportSchema = false)
+@Database(entities = [Card::class , Deck::class , DeckCardCrossRef::class] , version = 18 , exportSchema = false)
 abstract class CardDatabase : RoomDatabase() {
 
     abstract fun getCardDatabaseDao() : CardDatabaseDao

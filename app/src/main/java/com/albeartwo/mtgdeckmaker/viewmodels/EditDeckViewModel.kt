@@ -19,10 +19,10 @@ class EditDeckViewModel @Inject constructor(
 ) : ViewModel() {
 
     //TODO not working properly i think
-    fun changeDeckName(deckName : String, deckId : Int){
+    fun changeDeckName(deckName : String , deckId : Int) {
 
         viewModelScope.launch {
-            repository.updateDeckName(deckName, deckId)
+            repository.updateDeckName(deckName , deckId)
         }
     }
 
@@ -30,7 +30,7 @@ class EditDeckViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            if(! repository.dbDeckExists(deck.deckName)){
+            if (! repository.dbDeckExists(deck.deckName)) {
 
                 repository.dbInsertDeck(deck)
             }

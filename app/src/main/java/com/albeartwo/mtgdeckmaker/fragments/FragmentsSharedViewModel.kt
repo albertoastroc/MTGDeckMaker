@@ -184,7 +184,7 @@ class DisplayCardFragment : Fragment() {
 
                 sharedViewModel.getSingleCard(args)
                 binding.saveCardButton.visibility = View.INVISIBLE
-                
+
             }
         }
 

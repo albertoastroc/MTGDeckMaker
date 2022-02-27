@@ -20,8 +20,8 @@ object AppModule {
     fun provideDatabase(
         @ApplicationContext app : Context
     ) = Room.databaseBuilder(
-        app,
-        CardDatabase::class.java,
+        app ,
+        CardDatabase::class.java ,
         CARD_DATABASE_NAME
     ).build()
 

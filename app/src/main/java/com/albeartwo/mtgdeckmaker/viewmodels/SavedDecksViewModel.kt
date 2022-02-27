@@ -7,9 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SavedDecksViewModel @Inject constructor (
+class SavedDecksViewModel @Inject constructor(
     private val repository : Repository
-) : ViewModel()  {
+) : ViewModel() {
 
     val decks = repository.dbGetDecksList()
 

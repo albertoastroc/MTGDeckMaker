@@ -13,23 +13,23 @@ interface CardDatabaseDao {
     suspend fun insertDeck(deck : Deck)
 
     @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_db_id = :deckId")
-    suspend fun changeDeckName(deckName : String, deckId : Int)
+    suspend fun changeDeckName(deckName : String , deckId : Int)
 
     @Query("SELECT * from deck_table ORDER BY deck_db_id DESC")
     fun getDecksList() : LiveData<List<Deck>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId )")
-    suspend fun cardExists(oracleId : String , deckId : Int): Boolean
+    suspend fun cardExists(oracleId : String , deckId : Int) : Boolean
 
     @Query("SELECT EXISTS (SELECT 1 FROM deck_table WHERE UPPER (deck_name) LIKE (:deckName))")
-    suspend fun deckExists(deckName : String): Boolean
+    suspend fun deckExists(deckName : String) : Boolean
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeckCardCrossRef(crossRef : DeckCardCrossRef)
 
     //deletes one card from cross ref
     @Query("DELETE FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId")
-    suspend fun deleteFromCrossRef(oracleId : String, deckId : Int)
+    suspend fun deleteFromCrossRef(oracleId : String , deckId : Int)
 
     //deletes one card from card table
     @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")
@@ -63,8 +63,6 @@ interface CardDatabaseDao {
 
     @Query("UPDATE card_table SET card_count = CASE WHEN card_count >= 1 THEN card_count -1 ELSE card_count END WHERE card_db_id = :cardDbId")
     suspend fun minusOneCardQuantity(cardDbId : kotlin.Int?) : Int
-
-
 
 
 }

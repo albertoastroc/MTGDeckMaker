@@ -47,7 +47,7 @@ class EditDeckFragment : Fragment() {
             binding.saveButton.setOnClickListener {
 
                 val deckName = deckNameEditText.text.toString()
-                viewModel.changeDeckName(deckName, deckId)
+                viewModel.changeDeckName(deckName , deckId)
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
             }

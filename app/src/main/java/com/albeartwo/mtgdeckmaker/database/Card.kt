@@ -9,12 +9,11 @@ import androidx.room.PrimaryKey
 data class Card(
 
 
-
     @ColumnInfo(name = "oracle_id")
-    var oracleId : String = "",
+    var oracleId : String = "" ,
 
     @ColumnInfo(name = "card_count")
-    val cardCount : Int,
+    val cardCount : Int ,
 
     @ColumnInfo(name = "card_name")
     var cardName : String = "" ,
@@ -36,9 +35,7 @@ data class Card(
     @ColumnInfo(name = "thumbnail_url")
     var thumbnailUrl : String = ""
 
-)
-
-{
+) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "card_db_id")

@@ -24,11 +24,11 @@ private val retrofit = Retrofit.Builder()
 interface CardApiService {
 
 
-        @GET("cards/search")
-        fun getCardListResults(@Query("q") cardName : String) : Call<GetCardList>
+    @GET("cards/search")
+    fun getCardListResults(@Query("q") cardName : String) : Call<GetCardList>
 
-        @GET("cards/named")
-        fun getCardImage(@Query("exact") cardName : String) : Call<Data>
+    @GET("cards/named")
+    fun getCardImage(@Query("exact") cardName : String) : Call<Data>
 
 }
 

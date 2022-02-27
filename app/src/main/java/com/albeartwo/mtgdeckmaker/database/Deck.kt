@@ -8,11 +8,9 @@ import androidx.room.PrimaryKey
 data class Deck(
 
     @ColumnInfo(name = "deck_name")
-    var deckName : String = "",
+    var deckName : String = "" ,
 
-)
-
-{
+    ) {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "deck_db_id")
