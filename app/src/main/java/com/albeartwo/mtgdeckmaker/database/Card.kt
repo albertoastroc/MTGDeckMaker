@@ -26,14 +26,17 @@ data class Card(
 
     // Can be null
     @ColumnInfo(name = "power")
-    var power : String = "" ,
+    var power : String? = null,
 
     // Can be null
     @ColumnInfo(name = "toughness")
-    var toughness : String = "" ,
+    var toughness : String? = null ,
 
     @ColumnInfo(name = "thumbnail_url")
-    var thumbnailUrl : String = ""
+    var thumbnailUrl : String = "",
+
+    @ColumnInfo(name = "produced_mana")
+    var producedMana : String? = null
 
 ) {
 

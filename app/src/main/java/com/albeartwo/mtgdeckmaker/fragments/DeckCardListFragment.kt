@@ -25,14 +25,11 @@ class DeckCardListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         val binding = FragmentDeckCardListBinding.inflate(inflater)
-
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         //Prevents listItem from blinking when Card.cardCount is updated
         binding.deckCardsListView.itemAnimator = null
-
         binding.deckCardsListView.adapter = (DeckCardListAdapter { card , action ->
 
             when (action) {

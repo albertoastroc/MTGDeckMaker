@@ -18,6 +18,7 @@ class UtilityClass() {
             newCard.toughness = data.toughness.toString()
             newCard.typeLine = data.type_line.toString()
             newCard.thumbnailUrl = data.image_uris?.art_crop.toString()
+            newCard.producedMana = data.produced_mana.toString()
 
             return newCard
         }

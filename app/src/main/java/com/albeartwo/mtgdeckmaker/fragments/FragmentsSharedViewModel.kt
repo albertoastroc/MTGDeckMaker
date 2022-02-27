@@ -169,9 +169,7 @@ class DisplayCardFragment : Fragment() {
     ) : View {
 
         val binding = FragmentDisplayCardBinding.inflate(inflater)
-
         binding.lifecycleOwner = this
-
         binding.viewModel = sharedViewModel
 
         val args = DisplayCardFragmentArgs.fromBundle(requireArguments()).fromFragment

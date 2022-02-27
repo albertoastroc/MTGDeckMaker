@@ -31,7 +31,7 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
 
     val adapter = recyclerView.adapter as DeckCardListAdapter
     val cardList = data?.first()?.cards?.sortedWith(
-        compareBy({ it.power } , { it.typeLine })
+        compareBy( {it.producedMana},{ it.power }  , { it.typeLine })
     )
     adapter.submitList(cardList)
 }

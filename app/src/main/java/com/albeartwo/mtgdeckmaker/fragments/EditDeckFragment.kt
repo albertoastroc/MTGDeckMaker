@@ -1,6 +1,7 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -32,9 +33,7 @@ class EditDeckFragment : Fragment() {
         deckId = EditDeckFragmentArgs.fromBundle(requireArguments()).deckId
 
         val binding = FragmentEditDeckBinding.inflate(inflater)
-
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         //Checks if deck is being edited or new deck is being added
@@ -43,7 +42,6 @@ class EditDeckFragment : Fragment() {
             newDeck = false
 
             binding.saveButton.text = "Change Deck Name"
-
             binding.saveButton.setOnClickListener {
 
                 val deckName = deckNameEditText.text.toString()
@@ -57,7 +55,6 @@ class EditDeckFragment : Fragment() {
             newDeck = true
 
             binding.saveButton.text = "Save New Deck"
-
             binding.saveButton.setOnClickListener() {
 
                 val deckName = deckNameEditText.text.toString()
@@ -85,8 +82,17 @@ class EditDeckFragment : Fragment() {
         when (item.itemId) {
             R.id.editDeckItem -> {
 
-                viewModel.deleteDeck(deckId)
-                findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+                AlertDialog.Builder(context)
+                    .setTitle("Delete deck")
+                    .setMessage("Are you sure you want to delete this deck?")
+                    .setPositiveButton("DELETE") { _ , _ ->
+                        viewModel.deleteDeck(deckId)
+                        findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+                    }
+                    .setNegativeButton("CANCEL" , null)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
+
             }
         }
 

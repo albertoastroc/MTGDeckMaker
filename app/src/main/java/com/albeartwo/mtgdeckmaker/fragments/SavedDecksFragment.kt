@@ -27,9 +27,7 @@ class SavedDecksFragment : Fragment() {
         val binding = FragmentDatabaseDecksBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
-
         binding.decksListView.adapter = DecksListAdapter(DecksListener { singleDeckData ->
 
             findNavController().navigate(

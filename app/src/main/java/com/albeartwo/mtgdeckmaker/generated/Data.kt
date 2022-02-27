@@ -49,6 +49,7 @@ data class Data(
     val prices: Prices? = null ,
     val prints_search_uri: String? = null ,
     val promo: Boolean? = null ,
+    val produced_mana : List<String>? = null,
     val purchase_uris: PurchaseUris? = null ,
     val rarity: String? = null ,
     val related_uris: RelatedUris? = null ,
