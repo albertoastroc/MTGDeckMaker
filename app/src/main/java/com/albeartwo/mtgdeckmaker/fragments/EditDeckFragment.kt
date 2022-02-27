@@ -66,7 +66,6 @@ class EditDeckFragment : Fragment() {
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
             }
-
         }
 
         return binding.root
