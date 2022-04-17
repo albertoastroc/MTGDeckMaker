@@ -51,9 +51,9 @@ class CardListAdapter(val clickListener : CardListener) : ListAdapter<Data , Car
 }
 
 
-class CardListener(val clickListener : (singleCardData : Resource<Data>) -> Unit) {
+class CardListener(val clickListener : (singleCardData : Data) -> Unit) {
 
-    fun onClick(data : Resource<Data>) {
+    fun onClick(data : Data) {
 
         clickListener(data)
     }

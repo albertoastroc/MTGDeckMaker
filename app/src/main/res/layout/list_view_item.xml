@@ -21,7 +21,7 @@
     <data>
         <variable
             name="card"
-            type="com.albeartwo.mtgdeckmaker.database.Card" />
+            type="com.albeartwo.mtgdeckmaker.generated.Data" />
 
         <variable
             name="clickListener"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="@{card.cardName}"
+            android:text="@{card.name}"
             />
 
         <TextView
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="@{card.oracleId}"/>
+            android:text="@{card.oracle_id}"/>
 
 
     </LinearLayout>
