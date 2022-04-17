@@ -1,14 +1,32 @@
 package com.albeartwo.mtgdeckmaker.database
 
 import androidx.lifecycle.LiveData
-import com.albeartwo.mtgdeckmaker.network.CardApi
+import com.albeartwo.mtgdeckmaker.generated.Data
+import com.albeartwo.mtgdeckmaker.generated.GetCardList
+import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
+import com.albeartwo.mtgdeckmaker.other.Resource
+import java.lang.Exception
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    val cardDatabaseDao : CardDatabaseDao
+    private val cardDatabaseDao : CardDatabaseDao ,
+    private val scryfallAPI : ScryfallApiService
 ) {
 
+
+    //this
     suspend fun dbInsertCardCardTable(card : Card) : Long = cardDatabaseDao.insertCard(card)
+
+    //this
+    suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
+
+    suspend fun insertCardIntoDb(card : Card, crossRef : DeckCardCrossRef) {
+
+
+
+    }
+
+
 
     suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
 
@@ -21,8 +39,6 @@ class Repository @Inject constructor(
     fun dbGetDecksList() : LiveData<List<Deck>> = cardDatabaseDao.getDecksList()
 
     fun dbGetCardsOfDeck(deckId : Int) : LiveData<List<DeckWithCards>> = cardDatabaseDao.getCardsOfDeck(deckId)
-
-    suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
 
     suspend fun dbDeleteCrossRef(oracleId : String , deckId : Int) = cardDatabaseDao.deleteFromCrossRef(oracleId , deckId)
 
@@ -47,8 +63,47 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
-    fun nwGetSearchResultsList(inputText : String) = CardApi.retrofitService.getCardListResults(inputText)
+    suspend fun nwGetSearchResultsList(listQuery : String) : Resource<GetCardList> {
 
-    fun nwGetArtCropImage(cardName : String) = CardApi.retrofitService.getCardImage(cardName)
+        return try {
 
+            val response = scryfallAPI.getCardListResults(listQuery)
+
+            if (response.isSuccessful) {
+
+                response.body()?.let {
+                    return@let Resource.success(it)
+                } ?: Resource.error("An unknown error has occured" , null)
+            } else {
+
+                Resource.error("An unknown error has occured" , null)
+            }
+
+
+        } catch (e : Exception) {
+            Resource.error("Couldn't reach the server.  Check your internet connection" , null)
+        }
+    }
+
+    fun nwGetSingleCardData(imageQuery : String) : Resource<Data> {
+
+        return try {
+
+            val response = scryfallAPI.getSingleCardData(imageQuery)
+
+            if (response.isSuccessful) {
+
+                response.body()?.let {
+                    return@let Resource.success(it)
+                } ?: Resource.error("An unknown error has occured" , null)
+            } else {
+
+                Resource.error("An unknown error has occured" , null)
+            }
+
+
+        } catch (e : Exception) {
+            Resource.error("Couldn't reach the server.  Check your internet connection" , null)
+        }
+    }
 }

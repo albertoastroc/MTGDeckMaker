@@ -8,12 +8,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "card_table")
 data class Card(
 
+    @ColumnInfo(name = "card_count")
+    val cardCount : Int = 1,
 
     @ColumnInfo(name = "oracle_id")
     var oracleId : String = "" ,
-
-    @ColumnInfo(name = "card_count")
-    val cardCount : Int ,
 
     @ColumnInfo(name = "card_name")
     var cardName : String = "" ,

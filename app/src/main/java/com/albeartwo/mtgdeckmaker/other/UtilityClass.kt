@@ -7,18 +7,24 @@ class UtilityClass() {
 
     companion object {
 
-        fun convertDataToCard(data : Data) : Card {
+        fun convertDataToCard(cardData : Resource<Data>) : Card {
 
-            val oracleId = data.oracle_id
+            val cardProperties = cardData.data
 
-            val newCard = Card(oracleId , 1)
-            newCard.cardName = data.name.toString()
-            newCard.oracleText = data.oracle_text.toString()
-            newCard.power = data.power.toString()
-            newCard.toughness = data.toughness.toString()
-            newCard.typeLine = data.type_line.toString()
-            newCard.thumbnailUrl = data.image_uris?.art_crop.toString()
-            newCard.producedMana = data.produced_mana.toString()
+            val newCard = Card()
+
+            if (cardProperties != null) {
+
+                newCard.oracleId = cardProperties.oracle_id
+                newCard.cardName = cardProperties.name.toString()
+                newCard.oracleText = cardProperties.oracle_text.toString()
+                newCard.power = cardProperties.power.toString()
+                newCard.toughness = cardProperties.toughness.toString()
+                newCard.typeLine = cardProperties.type_line.toString()
+                newCard.thumbnailUrl = cardProperties.image_uris?.art_crop.toString()
+                newCard.producedMana = cardProperties.produced_mana.toString()
+
+            }
 
             return newCard
         }

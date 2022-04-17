@@ -10,25 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.CardListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.CardListener
-import com.albeartwo.mtgdeckmaker.database.Card
 import com.albeartwo.mtgdeckmaker.database.DeckCardCrossRef
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
+import com.albeartwo.mtgdeckmaker.other.Resource
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
 import javax.inject.Inject
 
 
@@ -37,22 +34,29 @@ class SharedViewModel @Inject constructor(
     private val repository : Repository ,
 ) : ViewModel() {
 
-    private val _properties = MutableLiveData<GetCardList>()
+    suspend fun getSearchResults(searchQueryCardList : String) {
 
-    val properties : LiveData<GetCardList>
-        get() = _properties
+        val searchResults = repository.nwGetSearchResultsList(searchQueryCardList)
+        _cardList.value = searchResults
+    }
 
-    internal val _cardList = MutableLiveData<List<Data>>()
+    suspend fun getSingleCardData(searchQueryCard : String) {
 
-    val cardList : LiveData<List<Data>>
+        val searchResults = repository.nwGetSingleCardData(searchQueryCard)
+        _singleCardData.value = searchResults
+    }
+
+    val _cardList = MutableLiveData<Resource<GetCardList>>()
+
+    val cardList : LiveData<Resource<GetCardList>>
         get() = _cardList
 
-    internal val _singleCardData = MutableLiveData<Data>()
+    val _singleCardData = MutableLiveData<Resource<Data>>()
 
-    val singleCardData : LiveData<Data>
+    val singleCardData : LiveData<Resource<Data>>
         get() = _singleCardData
 
-    internal var currentDeckId : Int = 0
+    val currentDeckId : Int = 0
 
     fun saveCard() {
 
@@ -75,43 +79,43 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getSearchResults(searchInput : String) {
-
-
-        repository.nwGetSearchResultsList(searchInput).enqueue(
-            object : Callback<GetCardList> {
-                override fun onResponse(
-                    call : Call<GetCardList> ,
-                    response : retrofit2.Response<GetCardList>
-                ) {
-
-                    _properties.value = response.body()
-                    _cardList.value = properties.value?.data
-
-                }
-
-                override fun onFailure(call : Call<GetCardList> , t : Throwable) {
-
-                }
-            })
-    }
-
-    fun getSingleCard(cardName : String) {
-
-        repository.nwGetArtCropImage(cardName).enqueue(
-            object : Callback<Data> {
-                override fun onResponse(
-                    call : Call<Data> ,
-                    response : retrofit2.Response<Data>
-                ) {
-                    _singleCardData.value = response.body()
-                }
-
-                override fun onFailure(call : Call<Data> , t : Throwable) {
-
-                }
-            })
-    }
+//    fun getSearchResults(searchInput : String) {
+//
+//
+//        repository.nwGetSearchResultsList(searchInput).enqueue(
+//            object : Callback<GetCardList> {
+//                override fun onResponse(
+//                    call : Call<GetCardList> ,
+//                    response : retrofit2.Response<GetCardList>
+//                ) {
+//
+//                    _properties.value = response.body()
+//                    _cardList.value = properties.value?.data
+//
+//                }
+//
+//                override fun onFailure(call : Call<GetCardList> , t : Throwable) {
+//
+//                }
+//            })
+//    }
+//
+//    fun getSingleCard(cardName : String) {
+//
+//        repository.nwGetArtCropImage(cardName).enqueue(
+//            object : Callback<Data> {
+//                override fun onResponse(
+//                    call : Call<Data> ,
+//                    response : retrofit2.Response<Data>
+//                ) {
+//                    _singleCardData.value = response.body()
+//                }
+//
+//                override fun onFailure(call : Call<Data> , t : Throwable) {
+//
+//                }
+//            })
+//    }
 }
 
 @AndroidEntryPoint
