@@ -34,18 +34,6 @@ class SharedViewModel @Inject constructor(
     private val repository : Repository ,
 ) : ViewModel() {
 
-    suspend fun getSearchResults(searchQueryCardList : String) {
-
-        val searchResults = repository.nwGetSearchResultsList(searchQueryCardList)
-        _cardList.value = searchResults
-    }
-
-    suspend fun getSingleCardData(searchQueryCard : String) {
-
-        val searchResults = repository.nwGetSingleCardData(searchQueryCard)
-        _singleCardData.value = searchResults
-    }
-
     val _cardList = MutableLiveData<Resource<GetCardList>>()
 
     val cardList : LiveData<Resource<GetCardList>>
@@ -56,7 +44,26 @@ class SharedViewModel @Inject constructor(
     val singleCardData : LiveData<Resource<Data>>
         get() = _singleCardData
 
-    val currentDeckId : Int = 0
+    var currentDeckId : Int = 0
+
+
+    fun getSearchResults(searchQueryCardList : String) {
+
+        viewModelScope.launch {
+
+            val searchResults = repository.nwGetSearchResultsList(searchQueryCardList)
+            _cardList.value = searchResults
+        }
+    }
+
+    fun getSingleCardData(searchQueryCard : String) {
+
+        viewModelScope.launch {
+
+            val searchResults = repository.nwGetSingleCardData(searchQueryCard)
+            _singleCardData.value = searchResults
+        }
+    }
 
     fun saveCard() {
 
@@ -64,58 +71,9 @@ class SharedViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            val oracleId = card?.oracleId
-
-            if (oracleId != null) {
-
-                if (! oracleId.let { repository.dbCardExists(it , currentDeckId) }) {
-
-                    val dbId = card.let { repository.dbInsertCardCardTable(it) }
-                    val deckCardRelation = DeckCardCrossRef(currentDeckId , dbId , oracleId)
-                    deckCardRelation.let { repository.dbInsertDeckCardCrossRef(it) }
-
-                }
-            }
+            card?.let { repository.insertCardIntoDb(it , currentDeckId) }
         }
     }
-
-//    fun getSearchResults(searchInput : String) {
-//
-//
-//        repository.nwGetSearchResultsList(searchInput).enqueue(
-//            object : Callback<GetCardList> {
-//                override fun onResponse(
-//                    call : Call<GetCardList> ,
-//                    response : retrofit2.Response<GetCardList>
-//                ) {
-//
-//                    _properties.value = response.body()
-//                    _cardList.value = properties.value?.data
-//
-//                }
-//
-//                override fun onFailure(call : Call<GetCardList> , t : Throwable) {
-//
-//                }
-//            })
-//    }
-//
-//    fun getSingleCard(cardName : String) {
-//
-//        repository.nwGetArtCropImage(cardName).enqueue(
-//            object : Callback<Data> {
-//                override fun onResponse(
-//                    call : Call<Data> ,
-//                    response : retrofit2.Response<Data>
-//                ) {
-//                    _singleCardData.value = response.body()
-//                }
-//
-//                override fun onFailure(call : Call<Data> , t : Throwable) {
-//
-//                }
-//            })
-//    }
 }
 
 @AndroidEntryPoint
@@ -138,7 +96,6 @@ class ResultListFragment : Fragment() {
         binding.executeSearchIv.setOnClickListener {
 
             sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
-
         }
 
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
@@ -146,7 +103,6 @@ class ResultListFragment : Fragment() {
             view?.findNavController()?.navigate(
                 ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
             )
-
         })
 
         return binding.root
@@ -184,9 +140,8 @@ class DisplayCardFragment : Fragment() {
             "results" -> {}
             else      -> {
 
-                sharedViewModel.getSingleCard(args)
+                sharedViewModel.getSingleCardData(args)
                 binding.saveCardButton.visibility = View.INVISIBLE
-
             }
         }
 
@@ -209,7 +164,6 @@ class DisplayCardFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         sharedViewModel._singleCardData.value = null
-
     }
 }
 

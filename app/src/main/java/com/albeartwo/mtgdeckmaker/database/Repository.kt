@@ -20,12 +20,18 @@ class Repository @Inject constructor(
     //this
     suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
 
-    suspend fun insertCardIntoDb(card : Card, crossRef : DeckCardCrossRef) {
+    suspend fun insertCardIntoDb(card : Card , currentDeckId : Int) {
 
+        val oracleId = card.oracleId
 
+        if (! dbCardExists(oracleId , currentDeckId)) {
 
+            val dbId = card.let { dbInsertCardCardTable(it) }
+            val deckCardRelation = DeckCardCrossRef(currentDeckId , dbId , oracleId)
+            deckCardRelation.let { dbInsertDeckCardCrossRef(it) }
+
+        }
     }
-
 
 
     suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
