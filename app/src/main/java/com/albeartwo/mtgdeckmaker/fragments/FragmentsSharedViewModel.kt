@@ -15,6 +15,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.CardListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.CardListener
+import com.albeartwo.mtgdeckmaker.database.DeckCardCrossRef
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
@@ -55,11 +56,11 @@ class SharedViewModel @Inject constructor(
         }
     }
 
-    fun getCardImageForDisplayFragment(searchQueryCard : String) {
+    fun getSingleCardData(searchQueryCard : String) {
 
         viewModelScope.launch {
 
-            val searchResults = repository.nwGetSingleCardImage(searchQueryCard)
+            val searchResults = repository.nwGetSingleCardData(searchQueryCard)
             _singleCardData.value = searchResults
         }
     }
@@ -73,96 +74,96 @@ class SharedViewModel @Inject constructor(
             card?.let { repository.insertCardIntoDb(it , currentDeckId) }
         }
     }
+}
 
-    @AndroidEntryPoint
-    class ResultListFragment : Fragment() {
+@AndroidEntryPoint
+class ResultListFragment : Fragment() {
 
-        private val sharedViewModel : SharedViewModel by activityViewModels()
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
-        override fun onCreateView(
-            inflater : LayoutInflater , container : ViewGroup? , savedInstanceState : Bundle?
-        ) : View {
+    override fun onCreateView(
+        inflater : LayoutInflater , container : ViewGroup? , savedInstanceState : Bundle?
+    ) : View {
 
-            val binding = FragmentSearchResultsBinding.inflate(inflater)
+        val binding = FragmentSearchResultsBinding.inflate(inflater)
 
-            sharedViewModel.currentDeckId = ResultListFragmentArgs.fromBundle(requireArguments()).currentDeckId
+        sharedViewModel.currentDeckId = ResultListFragmentArgs.fromBundle(requireArguments()).currentDeckId
 
-            binding.lifecycleOwner = this
+        binding.lifecycleOwner = this
 
-            binding.viewModel = sharedViewModel
+        binding.viewModel = sharedViewModel
 
-            binding.executeSearchIv.setOnClickListener {
+        binding.executeSearchIv.setOnClickListener {
 
-                sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
-            }
-
-            binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
-                sharedViewModel._singleCardData.value = Resource.success(singleCardData)
-                view?.findNavController()?.navigate(
-                    ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
-                )
-            })
-
-            return binding.root
-
+            sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
-        override fun onPause() {
-            super.onPause()
+        binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
+            sharedViewModel._singleCardData.value = singleCardData
+            view?.findNavController()?.navigate(
+                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
+            )
+        })
 
-            //Hide the soft keyboard when this fragment disappears
-            val imm : InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(requireView().windowToken , 0)
-        }
+        return binding.root
+
     }
 
-    @AndroidEntryPoint
-    class DisplayCardFragment : Fragment() {
+    override fun onPause() {
+        super.onPause()
 
-        private val sharedViewModel : SharedViewModel by activityViewModels()
+        //Hide the soft keyboard when this fragment disappears
+        val imm : InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken , 0)
+    }
+}
 
-        override fun onCreateView(
-            inflater : LayoutInflater , container : ViewGroup? ,
-            savedInstanceState : Bundle?
-        ) : View {
+@AndroidEntryPoint
+class DisplayCardFragment : Fragment() {
 
-            val binding = FragmentDisplayCardBinding.inflate(inflater)
-            binding.lifecycleOwner = this
-            binding.viewModel = sharedViewModel
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
-            val args = DisplayCardFragmentArgs.fromBundle(requireArguments()).fromFragment
+    override fun onCreateView(
+        inflater : LayoutInflater , container : ViewGroup? ,
+        savedInstanceState : Bundle?
+    ) : View {
 
-            //Checks what fragment was used to navigate here
-            when (args) {
+        val binding = FragmentDisplayCardBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        binding.viewModel = sharedViewModel
 
-                "results" -> {}
-                else      -> {
+        val args = DisplayCardFragmentArgs.fromBundle(requireArguments()).fromFragment
 
-                    sharedViewModel.getCardImageForDisplayFragment(args)
-                    binding.saveCardButton.visibility = View.INVISIBLE
-                }
+        //Checks what fragment was used to navigate here
+        when (args) {
+
+            "results" -> {}
+            else      -> {
+
+                sharedViewModel.getSingleCardData(args)
+                binding.saveCardButton.visibility = View.INVISIBLE
             }
+        }
 
-            binding.saveCardButton.setOnClickListener {
+        binding.saveCardButton.setOnClickListener {
 
-                sharedViewModel.saveCard()
+            sharedViewModel.saveCard()
 
-                it.findNavController().navigate(
+            it.findNavController().navigate(
 
-                    DisplayCardFragmentDirections.actionDisplayCardFragmentToDeckCardListFragment(
-                        sharedViewModel.currentDeckId
-                    )
+                DisplayCardFragmentDirections.actionDisplayCardFragmentToDeckCardListFragment(
+                    sharedViewModel.currentDeckId
                 )
-            }
-
-            return binding.root
-
+            )
         }
 
-        override fun onDestroy() {
-            super.onDestroy()
-            sharedViewModel._singleCardData.value = null
-        }
+        return binding.root
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedViewModel._singleCardData.value = null
     }
 }
 

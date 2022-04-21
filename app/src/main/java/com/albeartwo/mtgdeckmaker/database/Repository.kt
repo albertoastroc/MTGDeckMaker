@@ -14,8 +14,10 @@ class Repository @Inject constructor(
 ) {
 
 
+    //this
     suspend fun dbInsertCardCardTable(card : Card) : Long = cardDatabaseDao.insertCard(card)
 
+    //this
     suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
 
     suspend fun insertCardIntoDb(card : Card , currentDeckId : Int) {
@@ -61,7 +63,13 @@ class Repository @Inject constructor(
 
     }
 
-    fun nwGetSearchResultsList(listQuery : String) : Resource<GetCardList> {
+    suspend fun dbDeleteDeckContentsFromCardTable(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCardTable(idList)
+
+    suspend fun dbDeleteDeckContentsFromCrossRef(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCrossRef(idList)
+
+    suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
+
+    suspend fun nwGetSearchResultsList(listQuery : String) : Resource<GetCardList> {
 
         return try {
 
@@ -76,12 +84,14 @@ class Repository @Inject constructor(
 
                 Resource.error("An unknown error has occured" , null)
             }
+
+
         } catch (e : Exception) {
             Resource.error("Couldn't reach the server.  Check your internet connection" , null)
         }
     }
 
-    fun nwGetSingleCardImage(imageQuery : String) : Resource<Data> {
+    fun nwGetSingleCardData(imageQuery : String) : Resource<Data> {
 
         return try {
 
@@ -96,6 +106,8 @@ class Repository @Inject constructor(
 
                 Resource.error("An unknown error has occured" , null)
             }
+
+
         } catch (e : Exception) {
             Resource.error("Couldn't reach the server.  Check your internet connection" , null)
         }
