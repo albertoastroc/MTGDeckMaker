@@ -98,12 +98,12 @@ class ResultListFragment : Fragment() {
             sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
-//        binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
-//            sharedViewModel._singleCardData.value = singleCardData
-//            view?.findNavController()?.navigate(
-//                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
-//            )
-//        })
+        binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
+            sharedViewModel._singleCardData.value = singleCardData
+            view?.findNavController()?.navigate(
+                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
+            )
+        })
 
         return binding.root
 
