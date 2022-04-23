@@ -14,10 +14,10 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 
 @BindingAdapter("cardListData")
-fun bindCardRecyclerView(recyclerView : RecyclerView , data : GetCardList?) {
+fun bindCardRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
 
     val adapter = recyclerView.adapter as CardListAdapter
-    adapter.submitList(data?.data)
+    adapter.submitList(data)
 }
 
 @BindingAdapter("deckListData")

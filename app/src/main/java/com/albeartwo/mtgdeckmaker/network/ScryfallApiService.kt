@@ -16,9 +16,9 @@ interface ScryfallApiService {
 
 
     @GET("cards/search")
-    fun getCardListResults(@Query("q") cardName : String) : GetCardList
+    suspend fun getCardListResults(@Query("q") cardName : String) : GetCardList
 
     @GET("cards/named")
-    fun getSingleCardData(@Query("exact") cardName : String) :Data
+    suspend fun getSingleCardData(@Query("exact") cardName : String) :Data
 
 }

@@ -23,6 +23,7 @@ import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.android.synthetic.main.fragment_search_results.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -51,6 +52,7 @@ class SharedViewModel @Inject constructor(
 
             val searchResults = repository.nwGetSearchResultsList(searchQueryCardList)
             _cardList.value = searchResults
+
         }
     }
 
@@ -96,12 +98,12 @@ class ResultListFragment : Fragment() {
             sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
-        binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
-            sharedViewModel._singleCardData.value = singleCardData
-            view?.findNavController()?.navigate(
-                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
-            )
-        })
+//        binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
+//            sharedViewModel._singleCardData.value = singleCardData
+//            view?.findNavController()?.navigate(
+//                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
+//            )
+//        })
 
         return binding.root
 

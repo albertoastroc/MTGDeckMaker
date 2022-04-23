@@ -72,7 +72,7 @@ class Repository @Inject constructor(
         return scryfallAPI.getCardListResults(listQuery)
     }
 
-    fun nwGetSingleCardImage(imageQuery : String) : Data {
+    suspend fun nwGetSingleCardImage(imageQuery : String) : Data {
 
         return scryfallAPI.getSingleCardData(imageQuery)
     }
