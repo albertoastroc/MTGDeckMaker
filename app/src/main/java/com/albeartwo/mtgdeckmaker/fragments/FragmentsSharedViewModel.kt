@@ -15,13 +15,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.CardListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.CardListener
-import com.albeartwo.mtgdeckmaker.database.DeckCardCrossRef
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
-import com.albeartwo.mtgdeckmaker.other.Resource
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,14 +32,14 @@ class SharedViewModel @Inject constructor(
     private val repository : Repository ,
 ) : ViewModel() {
 
-    val _cardList = MutableLiveData<Resource<GetCardList>>()
+    val _cardList = MutableLiveData<GetCardList>()
 
-    val cardList : LiveData<Resource<GetCardList>>
+    val cardList : LiveData<GetCardList>
         get() = _cardList
 
-    val _singleCardData = MutableLiveData<Resource<Data>>()
+    val _singleCardData = MutableLiveData<Data>()
 
-    val singleCardData : LiveData<Resource<Data>>
+    val singleCardData : LiveData<Data>
         get() = _singleCardData
 
     var currentDeckId : Int = 0
@@ -60,7 +58,7 @@ class SharedViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            val searchResults = repository.nwGetSingleCardData(searchQueryCard)
+            val searchResults = repository.nwGetSingleCardImage(searchQueryCard)
             _singleCardData.value = searchResults
         }
     }

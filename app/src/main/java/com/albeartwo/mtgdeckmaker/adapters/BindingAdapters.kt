@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.database.DeckWithCards
 import com.albeartwo.mtgdeckmaker.generated.Data
+import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 
 @BindingAdapter("cardListData")
-fun bindCardRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
+fun bindCardRecyclerView(recyclerView : RecyclerView , data : GetCardList?) {
 
     val adapter = recyclerView.adapter as CardListAdapter
-    adapter.submitList(data)
+    adapter.submitList(data?.data)
 }
 
 @BindingAdapter("deckListData")

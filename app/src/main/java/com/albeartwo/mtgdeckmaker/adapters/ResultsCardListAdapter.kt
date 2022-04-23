@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.albeartwo.mtgdeckmaker.databinding.ListViewItemBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
-import com.albeartwo.mtgdeckmaker.other.Resource
 
 class CardListAdapter(val clickListener : CardListener) : ListAdapter<Data , CardListAdapter.CardViewHolder>(DiffCallback) {
 

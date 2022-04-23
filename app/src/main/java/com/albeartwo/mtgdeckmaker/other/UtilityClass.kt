@@ -3,28 +3,22 @@ package com.albeartwo.mtgdeckmaker.other
 import com.albeartwo.mtgdeckmaker.database.Card
 import com.albeartwo.mtgdeckmaker.generated.Data
 
-class UtilityClass() {
+class UtilityClass {
 
     companion object {
 
-        fun convertDataToCard(cardData : Resource<Data>) : Card {
-
-            val cardProperties = cardData.data
+        fun convertDataToCard(cardData :Data) : Card {
 
             val newCard = Card()
 
-            if (cardProperties != null) {
-
-                newCard.oracleId = cardProperties.oracle_id
-                newCard.cardName = cardProperties.name.toString()
-                newCard.oracleText = cardProperties.oracle_text.toString()
-                newCard.power = cardProperties.power.toString()
-                newCard.toughness = cardProperties.toughness.toString()
-                newCard.typeLine = cardProperties.type_line.toString()
-                newCard.thumbnailUrl = cardProperties.image_uris?.art_crop.toString()
-                newCard.producedMana = cardProperties.produced_mana.toString()
-
-            }
+            newCard.oracleId = cardData.oracle_id
+            newCard.cardName = cardData.name.toString()
+            newCard.oracleText = cardData.oracle_text.toString()
+            newCard.power = cardData.power.toString()
+            newCard.toughness = cardData.toughness.toString()
+            newCard.typeLine = cardData.type_line.toString()
+            newCard.thumbnailUrl = cardData.image_uris?.art_crop.toString()
+            newCard.producedMana = cardData.produced_mana.toString()
 
             return newCard
         }

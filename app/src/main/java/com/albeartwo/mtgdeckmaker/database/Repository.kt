@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
-import com.albeartwo.mtgdeckmaker.other.Resource
-import java.lang.Exception
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -69,47 +67,13 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
-    suspend fun nwGetSearchResultsList(listQuery : String) : Resource<GetCardList> {
+    suspend fun nwGetSearchResultsList(listQuery : String) : GetCardList {
 
-        return try {
-
-            val response = scryfallAPI.getCardListResults(listQuery)
-
-            if (response.isSuccessful) {
-
-                response.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error("An unknown error has occured" , null)
-            } else {
-
-                Resource.error("An unknown error has occured" , null)
-            }
-
-
-        } catch (e : Exception) {
-            Resource.error("Couldn't reach the server.  Check your internet connection" , null)
-        }
+        return scryfallAPI.getCardListResults(listQuery)
     }
 
-    fun nwGetSingleCardData(imageQuery : String) : Resource<Data> {
+    fun nwGetSingleCardImage(imageQuery : String) : Data {
 
-        return try {
-
-            val response = scryfallAPI.getSingleCardData(imageQuery)
-
-            if (response.isSuccessful) {
-
-                response.body()?.let {
-                    return@let Resource.success(it)
-                } ?: Resource.error("An unknown error has occured" , null)
-            } else {
-
-                Resource.error("An unknown error has occured" , null)
-            }
-
-
-        } catch (e : Exception) {
-            Resource.error("Couldn't reach the server.  Check your internet connection" , null)
-        }
+        return scryfallAPI.getSingleCardData(imageQuery)
     }
 }
