@@ -5,6 +5,7 @@ import com.albeartwo.mtgdeckmaker.other.Constants.BASE_URL
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -22,3 +23,7 @@ interface ScryfallApiService {
     suspend fun getSingleCardData(@Query("exact") cardName : String) : Response<Data>
 
 }
+
+//object ScryfallApi {
+//    val retrofitService : ScryfallApiService by lazy { ScryfallApiService::class.java) }
+//}
