@@ -44,8 +44,6 @@ class SavedDecksFragment : Fragment() {
 
         }
 
-        setHasOptionsMenu(true)
-
         return binding.root
     }
 

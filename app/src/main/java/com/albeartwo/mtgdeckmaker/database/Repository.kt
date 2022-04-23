@@ -68,16 +68,13 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
-    suspend fun nwGetSearchResultsList(listQuery : String) {
+    suspend fun nwGetSearchResultsList(query : String) : GetCardList? {
 
-        val nice = retrofit.create(ScryfallApiService::class.java)
-
-        nice.getCardListResults(listQuery).body()
-
+        return retrofit.create(ScryfallApiService::class.java).getCardListResults(query).body()
     }
 
-    suspend fun nwGetSingleCardImage(imageQuery : String)  {
+    suspend fun nwGetSingleCardImage(query : String) : Data? {
 
-
+        return retrofit.create(ScryfallApiService::class.java).getSingleCardData(query).body()
     }
 }

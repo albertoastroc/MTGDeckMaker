@@ -1,9 +1,13 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.R
 import com.albeartwo.mtgdeckmaker.adapters.DeckCardListAdapter
@@ -21,8 +25,6 @@ class DeckCardListFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
-
-        setHasOptionsMenu(true)
 
         val binding = FragmentDeckCardListBinding.inflate(inflater)
         binding.lifecycleOwner = this
@@ -63,24 +65,27 @@ class DeckCardListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
 
-        if (viewModel.deckId != null) {
+        val menuHost : MenuHost = requireActivity()
 
-            when (item.itemId) {
-
-                R.id.deckCardListItem -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId !!))
-
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu : Menu , menuInflater : MenuInflater) {
+                menuInflater.inflate(R.menu.deck_card_list_menu , menu)
             }
-        }
 
+            override fun onMenuItemSelected(menuItem : MenuItem) : Boolean {
 
-
-        return super.onOptionsItemSelected(item)
+                return when (menuItem.itemId) {
+                    R.id.deckCardListItem -> {
+                        if (viewModel.deckId != null) {
+                            findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId!!))
+                        }
+                        true
+                    }
+                    else                  -> false
+                }
+            }
+        } , viewLifecycleOwner , Lifecycle.State.RESUMED)
     }
-
-    override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
-        inflater.inflate(R.menu.deck_card_list_menu , menu)
-    }
-
 }

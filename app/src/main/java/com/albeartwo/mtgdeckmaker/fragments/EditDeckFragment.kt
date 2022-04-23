@@ -5,8 +5,11 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.R
@@ -27,8 +30,6 @@ class EditDeckFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
-
-        setHasOptionsMenu(true)
 
         deckId = EditDeckFragmentArgs.fromBundle(requireArguments()).deckId
 
@@ -69,6 +70,40 @@ class EditDeckFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
+
+        val menuHost : MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu : Menu , menuInflater : MenuInflater) {
+                menuInflater.inflate(R.menu.edit_deck_menu , menu)
+            }
+
+            override fun onMenuItemSelected(menuItem : MenuItem) : Boolean {
+
+                return when (menuItem.itemId) {
+                    R.id.editDeckItem -> {
+
+                        AlertDialog.Builder(context)
+                            .setTitle("Delete deck")
+                            .setMessage("Are you sure you want to delete this deck?")
+                            .setPositiveButton("DELETE") { _ , _ ->
+                                viewModel.deleteDeck(deckId)
+                                findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+                            }
+                            .setNegativeButton("CANCEL" , null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show()
+                        true
+                    }
+                    else              -> {
+                        false
+                    }
+                }
+            }
+        } , viewLifecycleOwner , Lifecycle.State.RESUMED)
+    }
+
     override fun onPause() {
         super.onPause()
 
@@ -76,36 +111,4 @@ class EditDeckFragment : Fragment() {
         val imm : InputMethodManager = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken , 0)
     }
-
-    override fun onOptionsItemSelected(item : MenuItem) : Boolean {
-
-        when (item.itemId) {
-            R.id.editDeckItem -> {
-
-                AlertDialog.Builder(context)
-                    .setTitle("Delete deck")
-                    .setMessage("Are you sure you want to delete this deck?")
-                    .setPositiveButton("DELETE") { _ , _ ->
-                        viewModel.deleteDeck(deckId)
-                        findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
-                    }
-                    .setNegativeButton("CANCEL" , null)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show()
-
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onCreateOptionsMenu(menu : Menu , inflater : MenuInflater) {
-
-        inflater.inflate(R.menu.edit_deck_menu , menu)
-        if (newDeck) {
-            menu.findItem(R.id.editDeckItem).isVisible = false
-        }
-    }
-
-
 }

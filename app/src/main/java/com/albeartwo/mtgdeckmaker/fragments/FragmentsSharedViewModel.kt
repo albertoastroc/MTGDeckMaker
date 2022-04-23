@@ -32,8 +32,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val repository : Repository ,
-    private val retrofit : Retrofit
+    private val repository : Repository,
 ) : ViewModel() {
 
     val _cardList = MutableLiveData<GetCardList?>()
@@ -48,23 +47,21 @@ class SharedViewModel @Inject constructor(
 
     var currentDeckId : Int = 0
 
-
-    fun getSearchResults(searchQueryCardList : String) {
+    fun getSearchResults(query : String) {
 
         viewModelScope.launch {
 
-            val retro = retrofit.create(ScryfallApiService::class.java).getCardListResults(searchQueryCardList).body()
-            _cardList.value = retro
-
+            val result = repository.nwGetSearchResultsList(query)
+            _cardList.value = result
         }
     }
 
-    fun getSingleCardData(searchQueryCard : String) {
+    fun getSingleCardData(query : String) {
 
         viewModelScope.launch {
 
-//            val searchResults = repository.nwGetSingleCardImage(searchQueryCard)
-//            _singleCardData.value = searchResults
+            val result = repository.nwGetSingleCardImage(query)
+            _singleCardData.value = result
         }
     }
 
