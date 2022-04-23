@@ -39,7 +39,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideScryFallApi() : ScryfallApiService {
+    fun provideScryFallApi() : Retrofit {
 
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
@@ -51,9 +51,7 @@ object AppModule {
             .build()
 
 
-        val retrofitService : ScryfallApiService by lazy { retrofit.create(ScryfallApiService::class.java) }
-
-        return retrofitService
+        return retrofit
 
     }
 
@@ -61,7 +59,7 @@ object AppModule {
     @Provides
     fun provideDefaultRepository(
         dao : CardDatabaseDao ,
-        api : ScryfallApiService
+        api : Retrofit
     ) = Repository(dao , api)
 
 }

@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
+import retrofit2.Retrofit
 import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val cardDatabaseDao : CardDatabaseDao ,
-    private val scryfallAPI : ScryfallApiService
+    private val retrofit : Retrofit
 ) {
 
 
@@ -67,15 +68,16 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
-    suspend fun nwGetSearchResultsList(listQuery : String) : GetCardList? {
+    suspend fun nwGetSearchResultsList(listQuery : String) {
 
-        val response = scryfallAPI.getCardListResults(listQuery)
-        return response.body()
+        val nice = retrofit.create(ScryfallApiService::class.java)
+
+        nice.getCardListResults(listQuery).body()
+
     }
 
-    suspend fun nwGetSingleCardImage(imageQuery : String) : Data? {
+    suspend fun nwGetSingleCardImage(imageQuery : String)  {
 
-        val response = scryfallAPI.getSingleCardData(imageQuery)
-        return response.body()
+
     }
 }

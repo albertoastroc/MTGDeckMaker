@@ -20,17 +20,20 @@ import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
+import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.android.synthetic.main.fragment_search_results.*
 import kotlinx.coroutines.launch
+import retrofit2.Retrofit
 import javax.inject.Inject
 
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
     private val repository : Repository ,
+    private val retrofit : Retrofit
 ) : ViewModel() {
 
     val _cardList = MutableLiveData<GetCardList?>()
@@ -50,8 +53,8 @@ class SharedViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            val searchResults = repository.nwGetSearchResultsList(searchQueryCardList)
-            _cardList.value = searchResults
+            val retro = retrofit.create(ScryfallApiService::class.java).getCardListResults(searchQueryCardList).body()
+            _cardList.value = retro
 
         }
     }
@@ -60,8 +63,8 @@ class SharedViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            val searchResults = repository.nwGetSingleCardImage(searchQueryCard)
-            _singleCardData.value = searchResults
+//            val searchResults = repository.nwGetSingleCardImage(searchQueryCard)
+//            _singleCardData.value = searchResults
         }
     }
 
