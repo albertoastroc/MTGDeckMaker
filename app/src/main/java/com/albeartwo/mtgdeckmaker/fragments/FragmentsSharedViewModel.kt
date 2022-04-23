@@ -94,6 +94,7 @@ class ResultListFragment : Fragment() {
         binding.viewModel = sharedViewModel
 
         binding.executeSearchIv.setOnClickListener {
+
             sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
@@ -157,7 +158,6 @@ class DisplayCardFragment : Fragment() {
         }
 
         return binding.root
-
     }
 
     override fun onDestroy() {

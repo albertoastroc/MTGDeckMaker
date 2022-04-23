@@ -30,18 +30,20 @@ class SavedDecksFragment : Fragment() {
         binding.viewModel = viewModel
         binding.decksListView.adapter = DecksListAdapter(DecksListener { singleDeckData ->
 
-            findNavController().navigate(
-                SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment(
-                    singleDeckData.deckId !!
+            if (singleDeckData.deckId != null) {
+                findNavController().navigate(
+
+                    SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment(
+                        singleDeckData.deckId!!
+                    )
                 )
-            )
+            }
             viewModel._singleDeck.value = singleDeckData
         })
 
         binding.savedDecksFab.setOnClickListener {
 
             findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToEditDeckFragment(0))
-
         }
 
         return binding.root
