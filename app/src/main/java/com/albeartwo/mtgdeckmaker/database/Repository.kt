@@ -67,13 +67,15 @@ class Repository @Inject constructor(
 
     suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
-    suspend fun nwGetSearchResultsList(listQuery : String) : GetCardList {
+    suspend fun nwGetSearchResultsList(listQuery : String) : GetCardList? {
 
-        return scryfallAPI.getCardListResults(listQuery)
+        val response = scryfallAPI.getCardListResults(listQuery)
+        return response.body()
     }
 
-    suspend fun nwGetSingleCardImage(imageQuery : String) : Data {
+    suspend fun nwGetSingleCardImage(imageQuery : String) : Data? {
 
-        return scryfallAPI.getSingleCardData(imageQuery)
+        val response = scryfallAPI.getSingleCardData(imageQuery)
+        return response.body()
     }
 }

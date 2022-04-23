@@ -8,6 +8,8 @@ import com.albeartwo.mtgdeckmaker.database.CardDatabaseDao
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
 import com.albeartwo.mtgdeckmaker.other.Constants.BASE_URL
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,21 +39,29 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideScryFallApi (): ScryfallApiService {
-        return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+    fun provideScryFallApi() : ScryfallApiService {
+
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
             .build()
-            .create(ScryfallApiService::class.java)
+
+
+        val retrofitService : ScryfallApiService by lazy { retrofit.create(ScryfallApiService::class.java) }
+
+        return retrofitService
+
     }
 
     @Singleton
     @Provides
     fun provideDefaultRepository(
-        dao: CardDatabaseDao,
-        api: ScryfallApiService
-    ) = Repository(dao, api)
-
-
+        dao : CardDatabaseDao ,
+        api : ScryfallApiService
+    ) = Repository(dao , api)
 
 }

@@ -33,14 +33,14 @@ class SharedViewModel @Inject constructor(
     private val repository : Repository ,
 ) : ViewModel() {
 
-    val _cardList = MutableLiveData<GetCardList>()
+    val _cardList = MutableLiveData<GetCardList?>()
 
-    val cardList : LiveData<GetCardList>
+    val cardList : LiveData<GetCardList?>
         get() = _cardList
 
-    val _singleCardData = MutableLiveData<Data>()
+    val _singleCardData = MutableLiveData<Data?>()
 
-    val singleCardData : LiveData<Data>
+    val singleCardData : LiveData<Data?>
         get() = _singleCardData
 
     var currentDeckId : Int = 0
@@ -94,7 +94,6 @@ class ResultListFragment : Fragment() {
         binding.viewModel = sharedViewModel
 
         binding.executeSearchIv.setOnClickListener {
-
             sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
