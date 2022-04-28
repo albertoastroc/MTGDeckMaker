@@ -6,7 +6,6 @@ import com.albeartwo.mtgdeckmaker.other.Constants.CARD_DATABASE_NAME
 import com.albeartwo.mtgdeckmaker.database.CardDatabase
 import com.albeartwo.mtgdeckmaker.database.CardDatabaseDao
 import com.albeartwo.mtgdeckmaker.database.Repository
-import com.albeartwo.mtgdeckmaker.network.ScryfallApiService
 import com.albeartwo.mtgdeckmaker.other.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -39,20 +38,16 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideScryFallApi() : Retrofit {
+    fun provideRetrofit() : Retrofit {
 
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
 
-        val retrofit = Retrofit.Builder()
+        return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
             .build()
-
-
-        return retrofit
-
     }
 
     @Singleton
@@ -61,5 +56,4 @@ object AppModule {
         dao : CardDatabaseDao ,
         api : Retrofit
     ) = Repository(dao , api)
-
 }

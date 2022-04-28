@@ -7,5 +7,4 @@ import androidx.room.RoomDatabase
 abstract class CardDatabase : RoomDatabase() {
 
     abstract fun getCardDatabaseDao() : CardDatabaseDao
-
 }

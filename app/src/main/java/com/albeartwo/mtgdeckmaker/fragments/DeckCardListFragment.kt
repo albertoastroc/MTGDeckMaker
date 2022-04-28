@@ -1,6 +1,5 @@
 package com.albeartwo.mtgdeckmaker.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuHost
@@ -32,7 +31,10 @@ class DeckCardListFragment : Fragment() {
 
         //Prevents listItem from blinking when Card.cardCount is updated
         binding.deckCardsListView.itemAnimator = null
+
         binding.deckCardsListView.adapter = (DeckCardListAdapter { card , action ->
+
+            viewModel._singleCard.value = card
 
             when (action) {
 
@@ -47,10 +49,10 @@ class DeckCardListFragment : Fragment() {
                 }
                 "root"      -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToDisplayCardFragment(card.cardName))
             }
-            viewModel._singleCard.value = card
+
         })
 
-        //Opens fragment that searches for cards
+        //Opens fragment that accepts a search query
         binding.deckCardListFab.setOnClickListener {
 
             if (viewModel.deckId != null) {

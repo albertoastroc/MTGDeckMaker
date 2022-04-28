@@ -9,16 +9,17 @@ class UtilityClass {
 
         fun convertDataToCard(cardData :Data) : Card {
 
-            val newCard = Card()
+            val newCard = Card().apply {
 
-            newCard.oracleId = cardData.oracle_id
-            newCard.cardName = cardData.name.toString()
-            newCard.oracleText = cardData.oracle_text.toString()
-            newCard.power = cardData.power.toString()
-            newCard.toughness = cardData.toughness.toString()
-            newCard.typeLine = cardData.type_line.toString()
-            newCard.thumbnailUrl = cardData.image_uris?.art_crop.toString()
-            newCard.producedMana = cardData.produced_mana.toString()
+                this.oracleId = cardData.oracle_id
+                this.cardName = cardData.name.toString()
+                this.oracleText = cardData.oracle_text.toString()
+                this.power = cardData.power.toString()
+                this.toughness = cardData.toughness.toString()
+                this.typeLine = cardData.type_line.toString()
+                this.thumbnailUrl = cardData.image_uris?.art_crop.toString()
+                this.producedMana = cardData.produced_mana.toString()
+            }
 
             return newCard
         }

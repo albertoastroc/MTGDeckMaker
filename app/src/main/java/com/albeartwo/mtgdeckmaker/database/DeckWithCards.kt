@@ -13,5 +13,4 @@ data class DeckWithCards(
         associateBy = Junction(DeckCardCrossRef::class)
     )
     val cards : List<Card>
-
 )

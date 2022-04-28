@@ -23,4 +23,6 @@
     <string name="deck_name">Deck Name</string>
     <string name="deck_colors">Deck Colors</string>
     <string name="save_new_deck">Save new Deck</string>
+    <string name="deck_is_empty"> is empty</string>
+    <string name="change_deck_name">Change Deck Name</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.albeartwo.mtgdeckmaker.database.Deck
@@ -10,8 +11,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditDeckViewModel @Inject constructor(
-    private val repository : Repository
+    private val repository : Repository,
+    savedStateHandle : SavedStateHandle
 ) : ViewModel() {
+
+    val deckId : Int? = savedStateHandle["currentDeckId"]
 
     fun changeDeckName(deckName : String , deckId : Int) {
 

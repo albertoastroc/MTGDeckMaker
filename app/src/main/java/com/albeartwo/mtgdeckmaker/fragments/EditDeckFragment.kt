@@ -23,39 +23,31 @@ import kotlinx.android.synthetic.main.fragment_edit_deck.*
 class EditDeckFragment : Fragment() {
 
     private val viewModel : EditDeckViewModel by viewModels()
-    private var deckId = 0
-    private var newDeck : Boolean = true
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
 
-        deckId = EditDeckFragmentArgs.fromBundle(requireArguments()).deckId
-
         val binding = FragmentEditDeckBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         //Checks if deck is being edited or new deck is being added
-        if (deckId != 0) {
+        if (viewModel.deckId != 0 && viewModel.deckId != null) {
 
-            newDeck = false
-
-            binding.saveButton.text = "Change Deck Name"
+            binding.saveButton.text = getString(R.string.change_deck_name)
             binding.saveButton.setOnClickListener {
 
                 val deckName = deckNameEditText.text.toString()
-                viewModel.changeDeckName(deckName , deckId)
+                viewModel.changeDeckName(deckName , viewModel.deckId !!)
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
             }
 
         } else {
 
-            newDeck = true
-
-            binding.saveButton.text = "Save New Deck"
+            binding.saveButton.text = getString(R.string.save_new_deck)
             binding.saveButton.setOnClickListener() {
 
                 val deckName = deckNameEditText.text.toString()
@@ -67,7 +59,6 @@ class EditDeckFragment : Fragment() {
         }
 
         return binding.root
-
     }
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
@@ -88,7 +79,8 @@ class EditDeckFragment : Fragment() {
                             .setTitle("Delete deck")
                             .setMessage("Are you sure you want to delete this deck?")
                             .setPositiveButton("DELETE") { _ , _ ->
-                                viewModel.deleteDeck(deckId)
+                                //Deck ID checked for null at this point
+                                viewModel.deleteDeck(viewModel.deckId !!)
                                 findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
                             }
                             .setNegativeButton("CANCEL" , null)

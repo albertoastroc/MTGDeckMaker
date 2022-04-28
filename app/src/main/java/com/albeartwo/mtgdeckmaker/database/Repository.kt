@@ -12,11 +12,8 @@ class Repository @Inject constructor(
     private val retrofit : Retrofit
 ) {
 
-
-    //this
     suspend fun dbInsertCardCardTable(card : Card) : Long = cardDatabaseDao.insertCard(card)
 
-    //this
     suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
 
     suspend fun insertCardIntoDb(card : Card , currentDeckId : Int) {
@@ -61,12 +58,6 @@ class Repository @Inject constructor(
         cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
     }
-
-    suspend fun dbDeleteDeckContentsFromCardTable(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCardTable(idList)
-
-    suspend fun dbDeleteDeckContentsFromCrossRef(idList : Array<Int>) = cardDatabaseDao.deleteDeckContentsFromCrossRef(idList)
-
-    suspend fun dbDeleteDeckFromDeckTable(deckId : Int) = cardDatabaseDao.deleteDeckFromDeckTable(deckId)
 
     suspend fun nwGetSearchResultsList(query : String) : GetCardList? {
 

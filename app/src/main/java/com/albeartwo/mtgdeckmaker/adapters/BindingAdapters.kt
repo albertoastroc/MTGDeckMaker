@@ -1,5 +1,6 @@
 package com.albeartwo.mtgdeckmaker.adapters
 
+import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -8,20 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.database.DeckWithCards
 import com.albeartwo.mtgdeckmaker.generated.Data
-import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 
 @BindingAdapter("cardListData")
-fun bindCardRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
+fun bindResultsRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
 
     val adapter = recyclerView.adapter as CardListAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("deckListData")
-fun bindDeckRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
+fun bindDecksRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
 
     val adapter = recyclerView.adapter as DecksListAdapter
     adapter.submitList(data)
@@ -32,11 +32,13 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
 
     val adapter = recyclerView.adapter as DeckCardListAdapter
     val cardList = data?.first()?.cards?.sortedWith(
-        compareBy( {it.producedMana},{ it.power }  , { it.typeLine })
+        compareBy({ it.producedMana } , { it.power } , { it.typeLine })
     )
     adapter.submitList(cardList)
 }
 
+//Displays how many cards are in the deck if any
+@SuppressLint("SetTextI18n")
 @BindingAdapter("countAdapter")
 fun countAdapter(textView : TextView , data : List<DeckWithCards>?) {
 

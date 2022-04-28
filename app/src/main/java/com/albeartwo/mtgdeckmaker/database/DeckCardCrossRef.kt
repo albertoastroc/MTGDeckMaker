@@ -12,5 +12,4 @@ data class DeckCardCrossRef(
     val deck_db_id : Int ,
     val card_db_id : Long ,
     val oracle_id : String ,
-
-    )
+)

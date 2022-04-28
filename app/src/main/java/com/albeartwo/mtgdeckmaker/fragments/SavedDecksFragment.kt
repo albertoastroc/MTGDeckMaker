@@ -38,11 +38,11 @@ class SavedDecksFragment : Fragment() {
                     )
                 )
             }
-            viewModel._singleDeck.value = singleDeckData
         })
 
         binding.savedDecksFab.setOnClickListener {
 
+            //0 tells EditDeckFragment that it was started to add a new deck
             findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToEditDeckFragment(0))
         }
 
