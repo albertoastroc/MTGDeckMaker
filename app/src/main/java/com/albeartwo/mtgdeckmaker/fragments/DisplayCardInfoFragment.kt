@@ -1,3 +1,5 @@
+package com.albeartwo.mtgdeckmaker.fragments
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
-import com.albeartwo.mtgdeckmaker.fragments.DisplayCardFragmentArgs
-import com.albeartwo.mtgdeckmaker.fragments.DisplayCardFragmentDirections
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class DisplayCardFragment : Fragment() {
+class DisplayCardInfoFragment : Fragment() {
 
     private val sharedViewModel : SharedViewModel by activityViewModels()
 
@@ -24,10 +22,10 @@ class DisplayCardFragment : Fragment() {
         val binding = FragmentDisplayCardBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
-        
-        binding.viewModel = sharedViewModel
 
-        val args = DisplayCardFragmentArgs.fromBundle(requireArguments()).fromFragment
+        binding.viewModel = sharedViewModel
+        val args = DisplayCardInfoFragmentArgs.fromBundle(requireArguments()).fromFragment
+
 
         //Checks what fragment was used to navigate here
         when (args) {
@@ -46,7 +44,7 @@ class DisplayCardFragment : Fragment() {
 
             it.findNavController().navigate(
 
-                DisplayCardFragmentDirections.actionDisplayCardFragmentToDeckCardListFragment(
+                DisplayCardInfoFragmentDirections.actionDisplayCardInfoFragmentToDeckCardListFragment(
                     sharedViewModel.currentDeckId
                 )
             )
@@ -59,4 +57,6 @@ class DisplayCardFragment : Fragment() {
         super.onDestroy()
         sharedViewModel._singleCardData.value = null
     }
+
+
 }

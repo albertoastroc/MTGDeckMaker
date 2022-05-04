@@ -5,21 +5,21 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fcf33a0-e48a-461f-b7b0-a3a6663ddbfe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DisplayCardFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/ResultsFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/SharedViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DisplayCardInfoFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/MTGDeckMaker.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/MTGDeckMaker.app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/FragmentsSharedViewModel.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_display_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_display_card.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_results.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_results.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DeckCardListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DeckCardListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DisplayCardFragment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/ResultsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/ResultsFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_graph.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="KotlinCodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ProjectId" id="28Op4rCc31YR0v1b4IXE3wiU1lH" />
   <component name="ProjectViewState">

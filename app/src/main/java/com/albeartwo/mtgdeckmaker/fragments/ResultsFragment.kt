@@ -26,7 +26,7 @@ class ResultsFragment : Fragment() {
 
         val binding = FragmentSearchResultsBinding.inflate(inflater)
 
-        sharedViewModel.currentDeckId = ResultListFragmentArgs.fromBundle(requireArguments()).currentDeckId
+        sharedViewModel.currentDeckId = ResultsFragmentArgs.fromBundle(requireArguments()).currentDeckId
 
         binding.lifecycleOwner = this
 
@@ -40,7 +40,7 @@ class ResultsFragment : Fragment() {
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
             sharedViewModel._singleCardData.value = singleCardData
             view?.findNavController()?.navigate(
-                ResultListFragmentDirections.actionResultListToDisplayCardFragment("results")
+            ResultsFragmentDirections.actionResultListToDisplayCardInfoFragment("results")
             )
         })
 

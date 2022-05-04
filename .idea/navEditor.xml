@@ -31,11 +31,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_deckCardListFragment_to_displayCardFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_deckCardListFragment_to_editDeckFragment">
                               <value>
                                 <LayoutPositions />
@@ -51,23 +46,14 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="displayCardFragment">
+                  <entry key="displayCardInfoFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="988" />
-                            <option name="y" value="12" />
+                            <option name="x" value="965" />
+                            <option name="y" value="25" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_displayCardFragment_to_deckCardListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -101,15 +87,6 @@
                             <option name="x" value="744" />
                             <option name="y" value="76" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_resultList_to_displayCardFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
