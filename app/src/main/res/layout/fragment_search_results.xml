@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.albeartwo.mtgdeckmaker.fragments.SharedViewModel" />
+            type="com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel" />
 
 
     </data>

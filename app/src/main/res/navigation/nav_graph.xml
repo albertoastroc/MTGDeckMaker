@@ -10,7 +10,7 @@
         app:argType="string" />
     <fragment
         android:id="@+id/resultList"
-        android:name="com.albeartwo.mtgdeckmaker.fragments.ResultListFragment"
+        android:name="com.albeartwo.mtgdeckmaker.fragments.ResultsFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search_results">
         <action

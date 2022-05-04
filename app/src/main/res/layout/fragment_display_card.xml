@@ -4,6 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel" />
+
+        <variable
+            name="card"
+            type="com.albeartwo.mtgdeckmaker.database.Card" />
+
+
+    </data>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -154,17 +167,6 @@
 
     </ScrollView>
 
-    <data>
 
-        <variable
-            name="viewModel"
-            type="com.albeartwo.mtgdeckmaker.fragments.SharedViewModel" />
-
-        <variable
-            name="card"
-            type="com.albeartwo.mtgdeckmaker.database.Card" />
-
-
-    </data>
 
 </layout>
