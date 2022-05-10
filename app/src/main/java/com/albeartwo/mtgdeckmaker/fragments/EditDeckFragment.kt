@@ -34,13 +34,16 @@ class EditDeckFragment : Fragment() {
         binding.viewModel = viewModel
 
         //Checks if deck is being edited or new deck is being added
-        if (viewModel.deckId != 0 && viewModel.deckId != null) {
+        if (viewModel.deckId != 0) {
 
             binding.saveButton.text = getString(R.string.change_deck_name)
             binding.saveButton.setOnClickListener {
 
-                val deckName = deckNameEditText.text.toString()
-                viewModel.changeDeckName(deckName , viewModel.deckId !!)
+                viewModel.deckId?.let {
+
+                    val deckName = deckNameEditText.text.toString()
+                    viewModel.changeDeckName(deckName, it)
+                }
 
                 saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
             }

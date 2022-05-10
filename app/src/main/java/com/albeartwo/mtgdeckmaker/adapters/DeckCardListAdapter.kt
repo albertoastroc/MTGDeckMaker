@@ -65,7 +65,7 @@ class DeckCardListAdapter(val clickListener : (Card , String) -> Unit) : ListAda
     }
 
     override fun getItemId(position : Int) : Long {
-        return getItem(position).cardDbId?.toLong() ?: getItemId(position)
+        return getItem(position).cardDbId.toLong()
     }
 
     override fun setHasStableIds(hasStableIds : Boolean) {

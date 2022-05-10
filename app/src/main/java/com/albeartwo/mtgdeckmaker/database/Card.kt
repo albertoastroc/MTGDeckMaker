@@ -38,7 +38,7 @@ data class Card(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "card_db_id")
-    var cardDbId : Int? = null
+    var cardDbId : Int = 0
 
 }
 

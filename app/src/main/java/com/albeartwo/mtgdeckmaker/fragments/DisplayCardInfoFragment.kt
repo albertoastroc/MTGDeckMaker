@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 
@@ -24,11 +24,9 @@ class DisplayCardInfoFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.viewModel = sharedViewModel
-        val args = DisplayCardInfoFragmentArgs.fromBundle(requireArguments()).fromFragment
-
 
         //Checks what fragment was used to navigate here
-        when (args) {
+        when (val args = DisplayCardInfoFragmentArgs.fromBundle(requireArguments()).fromFragment) {
 
             "results" -> {}
             else      -> {
@@ -42,7 +40,7 @@ class DisplayCardInfoFragment : Fragment() {
 
             sharedViewModel.saveCard()
 
-            it.findNavController().navigate(
+            findNavController().navigate(
 
                 DisplayCardInfoFragmentDirections.actionDisplayCardInfoFragmentToDeckCardListFragment(
                     sharedViewModel.currentDeckId

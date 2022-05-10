@@ -13,7 +13,7 @@ data class Deck(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "deck_db_id")
-    var deckId : Int? = null
+    var deckId : Int = 0
 }
 
 

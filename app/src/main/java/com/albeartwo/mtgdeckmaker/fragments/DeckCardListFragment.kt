@@ -26,9 +26,9 @@ class DeckCardListFragment : Fragment() {
     ) : View {
 
         val binding = FragmentDeckCardListBinding.inflate(inflater)
-            .apply {
-                this.viewModel = viewModel
-            }
+
+        binding.viewModel = viewModel
+
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         //Prevents listItem from blinking when Card.cardCount is updated
@@ -57,13 +57,12 @@ class DeckCardListFragment : Fragment() {
         //Opens fragment that accepts a search query
         binding.deckCardListFab.setOnClickListener {
 
-            if (viewModel.deckId != null) {
+            viewModel.deckId?.let {
+
                 findNavController().navigate(
-                    DeckCardListFragmentDirections.actionDeckCardListFragmentToResultList(
-                        viewModel.deckId !!
-                    )
-                )
+                    DeckCardListFragmentDirections.actionDeckCardListFragmentToResultList(it))
             }
+
         }
 
         return binding.root
@@ -82,8 +81,10 @@ class DeckCardListFragment : Fragment() {
 
                 return when (menuItem.itemId) {
                     R.id.deckCardListItem -> {
-                        if (viewModel.deckId != null) {
-                            findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(viewModel.deckId!!))
+
+                        viewModel.deckId?.let {
+
+                            findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToEditDeckFragment(it))
                         }
                         true
                     }
