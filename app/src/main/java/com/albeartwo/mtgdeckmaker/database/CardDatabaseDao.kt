@@ -10,7 +10,7 @@ interface CardDatabaseDao {
     suspend fun insertCard(card : Card) : Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDeck(deck : Deck)
+    suspend fun insertDeck(deck : Deck) : Long
 
     @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_db_id = :deckId")
     suspend fun changeDeckName(deckName : String , deckId : Int)
@@ -33,7 +33,7 @@ interface CardDatabaseDao {
 
     //deletes one card from card table
     @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")
-    suspend fun removeFromDatabase(cardDbId : kotlin.Int?) : Int
+    suspend fun removeFromDatabase(cardDbId : Int?) : Int
 
     //gets ids for cards to be deleted
     @Query("SELECT card_db_id FROM deck_card_cross_ref WHERE deck_db_id = :deckId")
@@ -59,10 +59,10 @@ interface CardDatabaseDao {
     fun getSingleCardCount(cardDbId : Long) : LiveData<Card>
 
     @Query("UPDATE card_table SET card_count = card_count + 1 WHERE card_db_id = :cardDbId")
-    suspend fun plusOneCardQuantity(cardDbId : kotlin.Int?) : Int
+    suspend fun plusOneCardQuantity(cardDbId : Int?) : Int
 
     @Query("UPDATE card_table SET card_count = CASE WHEN card_count >= 1 THEN card_count -1 ELSE card_count END WHERE card_db_id = :cardDbId")
-    suspend fun minusOneCardQuantity(cardDbId : kotlin.Int?) : Int
+    suspend fun minusOneCardQuantity(cardDbId : Int?) : Int
 
 
 }

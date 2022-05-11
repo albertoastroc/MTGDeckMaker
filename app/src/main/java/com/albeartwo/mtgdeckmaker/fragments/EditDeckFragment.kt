@@ -13,7 +13,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.R
-import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.databinding.FragmentEditDeckBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.EditDeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,32 +32,13 @@ class EditDeckFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        //Checks if deck is being edited or new deck is being added
-        if (viewModel.deckId != 0) {
+        binding.saveBt.setOnClickListener {
 
-            binding.saveButton.text = getString(R.string.change_deck_name)
-            binding.saveButton.setOnClickListener {
+            viewModel.deckId?.let {
 
-                viewModel.deckId?.let {
-
-                    val deckName = deckNameEditText.text.toString()
-                    viewModel.changeDeckName(deckName , it)
-                    saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToDeckCardListFragment(it))
-                }
-
-
-            }
-
-        } else {
-
-            binding.saveButton.text = getString(R.string.save_new_deck)
-            binding.saveButton.setOnClickListener() {
-
-                val deckName = deckNameEditText.text.toString()
-                val deck = Deck(deckName)
-                viewModel.insertDeck(deck)
-
-                saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+                val deckName = deckNameEt.text.toString()
+                viewModel.changeDeckName(deckName , it)
+                saveBt.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToDeckCardListFragment(it))
             }
         }
 

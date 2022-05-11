@@ -9,7 +9,7 @@ import androidx.room.Entity
 
 data class DeckCardCrossRef(
 
-    val deck_db_id : Int ,
+    val deck_db_id : Long ,
     val card_db_id : Long ,
     val oracle_id : String ,
 )

@@ -41,7 +41,7 @@ class SavedDecksFragment : Fragment() {
         binding.savedDecksFab.setOnClickListener {
 
             //0 tells EditDeckFragment that it was started to add a new deck
-            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToEditDeckFragment(0))
+            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToAddNewDeckFragment(0))
         }
 
         return binding.root

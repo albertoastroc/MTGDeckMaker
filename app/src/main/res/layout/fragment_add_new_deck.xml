@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.EditDeckFragment">
+    tools:context=".fragments.AddNewDeckFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.albeartwo.mtgdeckmaker.viewmodels.EditDeckViewModel" />
-
-
+            type="com.albeartwo.mtgdeckmaker.viewmodels.AddNewDeckViewModel" />
     </data>
 
     <LinearLayout
@@ -19,7 +16,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/deckNameEt"
+            android:id="@+id/newDeckNameEt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="8dp"
@@ -27,17 +24,14 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/saveBt"
+            android:id="@+id/saveNewDeckBt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:text="@string/save_button"
+            android:text="@string/save_new_deck"
             android:textColor="@color/white" />
 
 
     </LinearLayout>
-
-
-
 
 </layout>

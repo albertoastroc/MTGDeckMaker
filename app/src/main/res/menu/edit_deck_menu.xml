@@ -5,6 +5,6 @@
     <item
         android:id="@+id/editDeckItem"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="Edit Deck"
+        android:title="@string/edit_deck"
         app:showAsAction="ifRoom" />
 </menu>

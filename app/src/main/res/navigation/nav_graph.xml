@@ -13,12 +13,12 @@
         android:name="com.albeartwo.mtgdeckmaker.fragments.ResultsFragment"
         android:label="Search"
         tools:layout="@layout/fragment_search_results">
-        <argument
-            android:name="currentDeckId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_resultList_to_displayCardInfoFragment"
             app:destination="@id/displayCardInfoFragment" />
+        <argument
+            android:name="currentDeckId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -27,11 +27,11 @@
         android:label="Saved Decks"
         tools:layout="@layout/fragment_saved_decks">
         <action
-            android:id="@+id/action_savedDecksFragment_to_editDeckFragment"
-            app:destination="@id/editDeckFragment" />
-        <action
             android:id="@+id/action_savedDecksFragment_to_deckCardListFragment"
             app:destination="@id/deckCardListFragment" />
+        <action
+            android:id="@+id/action_savedDecksFragment_to_addNewDeckFragment"
+            app:destination="@id/addNewDeckFragment" />
     </fragment>
     <fragment
         android:id="@+id/editDeckFragment"
@@ -39,14 +39,14 @@
         android:label="Deck Properties"
         tools:layout="@layout/fragment_edit_deck">
         <action
+            android:id="@+id/action_editDeckFragment_to_deckCardListFragment"
+            app:destination="@id/deckCardListFragment" />
+        <action
             android:id="@+id/action_editDeckFragment_to_savedDecksFragment"
             app:destination="@id/savedDecksFragment" />
         <argument
             android:name="currentDeckId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_editDeckFragment_to_deckCardListFragment"
-            app:destination="@id/deckCardListFragment" />
     </fragment>
     <fragment
         android:id="@+id/deckCardListFragment"
@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_deckCardListFragment_to_displayCardInfoFragment"
             app:destination="@id/displayCardInfoFragment" />
+        <action
+            android:id="@+id/action_deckCardListFragment_to_savedDecksFragment"
+            app:destination="@id/savedDecksFragment" />
         <argument
             android:name="currentDeckId"
             app:argType="integer" />
@@ -76,15 +79,27 @@
     <fragment
         android:id="@+id/displayCardInfoFragment"
         android:name="com.albeartwo.mtgdeckmaker.fragments.DisplayCardInfoFragment"
-        android:label="Card Details" >
-        <argument
-            android:name="fromFragment"
-            app:argType="string" />
+        android:label="Card Details">
         <action
             android:id="@+id/action_displayCardInfoFragment_to_deckCardListFragment"
             app:destination="@id/deckCardListFragment"
             app:popUpTo="@id/deckCardListFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="fromFragment"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewDeckFragment"
+        android:name="com.albeartwo.mtgdeckmaker.fragments.AddNewDeckFragment"
+        android:label="fragment_add_new_deck"
+        tools:layout="@layout/fragment_add_new_deck">
+        <action
+            android:id="@+id/action_addNewDeckFragment_to_deckCardListFragment"
+            app:destination="@id/deckCardListFragment" />
+        <argument
+            android:name="currentDeckId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

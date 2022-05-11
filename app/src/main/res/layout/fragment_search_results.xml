@@ -13,7 +13,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="#F5F5F5"
+        android:background="@color/gray_100"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.albearthebear.gaspricechecker.MainActivity">
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="Go"
+            android:text="@string/go"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/searchInputEt"
             app:layout_constraintEnd_toEndOf="parent"

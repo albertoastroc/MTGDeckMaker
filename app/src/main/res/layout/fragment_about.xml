@@ -6,10 +6,10 @@
     tools:context=".fragments.AboutFragment">
 
     <TextView
-        android:background="#F5F5F5"
+        android:background="@color/gray_100"
         android:id="@+id/aboutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Simple MTG Deck Maker" />
+        android:text="@string/simple_mtg_deck_maker" />
 
 </FrameLayout>

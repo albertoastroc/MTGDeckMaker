@@ -20,23 +20,54 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="addNewDeckFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-106" />
+                            <option name="y" value="473" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_addNewDeckFragment_to_deckCardListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="deckCardListFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="50" />
+                            <option name="x" value="310" />
+                            <option name="y" value="-9" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_deckCardListFragment_to_displayCardInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_deckCardListFragment_to_editDeckFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_deckCardListFragment_to_resultList">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_deckCardListFragment_to_savedDecksFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -51,9 +82,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="965" />
-                            <option name="y" value="25" />
+                            <option name="x" value="998" />
+                            <option name="y" value="-83" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_displayCardInfoFragment_to_deckCardListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -69,7 +109,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_editDeckFragment_to_savedDecksFragment">
+                            <entry key="action_editDeckFragment_to_deckCardListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -84,9 +124,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="744" />
-                            <option name="y" value="76" />
+                            <option name="x" value="735" />
+                            <option name="y" value="112" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_resultList_to_displayCardInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -96,18 +145,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="256" />
-                            <option name="y" value="432" />
+                            <option name="x" value="285" />
+                            <option name="y" value="438" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_savedDecksFragment_to_deckCardListFragment">
+                            <entry key="action_savedDecksFragment_to_addNewDeckFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_savedDecksFragment_to_editDeckFragment">
+                            <entry key="action_savedDecksFragment_to_deckCardListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
