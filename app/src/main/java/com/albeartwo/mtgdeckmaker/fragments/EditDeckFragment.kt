@@ -42,10 +42,11 @@ class EditDeckFragment : Fragment() {
                 viewModel.deckId?.let {
 
                     val deckName = deckNameEditText.text.toString()
-                    viewModel.changeDeckName(deckName, it)
+                    viewModel.changeDeckName(deckName , it)
+                    saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToDeckCardListFragment(it))
                 }
 
-                saveButton.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
+
             }
 
         } else {

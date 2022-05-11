@@ -55,7 +55,6 @@
             android:paddingTop="8dp"
             android:paddingRight="8dp"
             android:text="@{card.cardName}"
-            app:layout_constraintBottom_toTopOf="@+id/card_type_line"
             app:layout_constraintEnd_toStartOf="@+id/minusOneTv"
             app:layout_constraintStart_toStartOf="@+id/card_type_line"
             app:layout_constraintTop_toTopOf="parent" />
