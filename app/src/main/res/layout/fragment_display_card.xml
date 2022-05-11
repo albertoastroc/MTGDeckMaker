@@ -5,26 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel" />
-
         <variable
             name="card"
             type="com.albeartwo.mtgdeckmaker.database.Card" />
-
-
     </data>
 
-
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/white"
+            android:background="#F5F5F5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp">
@@ -47,6 +43,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
+                android:layout_margin="4dp"
                 android:id="@+id/cardImageView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
