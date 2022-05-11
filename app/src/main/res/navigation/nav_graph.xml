@@ -25,7 +25,7 @@
         android:id="@+id/savedDecksFragment"
         android:name="com.albeartwo.mtgdeckmaker.fragments.SavedDecksFragment"
         android:label="Saved Decks"
-        tools:layout="@layout/fragment_database_decks">
+        tools:layout="@layout/fragment_saved_decks">
         <action
             android:id="@+id/action_savedDecksFragment_to_editDeckFragment"
             app:destination="@id/editDeckFragment" />

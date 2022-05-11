@@ -9,6 +9,8 @@
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
+        app:itemIconTint="#F4511E"
+        app:itemTextColor="#F4511E"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

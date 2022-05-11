@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.DecksListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.DecksListener
-import com.albeartwo.mtgdeckmaker.databinding.FragmentDatabaseDecksBinding
+import com.albeartwo.mtgdeckmaker.databinding.FragmentSavedDecksBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SavedDecksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class SavedDecksFragment : Fragment() {
         savedInstanceState : Bundle?
     ) : View {
 
-        val binding = FragmentDatabaseDecksBinding.inflate(inflater)
+        val binding = FragmentSavedDecksBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

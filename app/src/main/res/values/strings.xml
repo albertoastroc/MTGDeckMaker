@@ -25,4 +25,5 @@
     <string name="save_new_deck">Save new Deck</string>
     <string name="deck_is_empty"> is empty</string>
     <string name="change_deck_name">Change Deck Name</string>
+    <string name="edit_deck">Edit Deck</string>
 </resources>
