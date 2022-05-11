@@ -35,7 +35,7 @@ class AddNewDeckFragment : Fragment() {
             val deck = Deck(deckName)
             viewModel.insertDeck(deck)
 
-            saveNewDeckBt.findNavController().navigate(AddNewDeckFragmentDirections.actionAddNewDeckFragmentToDeckCardListFragment(viewModel.deckId))
+            saveNewDeckBt.findNavController().navigate(AddNewDeckFragmentDirections.actionAddNewDeckFragmentToSavedDecksFragment())
         }
 
         return binding.root

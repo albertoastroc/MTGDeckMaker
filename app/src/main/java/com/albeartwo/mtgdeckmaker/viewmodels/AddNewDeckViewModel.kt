@@ -21,7 +21,7 @@ class AddNewDeckViewModel @Inject constructor(
 
             if (! repository.dbDeckExists(deck.deckName)) {
 
-                deckId = repository.dbInsertDeck(deck)
+                repository.dbInsertDeck(deck)
             }
         }
     }
