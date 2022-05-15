@@ -24,7 +24,7 @@ fun bindResultsRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
 fun bindDecksRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
 
     val adapter = recyclerView.adapter as DecksListAdapter
-    adapter.submitList(data)
+    adapter.submitList(data?.reversed())
 }
 
 @BindingAdapter("deckCardsListData")

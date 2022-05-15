@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_0_mana.xml" value="0.254" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1835" />
         <entry key="app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1835" />
@@ -12,6 +13,7 @@
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.2703125" />
         <entry key="app/src/main/res/layout/fragment_database_decks.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_deck_card_list.xml" value="0.175" />
+        <entry key="app/src/main/res/layout/fragment_display_card.xml" value="0.3640625" />
         <entry key="app/src/main/res/layout/fragment_edit_deck.xml" value="0.1750911933298593" />
         <entry key="app/src/main/res/layout/fragment_saved_decks.xml" value="0.1750911933298593" />
         <entry key="app/src/main/res/layout/list_view_item.xml" value="0.175" />
