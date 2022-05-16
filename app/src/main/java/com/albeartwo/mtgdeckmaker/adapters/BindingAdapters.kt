@@ -2,6 +2,7 @@ package com.albeartwo.mtgdeckmaker.adapters
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -10,6 +11,7 @@ import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.database.DeckWithCards
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 
 
@@ -72,6 +74,7 @@ fun bindImage(imgView : ImageView , imgUrl : String?) {
 
         Glide.with(imgView.context)
             .load(imgUri)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .fitCenter()
             .into(imgView)
     }
@@ -89,4 +92,20 @@ fun bindThumbnail(imgView : ImageView , imgUrl : String?) {
             .transform(CircleCrop())
             .into(imgView)
     }
+}
+
+@BindingAdapter("manaSymbols")
+fun bindManaSymbols(imgView : ImageView, manaSymbols : List<String>){
+
+    for (i in manaSymbols.indices) {
+        val lp = LinearLayout.LayoutParams(200 , 200)
+        val linearLayout = LinearLayout(imgView.context)
+        imgView.layoutParams = lp
+        Glide.with(imgView.context)
+            .load(manaSymbols[i])
+            .override(200 , 200)
+            .into(imgView)
+        linearLayout.addView(imgView)
+    }
+
 }

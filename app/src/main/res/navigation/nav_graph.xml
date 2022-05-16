@@ -86,7 +86,10 @@
             app:popUpTo="@id/deckCardListFragment"
             app:popUpToInclusive="true" />
         <argument
-            android:name="fromFragment"
+            android:name="cardName"
+            app:argType="string" />
+        <argument
+            android:name="fragmentName"
             app:argType="string" />
     </fragment>
     <fragment

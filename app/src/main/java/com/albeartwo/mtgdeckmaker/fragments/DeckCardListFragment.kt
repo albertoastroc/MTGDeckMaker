@@ -49,7 +49,7 @@ class DeckCardListFragment : Fragment() {
                     }
 
                 }
-                "root"      -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToDisplayCardInfoFragment(card.cardName))
+                "root"      -> findNavController().navigate(DeckCardListFragmentDirections.actionDeckCardListFragmentToDisplayCardInfoFragment(card.cardName, "deck_card_list"))
             }
 
         })

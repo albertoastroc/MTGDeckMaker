@@ -34,9 +34,22 @@ class SharedViewModel @Inject constructor(
 
     var currentDeckId : Int = 0
 
-    fun getManaSymbols(string : String) {
+    private fun getManaSymbols() {
 
         _manaSymbols.value = _singleCardData.value?.mana_cost?.let { UtilityClass.getCmcArray(it) }
+
+    }
+
+    private fun setManaSymbols(manaSymbols : List<String>){
+
+        for (i in manaSymbols) {
+
+            when (i)  {
+
+
+            }
+
+        }
 
     }
 
@@ -55,6 +68,7 @@ class SharedViewModel @Inject constructor(
 
             val result = repository.nwGetSingleCardImage(query)
             _singleCardData.value = result
+            getManaSymbols()
         }
     }
 
