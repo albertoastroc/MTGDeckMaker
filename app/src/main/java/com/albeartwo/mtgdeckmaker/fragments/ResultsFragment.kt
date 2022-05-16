@@ -40,7 +40,7 @@ class ResultsFragment : Fragment() {
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
             sharedViewModel._singleCardData.value = singleCardData
             view?.findNavController()?.navigate(
-            ResultsFragmentDirections.actionResultListToDisplayCardInfoFragment("results")
+            ResultsFragmentDirections.actionResultListToDisplayCardInfoFragment(singleCardData.name.toString())
             )
         })
 

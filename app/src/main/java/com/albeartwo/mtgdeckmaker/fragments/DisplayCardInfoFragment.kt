@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
@@ -18,6 +19,8 @@ class DisplayCardInfoFragment : Fragment() {
         inflater : LayoutInflater , container : ViewGroup? ,
         savedInstanceState : Bundle?
     ) : View {
+
+        sharedViewModel.getManaSymbols("ok")
 
         val binding = FragmentDisplayCardBinding.inflate(inflater)
 
@@ -35,6 +38,12 @@ class DisplayCardInfoFragment : Fragment() {
                 binding.saveCardButton.visibility = View.INVISIBLE
             }
         }
+
+        sharedViewModel.manaSymbols.observe(viewLifecycleOwner, Observer {
+
+            binding.manaCost.text = it.toString()
+
+        })
 
         binding.saveCardButton.setOnClickListener {
 

@@ -27,7 +27,18 @@ class SharedViewModel @Inject constructor(
     val singleCardData : LiveData<Data?>
         get() = _singleCardData
 
+    val _manaSymbols = MutableLiveData<List<String>>()
+
+    val manaSymbols : LiveData<List<String>>
+        get() = _manaSymbols
+
     var currentDeckId : Int = 0
+
+    fun getManaSymbols(string : String) {
+
+        _manaSymbols.value = _singleCardData.value?.mana_cost?.let { UtilityClass.getCmcArray(it) }
+
+    }
 
     fun getSearchResults(query : String) {
 
