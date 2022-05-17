@@ -7,9 +7,11 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.albeartwo.mtgdeckmaker.R
 import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.database.DeckWithCards
 import com.albeartwo.mtgdeckmaker.generated.Data
+import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -95,17 +97,38 @@ fun bindThumbnail(imgView : ImageView , imgUrl : String?) {
 }
 
 @BindingAdapter("manaSymbols")
-fun bindManaSymbols(imgView : ImageView, manaSymbols : List<String>){
+fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
-    for (i in manaSymbols.indices) {
-        val lp = LinearLayout.LayoutParams(200 , 200)
-        val linearLayout = LinearLayout(imgView.context)
-        imgView.layoutParams = lp
-        Glide.with(imgView.context)
-            .load(manaSymbols[i])
-            .override(200 , 200)
-            .into(imgView)
-        linearLayout.addView(imgView)
+    val resourceList = mutableListOf<Int>()
+
+    val whatever = manaSymbols?.let { UtilityClass.getCmcArray(it) }
+
+    if (whatever != null) {
+        for (i in whatever) {
+
+            when (i) {
+
+                "1" -> resourceList.add(R.drawable.ic_1_mana)
+                "W" -> resourceList.add(R.drawable.ic_white)
+                "B" -> resourceList.add(R.drawable.ic_black)
+
+            }
+
+        }
     }
+
+    for (i in resourceList.indices) {
+        val imageView = ImageView(linearLayout.context)
+        linearLayout.addView(imageView)
+
+        Glide.with(linearLayout.context)
+            .load(resourceList[i])
+            .override(200 , 200)
+            .into(imageView)
+
+
+    }
+
+
 
 }

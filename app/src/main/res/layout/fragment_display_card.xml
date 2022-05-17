@@ -83,18 +83,29 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline"
                 tools:text="Teferi" />
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
                 android:id="@+id/manaCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@{viewModel.manaSymbols.toString()}"
-                android:textColor="@color/black"
-                android:textSize="20sp"
+                app:manaSymbols="@{viewModel.singleCardData.mana_cost}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typeLine"
-                tools:text="3{U}" />
+                app:layout_constraintTop_toBottomOf="@+id/typeLine" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/manaCost"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:text="@{viewModel.manaSymbols.toString()}"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="20sp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/typeLine"-->
+<!--                tools:text="3{U}" />-->
 
             <TextView
                 android:id="@+id/oracleText"
