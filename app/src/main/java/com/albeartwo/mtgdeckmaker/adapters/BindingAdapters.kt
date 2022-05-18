@@ -112,8 +112,8 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
             when (i) {
 
                 "1" -> resourceList.add(R.drawable.ic_1_mana)
-                "W" -> resourceList.add(R.drawable.ic_white)
-                "B" -> resourceList.add(R.drawable.ic_black)
+                "W" -> resourceList.add(R.drawable.ic_white_mana)
+                "B" -> resourceList.add(R.drawable.ic_black_mana)
 
             }
 

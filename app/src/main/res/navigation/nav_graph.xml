@@ -95,14 +95,14 @@
     <fragment
         android:id="@+id/addNewDeckFragment"
         android:name="com.albeartwo.mtgdeckmaker.fragments.AddNewDeckFragment"
-        android:label="fragment_add_new_deck"
+        android:label="Add New Deck"
         tools:layout="@layout/fragment_add_new_deck">
-        <argument
-            android:name="currentDeckId"
-            app:argType="integer" />
         <action
             android:id="@+id/action_addNewDeckFragment_to_savedDecksFragment"
             app:destination="@id/savedDecksFragment" />
+        <argument
+            android:name="currentDeckId"
+            app:argType="integer" />
     </fragment>
 
 </navigation>
