@@ -6,21 +6,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.Data
-import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SharedViewModel @Inject constructor(
-    private val repository : Repository ,
+class DisplayCardInfoViewModel @Inject constructor(
+    private val repository : Repository
 ) : ViewModel() {
 
-    val _cardList = MutableLiveData<GetCardList?>()
-
-    val cardList : LiveData<GetCardList?>
-        get() = _cardList
+    var currentDeckId : Int = 0
 
     val _singleCardData = MutableLiveData<Data?>()
 
@@ -32,21 +28,10 @@ class SharedViewModel @Inject constructor(
     val manaSymbols : LiveData<List<String>>
         get() = _manaSymbols
 
-    var currentDeckId : Int = 0
-
     private fun getManaSymbols() {
 
         _manaSymbols.value = _singleCardData.value?.mana_cost?.let { UtilityClass.getCmcArray(it) }
 
-    }
-
-    fun getSearchResults(query : String) {
-
-        viewModelScope.launch {
-
-            val result = repository.nwGetSearchResultsList(query)
-            _cardList.value = result
-        }
     }
 
     fun getSingleCardData(query : String) {
@@ -68,4 +53,5 @@ class SharedViewModel @Inject constructor(
             card?.let { repository.insertCardIntoDb(it , currentDeckId) }
         }
     }
+
 }

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel" />
+            type="com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel" />
         <variable
             name="card"
             type="com.albeartwo.mtgdeckmaker.database.Card" />
