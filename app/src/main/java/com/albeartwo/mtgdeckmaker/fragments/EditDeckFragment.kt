@@ -29,7 +29,7 @@ class EditDeckFragment : Fragment() {
     ) : View {
 
         val binding = FragmentEditDeckBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.saveBt.setOnClickListener {

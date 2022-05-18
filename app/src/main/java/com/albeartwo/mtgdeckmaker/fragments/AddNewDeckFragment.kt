@@ -26,7 +26,7 @@ class AddNewDeckFragment : Fragment() {
     ) : View {
 
         val binding = FragmentAddNewDeckBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.saveNewDeckBt.setOnClickListener() {

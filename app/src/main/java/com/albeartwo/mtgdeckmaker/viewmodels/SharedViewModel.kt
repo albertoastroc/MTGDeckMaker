@@ -40,19 +40,6 @@ class SharedViewModel @Inject constructor(
 
     }
 
-    private fun setManaSymbols(manaSymbols : List<String>){
-
-        for (i in manaSymbols) {
-
-            when (i)  {
-
-
-            }
-
-        }
-
-    }
-
     fun getSearchResults(query : String) {
 
         viewModelScope.launch {

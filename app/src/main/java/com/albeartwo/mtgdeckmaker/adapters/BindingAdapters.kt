@@ -15,6 +15,7 @@ import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import timber.log.Timber
 
 
 @BindingAdapter("cardListData")
@@ -101,10 +102,12 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
     val resourceList = mutableListOf<Int>()
 
-    val whatever = manaSymbols?.let { UtilityClass.getCmcArray(it) }
+    val manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
 
-    if (whatever != null) {
-        for (i in whatever) {
+    if (manaArray != null) {
+        for (i in manaArray) {
+
+            Timber.d(("first loop $i"))
 
             when (i) {
 
@@ -117,9 +120,14 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
         }
     }
 
+    Timber.d("resource list $resourceList")
+    Timber.d("mana array $manaArray")
+
     for (i in resourceList.indices) {
         val imageView = ImageView(linearLayout.context)
         linearLayout.addView(imageView)
+
+        Timber.d("inside last loop $i")
 
         Glide.with(linearLayout.context)
             .load(resourceList[i])

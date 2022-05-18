@@ -28,7 +28,7 @@ class ResultsFragment : Fragment() {
 
         sharedViewModel.currentDeckId = ResultsFragmentArgs.fromBundle(requireArguments()).currentDeckId
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = sharedViewModel
 

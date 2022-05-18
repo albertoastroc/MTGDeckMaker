@@ -29,7 +29,7 @@ class DeckCardListFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding.lifecycleOwner = viewLifecycleOwner
 
         //Prevents listItem from blinking when Card.cardCount is updated
         binding.deckCardsListView.itemAnimator = null

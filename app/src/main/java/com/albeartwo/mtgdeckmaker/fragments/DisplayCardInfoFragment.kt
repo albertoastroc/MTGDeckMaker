@@ -21,7 +21,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         val binding = FragmentDisplayCardBinding.inflate(inflater)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = sharedViewModel
 
@@ -57,6 +57,6 @@ class DisplayCardInfoFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        sharedViewModel._singleCardData.value = null
+//        sharedViewModel._singleCardData.value = null
     }
 }
