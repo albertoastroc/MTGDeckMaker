@@ -37,7 +37,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         when (navigatedFrom) {
 
-            "deckCardList" -> binding.saveCardButton.visibility = View.INVISIBLE
+            "deck_card_list" -> binding.saveCardButton.visibility = View.INVISIBLE
         }
 
         binding.saveCardButton.setOnClickListener {

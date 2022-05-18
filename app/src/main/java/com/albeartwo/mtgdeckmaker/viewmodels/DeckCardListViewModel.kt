@@ -39,11 +39,15 @@ class DeckCardListViewModel @Inject constructor(
     fun removeFromDatabase(card : Card) {
 
         viewModelScope.launch {
-            if (deckId != null) {
+
+            deckId?.let {
 
                 repository.dbDeleteCardFromCardTable(card.cardDbId)
                 repository.dbDeleteCrossRef(card.oracleId , deckId)
             }
+
+
+
         }
     }
 }

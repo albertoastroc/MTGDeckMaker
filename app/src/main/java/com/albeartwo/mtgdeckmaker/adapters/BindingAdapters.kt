@@ -104,21 +104,39 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
     val manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
 
-    if (manaArray != null) {
-        for (i in manaArray) {
+    manaArray?.forEach { i ->
 
-            Timber.d(("first loop $i"))
+        when (i) {
 
-            when (i) {
-
-                "1" -> resourceList.add(R.drawable.ic_1_mana)
-                "W" -> resourceList.add(R.drawable.ic_white_mana)
-                "B" -> resourceList.add(R.drawable.ic_black_mana)
-
-            }
+            "1" -> resourceList.add(R.drawable.ic_1_mana)
+            "2" -> resourceList.add(R.drawable.ic_2_mana)
+            "3" -> resourceList.add(R.drawable.ic_3_mana)
+            "4" -> resourceList.add(R.drawable.ic_4_mana)
+            "5" -> resourceList.add(R.drawable.ic_5_mana)
+            "6" -> resourceList.add(R.drawable.ic_6_mana)
+            "7" -> resourceList.add(R.drawable.ic_7_mana)
+            "8" -> resourceList.add(R.drawable.ic_8_mana)
+            "9" -> resourceList.add(R.drawable.ic_9_mana)
+            "10" -> resourceList.add(R.drawable.ic_10_mana)
+            "11" -> resourceList.add(R.drawable.ic_11_mana)
+            "12" -> resourceList.add(R.drawable.ic_12_mana)
+            "13" -> resourceList.add(R.drawable.ic_13_mana)
+            "14" -> resourceList.add(R.drawable.ic_14_mana)
+            "15" -> resourceList.add(R.drawable.ic_15_mana)
+            "16" -> resourceList.add(R.drawable.ic_16_mana)
+            "17" -> resourceList.add(R.drawable.ic_17_mana)
+            "18" -> resourceList.add(R.drawable.ic_18_mana)
+            "19" -> resourceList.add(R.drawable.ic_19_mana)
+            "20" -> resourceList.add(R.drawable.ic_20_mana)
+            "R" -> resourceList.add(R.drawable.ic_red_mana)
+            "U" -> resourceList.add(R.drawable.ic_blue_mana)
+            "G" -> resourceList.add(R.drawable.ic_green_mana)
+            "W" -> resourceList.add(R.drawable.ic_white_mana)
+            "B" -> resourceList.add(R.drawable.ic_black_mana)
 
         }
     }
+
 
     Timber.d("resource list $resourceList")
     Timber.d("mana array $manaArray")
@@ -131,7 +149,7 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
         Glide.with(linearLayout.context)
             .load(resourceList[i])
-            .override(200 , 200)
+            .override(50 , 50)
             .into(imageView)
 
 
