@@ -13,8 +13,6 @@ class AddNewDeckViewModel @Inject constructor(
     private val repository : Repository,
 ) : ViewModel() {
 
-    var deckId : Int = 0
-
     fun insertDeck(deck : Deck) {
 
         viewModelScope.launch {
