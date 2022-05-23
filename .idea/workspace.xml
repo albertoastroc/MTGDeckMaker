@@ -13,10 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fcf33a0-e48a-461f-b7b0-a3a6663ddbfe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/adapters/BindingAdapters.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/adapters/BindingAdapters.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DisplayCardInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/DisplayCardInfoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/DeckCardListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/DeckCardListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/AddNewDeckViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/AddNewDeckViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
