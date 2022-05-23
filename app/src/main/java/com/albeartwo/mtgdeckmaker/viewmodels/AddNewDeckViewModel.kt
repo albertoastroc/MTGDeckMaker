@@ -2,7 +2,6 @@ package com.albeartwo.mtgdeckmaker.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.database.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,13 +12,13 @@ class AddNewDeckViewModel @Inject constructor(
     private val repository : Repository,
 ) : ViewModel() {
 
-    fun insertDeck(deck : Deck) {
+    fun insertDeck(deckName : String) {
 
         viewModelScope.launch {
 
-            if (! repository.dbDeckExists(deck.deckName)) {
+            if (! repository.dbDeckExists(deckName)) {
 
-                repository.dbInsertDeck(deck)
+                repository.dbInsertDeck(deckName)
             }
         }
     }

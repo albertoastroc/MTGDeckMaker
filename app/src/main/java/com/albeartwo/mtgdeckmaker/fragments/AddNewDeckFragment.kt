@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.albeartwo.mtgdeckmaker.database.Deck
 import com.albeartwo.mtgdeckmaker.databinding.FragmentAddNewDeckBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.AddNewDeckViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,8 +31,7 @@ class AddNewDeckFragment : Fragment() {
         binding.saveNewDeckBt.setOnClickListener() {
 
             val deckName = newDeckNameEt.text.toString()
-            val deck = Deck(deckName)
-            viewModel.insertDeck(deck)
+            viewModel.insertDeck(deckName)
 
             saveNewDeckBt.findNavController().navigate(AddNewDeckFragmentDirections.actionAddNewDeckFragmentToSavedDecksFragment())
         }

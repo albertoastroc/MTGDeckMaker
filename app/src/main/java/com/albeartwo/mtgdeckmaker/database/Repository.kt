@@ -29,14 +29,17 @@ class Repository @Inject constructor(
         }
     }
 
-
     suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
 
     suspend fun dbCardExists(oracleId : String , deckId : Int) : Boolean = cardDatabaseDao.cardExists(oracleId , deckId)
 
     suspend fun dbDeckExists(deckName : String) : Boolean = cardDatabaseDao.deckExists(deckName)
 
-    suspend fun dbInsertDeck(deck : Deck) = cardDatabaseDao.insertDeck(deck)
+    suspend fun dbInsertDeck(deckName : String)  {
+
+        val newDeck = Deck(deckName)
+        cardDatabaseDao.insertDeck(newDeck)
+    }
 
     fun dbGetDecksList() : LiveData<List<Deck>> = cardDatabaseDao.getDecksList()
 
