@@ -13,6 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fcf33a0-e48a-461f-b7b0-a3a6663ddbfe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/database/Repository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/database/Repository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/AddNewDeckFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/fragments/AddNewDeckFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/AddNewDeckViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/albeartwo/mtgdeckmaker/viewmodels/AddNewDeckViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
