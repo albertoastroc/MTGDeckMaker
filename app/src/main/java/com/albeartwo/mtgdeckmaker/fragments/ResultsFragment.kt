@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.CardListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.CardListener
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
-import com.albeartwo.mtgdeckmaker.viewmodels.ResultsListViewModel
+import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ResultsFragment : Fragment() {
 
-    private val resultsListViewModel : ResultsListViewModel by viewModels()
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? , savedInstanceState : Bundle?
@@ -26,15 +26,13 @@ class ResultsFragment : Fragment() {
 
         val binding = FragmentSearchResultsBinding.inflate(inflater)
 
-        resultsListViewModel.currentDeckId = ResultsFragmentArgs.fromBundle(requireArguments()).currentDeckId
-
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.viewModel = resultsListViewModel
+        binding.viewModel = sharedViewModel
 
         binding.executeSearchIv.setOnClickListener {
 
-            resultsListViewModel.getSearchResults(binding.searchInputEt.text.toString())
+            sharedViewModel.getSearchResults(binding.searchInputEt.text.toString())
         }
 
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->

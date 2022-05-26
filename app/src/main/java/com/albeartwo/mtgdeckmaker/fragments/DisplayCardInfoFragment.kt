@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.activityViewModels
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
-import com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel
+import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DisplayCardInfoFragment : Fragment() {
 
-    private val viewModel : DisplayCardInfoViewModel by viewModels()
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
@@ -25,7 +24,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.viewModel = viewModel
+        binding.viewModel = sharedViewModel
 
         //Checks what fragment was used to navigate here
 
@@ -33,7 +32,7 @@ class DisplayCardInfoFragment : Fragment() {
         val cardName = args.cardName
         val navigatedFrom = args.fragmentName
 
-        viewModel.getSingleCardData(cardName)
+        sharedViewModel.getSingleCardData(cardName)
 
         when (navigatedFrom) {
 
@@ -42,14 +41,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         binding.saveCardButton.setOnClickListener {
 
-            viewModel.saveCard()
-
-            findNavController().navigate(
-
-                DisplayCardInfoFragmentDirections.actionDisplayCardInfoFragmentToDeckCardListFragment(
-                    viewModel.currentDeckId
-                )
-            )
+            sharedViewModel.saveCard()
         }
 
         return binding.root
@@ -59,6 +51,6 @@ class DisplayCardInfoFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel._singleCardData.value = null
+        sharedViewModel._singleCardData.value = null
     }
 }

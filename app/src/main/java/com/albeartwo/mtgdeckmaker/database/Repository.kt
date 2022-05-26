@@ -35,10 +35,10 @@ class Repository @Inject constructor(
 
     suspend fun dbDeckExists(deckName : String) : Boolean = cardDatabaseDao.deckExists(deckName)
 
-    suspend fun dbInsertDeck(deckName : String)  {
+    suspend fun dbInsertDeck(deckName : String) : Long {
 
         val newDeck = Deck(deckName)
-        cardDatabaseDao.insertDeck(newDeck)
+        return cardDatabaseDao.insertDeck(newDeck)
     }
 
     fun dbGetDecksList() : LiveData<List<Deck>> = cardDatabaseDao.getDecksList()

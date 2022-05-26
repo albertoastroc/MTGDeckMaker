@@ -10,7 +10,7 @@ interface CardDatabaseDao {
     suspend fun insertCard(card : Card) : Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDeck(deck : Deck)
+    suspend fun insertDeck(deck : Deck) : Long
 
     @Query("UPDATE deck_table SET deck_name = :deckName WHERE deck_db_id = :deckId")
     suspend fun changeDeckName(deckName : String , deckId : Int)

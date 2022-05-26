@@ -36,6 +36,7 @@ fun bindDecksRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
 fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWithCards>?) {
 
     val adapter = recyclerView.adapter as DeckCardListAdapter
+    Timber.d("$data")
     val cardList = data?.first()?.cards?.sortedWith(
         compareBy({ it.producedMana } , { it.power } , { it.typeLine })
     )

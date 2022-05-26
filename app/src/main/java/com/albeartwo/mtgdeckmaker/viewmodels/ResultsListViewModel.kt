@@ -1,9 +1,6 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,14 +10,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ResultsListViewModel @Inject constructor(
     private val repository : Repository ,
+    private val savedStateHandle : SavedStateHandle
 ) : ViewModel() {
+
+    val deckId : Int? = savedStateHandle["current_deck_id"]
 
     val _cardList = MutableLiveData<GetCardList?>()
 
     val cardList : LiveData<GetCardList?>
         get() = _cardList
-
-    var currentDeckId : Int = 0
 
     fun getSearchResults(query : String) {
 

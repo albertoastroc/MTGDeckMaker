@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_resultList_to_displayCardInfoFragment"
             app:destination="@id/displayCardInfoFragment" />
-        <argument
-            android:name="currentDeckId"
-            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -29,9 +26,6 @@
         <action
             android:id="@+id/action_savedDecksFragment_to_deckCardListFragment"
             app:destination="@id/deckCardListFragment" />
-        <action
-            android:id="@+id/action_savedDecksFragment_to_addNewDeckFragment"
-            app:destination="@id/addNewDeckFragment" />
     </fragment>
     <fragment
         android:id="@+id/editDeckFragment"
@@ -64,9 +58,6 @@
         <action
             android:id="@+id/action_deckCardListFragment_to_savedDecksFragment"
             app:destination="@id/savedDecksFragment" />
-        <argument
-            android:name="currentDeckId"
-            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -82,27 +73,13 @@
         android:label="Card Details">
         <action
             android:id="@+id/action_displayCardInfoFragment_to_deckCardListFragment"
-            app:destination="@id/deckCardListFragment"
-            app:popUpTo="@id/deckCardListFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/deckCardListFragment" />
         <argument
             android:name="cardName"
             app:argType="string" />
         <argument
             android:name="fragmentName"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/addNewDeckFragment"
-        android:name="com.albeartwo.mtgdeckmaker.fragments.AddNewDeckFragment"
-        android:label="Add New Deck"
-        tools:layout="@layout/fragment_add_new_deck">
-        <action
-            android:id="@+id/action_addNewDeckFragment_to_savedDecksFragment"
-            app:destination="@id/savedDecksFragment" />
-        <argument
-            android:name="currentDeckId"
-            app:argType="integer" />
     </fragment>
 
 </navigation>

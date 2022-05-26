@@ -1,9 +1,6 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
@@ -13,10 +10,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DisplayCardInfoViewModel @Inject constructor(
-    private val repository : Repository
+    private val repository : Repository,
+    private val savedStateHandle : SavedStateHandle
 ) : ViewModel() {
 
-    var currentDeckId : Int = 0
+    var currentDeckId : Int? = savedStateHandle["current_deck_id"]
 
     val _singleCardData = MutableLiveData<Data?>()
 
@@ -50,7 +48,7 @@ class DisplayCardInfoViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            card?.let { repository.insertCardIntoDb(it , currentDeckId) }
+            card?.let { repository.insertCardIntoDb(it , currentDeckId !!) }
         }
     }
 
