@@ -18,7 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import timber.log.Timber
 
 
-@BindingAdapter("cardListData")
+@BindingAdapter("resultsListData")
 fun bindResultsRecyclerView(recyclerView : RecyclerView , data : List<Data>?) {
 
     val adapter = recyclerView.adapter as CardListAdapter
@@ -36,7 +36,6 @@ fun bindDecksRecyclerView(recyclerView : RecyclerView , data : List<Deck>?) {
 fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWithCards>?) {
 
     val adapter = recyclerView.adapter as DeckCardListAdapter
-    Timber.d("$data")
     val cardList = data?.first()?.cards?.sortedWith(
         compareBy({ it.producedMana } , { it.power } , { it.typeLine })
     )

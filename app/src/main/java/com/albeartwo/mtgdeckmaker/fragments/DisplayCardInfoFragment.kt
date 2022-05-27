@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DisplayCardInfoFragment : Fragment() {
@@ -25,6 +26,8 @@ class DisplayCardInfoFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = sharedViewModel
+
+        Timber.d("${sharedViewModel.deckId}")
 
         //Checks what fragment was used to navigate here
 

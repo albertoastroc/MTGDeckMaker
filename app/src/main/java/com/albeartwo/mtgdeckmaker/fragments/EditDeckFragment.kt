@@ -8,20 +8,20 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.R
 import com.albeartwo.mtgdeckmaker.databinding.FragmentEditDeckBinding
-import com.albeartwo.mtgdeckmaker.viewmodels.EditDeckViewModel
+import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit_deck.*
 
 @AndroidEntryPoint
 class EditDeckFragment : Fragment() {
 
-    private val viewModel : EditDeckViewModel by viewModels()
+    private val sharedViewModel : SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
@@ -30,16 +30,14 @@ class EditDeckFragment : Fragment() {
 
         val binding = FragmentEditDeckBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
+        binding.viewModel = sharedViewModel
 
         binding.saveBt.setOnClickListener {
 
-            viewModel.deckId?.let {
-
                 val deckName = deckNameEt.text.toString()
-                viewModel.changeDeckName(deckName , it)
+                sharedViewModel.changeDeckName(deckName , sharedViewModel.deckId)
                 saveBt.findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToDeckCardListFragment())
-            }
+
         }
 
         return binding.root
@@ -64,7 +62,7 @@ class EditDeckFragment : Fragment() {
                             .setMessage("Are you sure you want to delete this deck?")
                             .setPositiveButton("DELETE") { _ , _ ->
                                 //Deck ID checked for null at this point
-                                viewModel.deleteDeck(viewModel.deckId !!)
+                                sharedViewModel.deleteDeck(sharedViewModel.deckId)
                                 findNavController().navigate(EditDeckFragmentDirections.actionEditDeckFragmentToSavedDecksFragment())
                             }
                             .setNegativeButton("CANCEL" , null)

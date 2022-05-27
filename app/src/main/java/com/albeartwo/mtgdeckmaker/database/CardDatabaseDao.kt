@@ -29,7 +29,7 @@ interface CardDatabaseDao {
 
     //deletes one card from cross ref
     @Query("DELETE FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId")
-    suspend fun deleteFromCrossRef(oracleId : String , deckId : Int)
+    suspend fun deleteFromCrossRef(oracleId : String , deckId : Int?)
 
     //deletes one card from card table
     @Query("DELETE FROM card_table WHERE card_db_id = :cardDbId")

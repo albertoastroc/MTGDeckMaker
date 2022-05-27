@@ -13,6 +13,7 @@ import com.albeartwo.mtgdeckmaker.adapters.DeckCardListAdapter
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDeckCardListBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -28,6 +29,7 @@ class DeckCardListFragment : Fragment() {
         val binding = FragmentDeckCardListBinding.inflate(inflater)
 
         binding.viewModel = sharedViewModel
+        Timber.d("${sharedViewModel.deckId}")
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -35,6 +37,7 @@ class DeckCardListFragment : Fragment() {
         binding.deckCardsListView.itemAnimator = null
 
         binding.deckCardsListView.adapter = (DeckCardListAdapter { card , action ->
+
 
             sharedViewModel._singleCard.value = card
 

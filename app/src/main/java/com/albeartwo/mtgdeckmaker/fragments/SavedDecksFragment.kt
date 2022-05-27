@@ -15,6 +15,7 @@ import com.albeartwo.mtgdeckmaker.adapters.DecksListener
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSavedDecksBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -33,8 +34,9 @@ class SavedDecksFragment : Fragment() {
         binding.viewModel = sharedViewModel
 
         binding.decksListView.adapter = DecksListAdapter(DecksListener { singleDeckData ->
-
+            Timber.d("${singleDeckData.deckId} ${sharedViewModel.deckId}")
             sharedViewModel.deckId = singleDeckData.deckId
+            Timber.d("${singleDeckData.deckId} ${sharedViewModel.deckId}")
             findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment())
         })
 
