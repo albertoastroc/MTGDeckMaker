@@ -16,19 +16,16 @@ class Repository @Inject constructor(
 
     suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
 
-    suspend fun insertCardIntoDb(card : Card , currentDeckId : Int?) {
+    suspend fun insertCardIntoDb(card : Card , currentDeckId : Int) {
 
         val oracleId = card.oracleId
 
-        currentDeckId?.let {
+        if (! dbCardExists(oracleId , currentDeckId)) {
 
-            if (! dbCardExists(oracleId , currentDeckId)) {
+            val dbId = card.let { dbInsertCardCardTable(it) }
+            val deckCardRelation = DeckCardCrossRef(currentDeckId , dbId , oracleId)
+            deckCardRelation.let { dbInsertDeckCardCrossRef(it) }
 
-                val dbId = card.let { dbInsertCardCardTable(it) }
-                val deckCardRelation = DeckCardCrossRef(currentDeckId , dbId , oracleId)
-                deckCardRelation.let { dbInsertDeckCardCrossRef(it) }
-
-            }
         }
     }
 
@@ -48,7 +45,7 @@ class Repository @Inject constructor(
 
     fun dbGetCardsOfDeck(deckId : Int) : LiveData<List<DeckWithCards>> = cardDatabaseDao.getCardsOfDeck(deckId)
 
-    suspend fun dbDeleteCrossRef(oracleId : String , deckId : Int?) = cardDatabaseDao.deleteFromCrossRef(oracleId , deckId)
+    suspend fun dbDeleteCrossRef(oracleId : String , deckId : Int) = cardDatabaseDao.deleteFromCrossRef(oracleId , deckId)
 
     suspend fun dbAddOneCardQuantity(cardDbId : Int?) : Int = cardDatabaseDao.plusOneCardQuantity(cardDbId)
 

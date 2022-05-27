@@ -14,7 +14,6 @@ import com.albeartwo.mtgdeckmaker.adapters.CardListener
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSearchResultsBinding
 import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ResultsFragment : Fragment() {
@@ -30,8 +29,6 @@ class ResultsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = sharedViewModel
-
-        Timber.d("${sharedViewModel.deckId}")
 
         binding.executeSearchIv.setOnClickListener {
 

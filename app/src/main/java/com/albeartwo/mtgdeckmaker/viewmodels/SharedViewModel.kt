@@ -15,18 +15,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private var repository : Repository ,
+    private var repository : Repository,
 ) : ViewModel() {
 
     //Used by all
 
-    var deckId = 0
+    var deckId : Int = 0
 
     //Used by savedDecks
 
     val decks = repository.dbGetDecksList()
 
-    fun insertDeck(deckName : String) {
+    fun insertDeck(deckName : String)  {
 
         viewModelScope.launch {
 
@@ -75,9 +75,11 @@ class SharedViewModel @Inject constructor(
 
     //Used by DeckCardList
 
-    val deckWithCards = repository.dbGetCardsOfDeck(deckId)
+    //val cardList = deckId.let { repository.dbGetCardsOfDeck(it) }
 
-    internal val _singleCard = MutableLiveData<Card>()
+    val cardList = repository.dbGetCardsOfDeck(deckId)
+
+    val _singleCard = MutableLiveData<Card>()
 
     fun cardQuantAddOne(card : Card) {
 
@@ -118,24 +120,6 @@ class SharedViewModel @Inject constructor(
 
             val result = repository.nwGetSearchResultsList(query)
             _resultsList.value = result
-        }
-    }
-
-    //Used by edit deck
-
-    fun changeDeckName(deckName : String , deckId : Int) {
-
-        viewModelScope.launch {
-            repository.updateDeckName(deckName , deckId)
-        }
-    }
-
-    fun deleteDeck(deckId : Int) {
-
-        viewModelScope.launch {
-
-            repository.dbDeleteDeck(deckId)
-
         }
     }
 }
