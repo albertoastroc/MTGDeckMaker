@@ -37,7 +37,7 @@ class ResultsFragment : Fragment() {
 
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->
             view?.findNavController()?.navigate(
-            ResultsFragmentDirections.actionResultListToDisplayCardInfoFragment(singleCardData.name.toString(), "results")
+            ResultsFragmentDirections.actionResultListToDisplayCardInfoFragment(singleCardData.name.toString(), "results", viewModel.deckId!!)
             )
         })
 

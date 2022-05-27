@@ -51,7 +51,8 @@ class DeckCardListFragment : Fragment() {
                 "root" -> findNavController().navigate(
                     DeckCardListFragmentDirections.actionDeckCardListFragmentToDisplayCardInfoFragment(
                         card.cardName ,
-                        "deck_card_list"
+                        "deck_card_list",
+                        viewModel.deckId!!
                     )
                 )
             }
@@ -61,7 +62,7 @@ class DeckCardListFragment : Fragment() {
         binding.deckCardListFab.setOnClickListener {
 
             findNavController().navigate(
-                DeckCardListFragmentDirections.actionDeckCardListFragmentToResultList()
+                DeckCardListFragmentDirections.actionDeckCardListFragmentToResultList(viewModel.deckId!!)
             )
         }
 
