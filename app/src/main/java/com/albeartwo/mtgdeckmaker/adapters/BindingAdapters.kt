@@ -78,6 +78,7 @@ fun bindImage(imgView : ImageView , imgUrl : String?) {
 
         Glide.with(imgView.context)
             .load(imgUri)
+            .override(50,50)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .fitCenter()
             .into(imgView)
@@ -101,9 +102,11 @@ fun bindThumbnail(imgView : ImageView , imgUrl : String?) {
 @BindingAdapter("manaSymbols")
 fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
+    linearLayout.removeAllViews()
+
     val resourceList = mutableListOf<Int>()
 
-    val manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
+    var manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
 
     manaArray?.forEach { i ->
 
@@ -138,24 +141,14 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
         }
     }
 
-
-    Timber.d("resource list $resourceList")
-    Timber.d("mana array $manaArray")
-
     for (i in resourceList.indices) {
+
         val imageView = ImageView(linearLayout.context)
         linearLayout.addView(imageView)
-
-        Timber.d("inside last loop $i")
 
         Glide.with(linearLayout.context)
             .load(resourceList[i])
             .override(50 , 50)
             .into(imageView)
-
-
     }
-
-
-
 }
