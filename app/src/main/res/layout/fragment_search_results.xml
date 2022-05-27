@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel" />
+            type="com.albeartwo.mtgdeckmaker.viewmodels.ResultsListViewModel" />
 
 
     </data>
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="6dp"
-            app:cardListData="@{viewModel.resultsList.data}"
+            app:cardListData="@{viewModel.cardList.data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

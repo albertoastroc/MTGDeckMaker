@@ -16,7 +16,7 @@ class DeckCardListViewModel @Inject constructor(
     savedStateHandle : SavedStateHandle
 ) : ViewModel() {
 
-    val deckId : Int? = savedStateHandle["currentDeckId"]
+    val deckId : Int? = savedStateHandle["current_deck_id"]
 
     val cardList = deckId?.let { repository.dbGetCardsOfDeck(it) }
 

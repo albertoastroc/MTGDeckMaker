@@ -8,19 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.DecksListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.DecksListener
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSavedDecksBinding
-import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
+import com.albeartwo.mtgdeckmaker.viewmodels.SavedDecksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class SavedDecksFragment : Fragment() {
 
-    private val sharedViewModel : SharedViewModel by activityViewModels()
+    private val viewModel : SavedDecksViewModel by viewModels()
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
@@ -30,12 +30,11 @@ class SavedDecksFragment : Fragment() {
         val binding = FragmentSavedDecksBinding.inflate(inflater)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = sharedViewModel
+        binding.viewModel = viewModel
 
         binding.decksListView.adapter = DecksListAdapter(DecksListener { singleDeckData ->
 
-            sharedViewModel.deckId = singleDeckData.deckId
-            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment())
+            findNavController().navigate(SavedDecksFragmentDirections.actionSavedDecksFragmentToDeckCardListFragment(singleDeckData.deckId))
         })
 
         binding.savedDecksFab.setOnClickListener {
@@ -50,7 +49,7 @@ class SavedDecksFragment : Fragment() {
                 .setTitle("New Deck")
                 .setPositiveButton("CREATE") { _ , _ ->
 
-                    sharedViewModel.insertDeck(input.text.toString())
+                    viewModel.insertDeck(input.text.toString())
                 }
                 .setNegativeButton("CANCEL" , null)
                 .setIcon(android.R.drawable.ic_dialog_alert)

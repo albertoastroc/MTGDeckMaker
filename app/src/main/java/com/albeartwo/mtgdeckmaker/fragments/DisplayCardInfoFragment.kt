@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.albeartwo.mtgdeckmaker.databinding.FragmentDisplayCardBinding
-import com.albeartwo.mtgdeckmaker.viewmodels.SharedViewModel
+import com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DisplayCardInfoFragment : Fragment() {
 
-    private val sharedViewModel : SharedViewModel by activityViewModels()
+    private val viewModel : DisplayCardInfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater : LayoutInflater , container : ViewGroup? ,
@@ -24,7 +24,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.viewModel = sharedViewModel
+        binding.viewModel = viewModel
 
         //Checks what fragment was used to navigate here
 
@@ -32,7 +32,7 @@ class DisplayCardInfoFragment : Fragment() {
         val cardName = args.cardName
         val navigatedFrom = args.fragmentName
 
-        sharedViewModel.getSingleCardData(cardName)
+        viewModel.getSingleCardData(cardName)
 
         when (navigatedFrom) {
 
@@ -41,7 +41,7 @@ class DisplayCardInfoFragment : Fragment() {
 
         binding.saveCardButton.setOnClickListener {
 
-            sharedViewModel.saveCard()
+            viewModel.saveCard()
         }
 
         return binding.root
@@ -51,6 +51,6 @@ class DisplayCardInfoFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        sharedViewModel._singleCardData.value = null
+        viewModel._singleCardData.value = null
     }
 }

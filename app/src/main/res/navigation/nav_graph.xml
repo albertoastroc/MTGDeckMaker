@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_deckCardListFragment_to_savedDecksFragment"
             app:destination="@id/savedDecksFragment" />
+        <argument
+            android:name="current_deck_id"
+            app:argType="integer" />
     </fragment>
 
     <fragment
