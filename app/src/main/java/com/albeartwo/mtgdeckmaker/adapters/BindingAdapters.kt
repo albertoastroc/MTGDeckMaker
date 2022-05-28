@@ -78,7 +78,6 @@ fun bindImage(imgView : ImageView , imgUrl : String?) {
 
         Glide.with(imgView.context)
             .load(imgUri)
-            .override(50,50)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .fitCenter()
             .into(imgView)
@@ -106,7 +105,7 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
 
     val resourceList = mutableListOf<Int>()
 
-    var manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
+    val manaArray = manaSymbols?.let { UtilityClass.getCmcArray(it) }
 
     manaArray?.forEach { i ->
 

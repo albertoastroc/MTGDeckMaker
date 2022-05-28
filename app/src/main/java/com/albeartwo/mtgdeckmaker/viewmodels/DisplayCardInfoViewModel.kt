@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DisplayCardInfoViewModel @Inject constructor(
-    private val repository : Repository,
+    private val repository : Repository ,
     private val savedStateHandle : SavedStateHandle
 ) : ViewModel() {
 
@@ -20,6 +20,11 @@ class DisplayCardInfoViewModel @Inject constructor(
 
     val singleCardData : LiveData<Data?>
         get() = _singleCardData
+
+    val _inDeck = MutableLiveData<Boolean>()
+
+    val inDeck : LiveData<Boolean>
+        get() = _inDeck
 
     val _manaSymbols = MutableLiveData<List<String>>()
 
@@ -32,6 +37,11 @@ class DisplayCardInfoViewModel @Inject constructor(
 
     }
 
+    private suspend fun checkCardInDeck() {
+
+        _inDeck.value = singleCardData.value?.let { repository.dbCardExists(it.oracle_id, currentDeckId!!) }
+    }
+
     fun getSingleCardData(query : String) {
 
         viewModelScope.launch {
@@ -39,6 +49,8 @@ class DisplayCardInfoViewModel @Inject constructor(
             val result = repository.nwGetSingleCardImage(query)
             _singleCardData.value = result
             getManaSymbols()
+            checkCardInDeck()
+
         }
     }
 
