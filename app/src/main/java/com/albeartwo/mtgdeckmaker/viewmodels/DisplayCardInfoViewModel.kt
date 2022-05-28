@@ -39,7 +39,7 @@ class DisplayCardInfoViewModel @Inject constructor(
 
     private suspend fun checkCardInDeck() {
 
-        _inDeck.value = singleCardData.value?.let { repository.dbCardExists(it.oracle_id, currentDeckId!!) }
+        _inDeck.value = singleCardData.value?.let { currentDeckId?.let { deckId-> repository.dbCardExists(it.oracle_id, deckId) } }
     }
 
     fun getSingleCardData(query : String) {
@@ -48,6 +48,7 @@ class DisplayCardInfoViewModel @Inject constructor(
 
             val result = repository.nwGetSingleCardImage(query)
             _singleCardData.value = result
+            _inDeck.value = null
             getManaSymbols()
             checkCardInDeck()
 
@@ -60,7 +61,7 @@ class DisplayCardInfoViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            card?.let { repository.insertCardIntoDb(it , currentDeckId !!) }
+            card?.let { currentDeckId?.let { deckId -> repository.insertCardIntoDb(card , deckId) } }
         }
     }
 
