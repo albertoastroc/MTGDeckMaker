@@ -1,6 +1,7 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
 import androidx.lifecycle.*
+import com.albeartwo.mtgdeckmaker.R
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
@@ -40,6 +41,7 @@ class DisplayCardInfoViewModel @Inject constructor(
     private suspend fun checkCardInDeck() {
 
         _inDeck.value = singleCardData.value?.let { currentDeckId?.let { deckId-> repository.dbCardExists(it.oracle_id, deckId) } }
+
     }
 
     fun getSingleCardData(query : String) {
@@ -48,7 +50,6 @@ class DisplayCardInfoViewModel @Inject constructor(
 
             val result = repository.nwGetSingleCardImage(query)
             _singleCardData.value = result
-            _inDeck.value = null
             getManaSymbols()
             checkCardInDeck()
 

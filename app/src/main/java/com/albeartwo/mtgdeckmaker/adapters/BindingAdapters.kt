@@ -15,6 +15,7 @@ import com.albeartwo.mtgdeckmaker.other.UtilityClass
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import timber.log.Timber
 
 
@@ -41,6 +42,16 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
         compareBy({ it.producedMana } , { it.power } , { it.typeLine })
     )
     adapter.submitList(cardList)
+}
+
+@BindingAdapter("displayCardInfoFAB")
+fun bindDisplayCardInfoFAB(fab : FloatingActionButton, boolean : Boolean) {
+
+    when (boolean) {
+        true -> fab.setImageResource(android.R.drawable.ic_btn_speak_now)
+        false -> fab.setImageResource(android.R.drawable.ic_dialog_alert)
+    }
+
 }
 
 //Displays how many cards are in the deck if any

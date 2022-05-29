@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.albeartwo.mtgdeckmaker.adapters.DecksListAdapter
 import com.albeartwo.mtgdeckmaker.adapters.DecksListener
 import com.albeartwo.mtgdeckmaker.databinding.FragmentSavedDecksBinding
+import com.albeartwo.mtgdeckmaker.other.AnimateFab
 import com.albeartwo.mtgdeckmaker.viewmodels.SavedDecksViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,8 @@ class SavedDecksFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        AnimateFab.showFabWithAnimation(binding.savedDecksFab, 100)
 
         binding.decksListView.adapter = DecksListAdapter(DecksListener { singleDeckData ->
 

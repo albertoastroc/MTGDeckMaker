@@ -12,6 +12,6 @@
     <color name="deep_orange_100">#FFCCBC</color>
     <color name="gray_100">#F5F5F5</color>
 
-    <color name="red">#FF0000</color>
-    <color name="green">#00FF00</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
 </resources>
