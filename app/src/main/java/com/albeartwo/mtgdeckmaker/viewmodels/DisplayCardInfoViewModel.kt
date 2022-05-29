@@ -1,7 +1,7 @@
 package com.albeartwo.mtgdeckmaker.viewmodels
 
 import androidx.lifecycle.*
-import com.albeartwo.mtgdeckmaker.R
+import com.albeartwo.mtgdeckmaker.database.Card
 import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.Data
 import com.albeartwo.mtgdeckmaker.other.UtilityClass
@@ -27,6 +27,8 @@ class DisplayCardInfoViewModel @Inject constructor(
     val inDeck : LiveData<Boolean>
         get() = _inDeck
 
+    val _card = MutableLiveData<Card>()
+
     val _manaSymbols = MutableLiveData<List<String>>()
 
     val manaSymbols : LiveData<List<String>>
@@ -41,6 +43,9 @@ class DisplayCardInfoViewModel @Inject constructor(
     private suspend fun checkCardInDeck() {
 
         _inDeck.value = singleCardData.value?.let { currentDeckId?.let { deckId-> repository.dbCardExists(it.oracle_id, deckId) } }
+//        if (_inDeck.value == true) {
+//            _card.value = singleCardData.value?.let { currentDeckId?.let { deckId -> repository.dbGetCardByOracleDeckIds(it.oracle_id, deckId) } }
+//        }
 
     }
 
@@ -63,6 +68,21 @@ class DisplayCardInfoViewModel @Inject constructor(
         viewModelScope.launch {
 
             card?.let { currentDeckId?.let { deckId -> repository.insertCardIntoDb(card , deckId) } }
+        }
+    }
+
+    fun removeFromDatabase() {
+
+        viewModelScope.launch {
+
+            currentDeckId?.let {
+
+                repository.dbDeleteCardFromCardTable(_card.value?.cardDbId)
+                _card.value?.let { card -> repository.dbDeleteCrossRef(card.oracleId , currentDeckId !!) }
+            }
+
+
+
         }
     }
 

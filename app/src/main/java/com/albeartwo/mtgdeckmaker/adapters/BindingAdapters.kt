@@ -48,8 +48,8 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
 fun bindDisplayCardInfoFAB(fab : FloatingActionButton, boolean : Boolean) {
 
     when (boolean) {
-        true -> fab.setImageResource(android.R.drawable.ic_btn_speak_now)
-        false -> fab.setImageResource(android.R.drawable.ic_dialog_alert)
+        true -> fab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+        false -> fab.setImageResource(android.R.drawable.ic_input_add)
     }
 
 }

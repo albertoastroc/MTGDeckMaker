@@ -35,6 +35,10 @@ class Repository @Inject constructor(
 
     suspend fun dbDeckExists(deckName : String) : Boolean = cardDatabaseDao.deckExists(deckName)
 
+    suspend fun dbGetCardByOracleDeckIds(oracleId : String, deckId : Int) : Int = cardDatabaseDao.getCardByDeckIdOracleId(oracleId, deckId)
+    // implement total deletion of single card here?
+    // check how it's done in deck card list and prob copy that
+
     suspend fun dbInsertDeck(deckName : String) : Long {
 
         val newDeck = Deck(deckName)

@@ -14,7 +14,9 @@ import com.albeartwo.mtgdeckmaker.other.AnimateFab
 import com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_display_card.*
 
 @AndroidEntryPoint
 class DisplayCardInfoFragment : Fragment() {
@@ -33,7 +35,6 @@ class DisplayCardInfoFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-
         //Checks what fragment was used to navigate here
 
         val args = DisplayCardInfoFragmentArgs.fromBundle(requireArguments())
@@ -45,21 +46,40 @@ class DisplayCardInfoFragment : Fragment() {
         when (navigatedFrom) {
 
             "deck_card_list" -> binding.saveCardButton.visibility = View.INVISIBLE
-            "results" -> AnimateFab.showFabWithAnimation(binding.saveCardButton, 100)
+            "results"        -> AnimateFab.showFabWithAnimation(binding.saveCardButton , 100)
         }
 
         binding.saveCardButton.setOnClickListener {
 
-            binding.saveCardButton.setImageResource(android.R.drawable.ic_btn_speak_now)
-            YoYo.with(Techniques.FlipInX)
-                .duration(700)
-                .playOn(it)
-            viewModel.saveCard()
+            animateFab(binding.saveCardButton)
         }
 
         return binding.root
     }
 
+    fun animateFab(fab : FloatingActionButton) {
+
+        when (viewModel._inDeck.value) {
+            true -> {
+                YoYo.with(Techniques.FlipInX)
+                    .duration(700)
+                    .playOn(fab)
+                fab.setImageResource(android.R.drawable.ic_input_add)
+                fab.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.green, null))
+                viewModel.removeFromDatabase()
+            }
+            false -> {
+                YoYo.with(Techniques.FlipInX)
+                    .duration(700)
+                    .playOn(fab)
+                fab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+                fab.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.red, null))
+                viewModel.saveCard()
+            }
+            else -> {}
+        }
+
+    }
 
 
     override fun onDestroy() {
