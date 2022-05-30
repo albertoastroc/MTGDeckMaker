@@ -23,12 +23,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="80dp">
 
         <ImageView
             android:id="@+id/thumbnail_image_view"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,65 +37,71 @@
         <TextView
             android:id="@+id/card_type_line"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingBottom="8dp"
             android:text="@{card.typeLine}"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/minusOneTv"
-            app:layout_constraintStart_toEndOf="@+id/thumbnail_image_view" />
+            app:layout_constraintEnd_toStartOf="@+id/minusOneBt"
+            app:layout_constraintStart_toEndOf="@+id/thumbnail_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
         <TextView
             android:id="@+id/card_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:paddingLeft="8dp"
-            android:paddingTop="8dp"
             android:paddingRight="8dp"
             android:text="@{card.cardName}"
-            app:layout_constraintEnd_toStartOf="@+id/minusOneTv"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/minusOneBt"
             app:layout_constraintStart_toStartOf="@+id/card_type_line"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/minusOneTv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_corner_button"
-            android:gravity="center"
-            android:text="@string/minus"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/currentCardCountTv"
-            app:layout_constraintEnd_toStartOf="@+id/currentCardCountTv"
-            app:layout_constraintTop_toTopOf="@+id/currentCardCountTv" />
 
         <TextView
             android:id="@+id/currentCardCountTv"
             android:layout_width="25dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
+            android:layout_height="25dp"
+            android:textAlignment="center"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/addOneTv"
-            app:layout_constraintEnd_toStartOf="@+id/addOneTv"
-            app:layout_constraintTop_toTopOf="@+id/addOneTv" />
+            app:layout_constraintBottom_toBottomOf="@+id/addOneBt"
+            app:layout_constraintEnd_toStartOf="@+id/addOneBt"
+            app:layout_constraintTop_toTopOf="@+id/addOneBt" />
 
-        <TextView
-            android:id="@+id/addOneTv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_corner_button"
-            android:gravity="center"
-            android:text="@string/plus"
-            android:textColor="@color/white"
-            android:textSize="24sp"
+        <ImageButton
+            android:id="@+id/minusOneBt"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_remove_48px"
+            app:layout_constraintBottom_toBottomOf="@+id/addOneBt"
+            app:layout_constraintEnd_toStartOf="@+id/currentCardCountTv"
+            app:layout_constraintTop_toTopOf="@+id/addOneBt" />
+
+        <ImageButton
+            android:id="@+id/addOneBt"
+            android:layout_width="35dp"
+            android:layout_height="0dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add_48px"
             app:layout_constraintBottom_toBottomOf="@+id/card_type_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/card_name" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

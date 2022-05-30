@@ -22,12 +22,12 @@ class DeckCardListAdapter(val clickListener : (Card , String) -> Unit) : ListAda
 
             binding.currentCardCountTv.text = card.cardCount.toString()
 
-            binding.addOneTv.setOnClickListener {
+            binding.addOneBt.setOnClickListener {
 
                 clickListener(card , "plus_one")
             }
 
-            binding.minusOneTv.setOnClickListener {
+            binding.minusOneBt.setOnClickListener {
 
                 clickListener(card , "minus_one")
             }
