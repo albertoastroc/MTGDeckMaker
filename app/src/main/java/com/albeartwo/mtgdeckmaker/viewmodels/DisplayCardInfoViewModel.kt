@@ -43,10 +43,6 @@ class DisplayCardInfoViewModel @Inject constructor(
     private suspend fun checkCardInDeck() {
 
         _inDeck.value = singleCardData.value?.let { currentDeckId?.let { deckId-> repository.dbCardExists(it.oracle_id, deckId) } }
-//        if (_inDeck.value == true) {
-//            _card.value = singleCardData.value?.let { currentDeckId?.let { deckId -> repository.dbGetCardByOracleDeckIds(it.oracle_id, deckId) } }
-//        }
-
     }
 
     fun getSingleCardData(query : String) {
@@ -68,22 +64,8 @@ class DisplayCardInfoViewModel @Inject constructor(
         viewModelScope.launch {
 
             card?.let { currentDeckId?.let { deckId -> repository.insertCardIntoDb(card , deckId) } }
+            checkCardInDeck()
         }
     }
-
-    fun removeFromDatabase() {
-
-        viewModelScope.launch {
-
-            currentDeckId?.let {
-
-                repository.dbDeleteCardFromCardTable(_card.value?.cardDbId)
-                _card.value?.let { card -> repository.dbDeleteCrossRef(card.oracleId , currentDeckId !!) }
-            }
-
-
-
-        }
-    }
-
 }
+

@@ -48,7 +48,7 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
 fun bindDisplayCardInfoFAB(fab : FloatingActionButton, boolean : Boolean) {
 
     when (boolean) {
-        true -> fab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
+        true -> fab.setImageResource(R.drawable.check)
         false -> fab.setImageResource(android.R.drawable.ic_input_add)
     }
 

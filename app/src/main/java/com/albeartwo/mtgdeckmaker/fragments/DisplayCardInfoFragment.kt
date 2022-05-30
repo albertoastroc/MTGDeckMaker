@@ -15,8 +15,10 @@ import com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_display_card.*
+import timber.log.Timber
 
 @AndroidEntryPoint
 class DisplayCardInfoFragment : Fragment() {
@@ -60,27 +62,24 @@ class DisplayCardInfoFragment : Fragment() {
     fun animateFab(fab : FloatingActionButton) {
 
         when (viewModel._inDeck.value) {
-            true -> {
-                YoYo.with(Techniques.FlipInX)
-                    .duration(700)
-                    .playOn(fab)
-                fab.setImageResource(android.R.drawable.ic_input_add)
-                fab.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.green, null))
-                viewModel.removeFromDatabase()
+            true  -> {
+
+                val mySnackbar = Snackbar.make(fab , "${viewModel.singleCardData.value?.name} is already in the deck" , Snackbar.LENGTH_LONG)
+                mySnackbar.show()
             }
             false -> {
-                YoYo.with(Techniques.FlipInX)
+
+                YoYo.with(Techniques.BounceIn)
                     .duration(700)
                     .playOn(fab)
-                fab.setImageResource(android.R.drawable.ic_menu_close_clear_cancel)
-                fab.setBackgroundColor(ResourcesCompat.getColor(resources, R.color.red, null))
+                fab.setImageResource(R.drawable.check)
                 viewModel.saveCard()
+                val mySnackbar = Snackbar.make(fab , "${viewModel.singleCardData.value?.name} has been added to deck" , Snackbar.LENGTH_LONG)
+                mySnackbar.show()
             }
-            else -> {}
+            else  -> {}
         }
-
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
