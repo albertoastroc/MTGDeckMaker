@@ -47,8 +47,8 @@ fun bindDeckCardsRecyclerView(recyclerView : RecyclerView , data : List<DeckWith
 fun bindDisplayCardInfoFAB(fab : FloatingActionButton, boolean : Boolean) {
 
     when (boolean) {
-        true -> fab.setImageResource(R.drawable.check)
-        false -> fab.setImageResource(android.R.drawable.ic_input_add)
+        true -> fab.setImageResource(R.drawable.ic_done_48px)
+        false -> fab.setImageResource(R.drawable.ic_add_48px)
     }
 
 }
@@ -131,6 +131,13 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
             "8" -> resourceList.add(R.drawable.ic_8_mana)
             "9" -> resourceList.add(R.drawable.ic_9_mana)
             "10" -> resourceList.add(R.drawable.ic_10_mana)
+            "R" -> resourceList.add(R.drawable.ic_red_mana)
+            "U" -> resourceList.add(R.drawable.ic_blue_mana)
+            "G" -> resourceList.add(R.drawable.ic_green_mana)
+            "W" -> resourceList.add(R.drawable.ic_white_mana)
+            "B" -> resourceList.add(R.drawable.ic_black_mana)
+            "X" -> resourceList.add(R.drawable.ic_x_mana)
+            "C" -> resourceList.add(R.drawable.ic_colorless_mana)
             "11" -> resourceList.add(R.drawable.ic_11_mana)
             "12" -> resourceList.add(R.drawable.ic_12_mana)
             "13" -> resourceList.add(R.drawable.ic_13_mana)
@@ -141,14 +148,23 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
             "18" -> resourceList.add(R.drawable.ic_18_mana)
             "19" -> resourceList.add(R.drawable.ic_19_mana)
             "20" -> resourceList.add(R.drawable.ic_20_mana)
-            "R" -> resourceList.add(R.drawable.ic_red_mana)
-            "U" -> resourceList.add(R.drawable.ic_blue_mana)
-            "G" -> resourceList.add(R.drawable.ic_green_mana)
-            "W" -> resourceList.add(R.drawable.ic_white_mana)
-            "B" -> resourceList.add(R.drawable.ic_black_mana)
+            "B/G" -> resourceList.add(R.drawable.ic_bg_mana)
+            "B/R" -> resourceList.add(R.drawable.ic_br_mana)
+            "W/B" -> resourceList.add(R.drawable.ic_wb_mana)
+            "W/U" -> resourceList.add(R.drawable.ic_wu_mana)
+            "R/G" -> resourceList.add(R.drawable.ic_rg_mana)
+            "R/W" -> resourceList.add(R.drawable.ic_rw_mana)
+            "U/B" -> resourceList.add(R.drawable.ic_ub_mana)
+            "U/R" -> resourceList.add(R.drawable.ic_ur_mana)
+            "G/W" -> resourceList.add(R.drawable.ic_gw_mana)
+            "G/U" -> resourceList.add(R.drawable.ic_gu_mana)
 
         }
     }
+
+    Timber.d("$resourceList")
+    Timber.d("$manaArray")
+    Timber.d("$manaSymbols")
 
     for (i in resourceList.indices) {
 

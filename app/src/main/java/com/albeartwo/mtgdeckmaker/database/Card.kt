@@ -32,7 +32,10 @@ data class Card(
     var thumbnailUrl : String = "" ,
 
     @ColumnInfo(name = "produced_mana")
-    var producedMana : String? = null
+    var producedMana : String? = null,
+
+    @ColumnInfo(name =  "loyalty")
+    var loyalty : String? = null
 
 ) {
 

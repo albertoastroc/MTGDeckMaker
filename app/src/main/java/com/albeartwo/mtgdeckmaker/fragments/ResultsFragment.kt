@@ -32,7 +32,7 @@ class ResultsFragment : Fragment() {
 
         binding.executeSearchIv.setOnClickListener {
 
-            viewModel.getSearchResults(binding.searchInputEt.text.toString())
+            viewModel.getSearchResults(binding.searchInputEt.text.toString(), requireContext())
         }
 
         binding.cardList.adapter = CardListAdapter(CardListener { singleCardData ->

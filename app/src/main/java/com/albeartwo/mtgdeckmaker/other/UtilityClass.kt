@@ -19,6 +19,7 @@ class UtilityClass {
                 this.typeLine = cardData.type_line.toString()
                 this.thumbnailUrl = cardData.image_uris?.art_crop.toString()
                 this.producedMana = cardData.produced_mana.toString()
+                this.loyalty = cardData.loyalty.toString()
             }
 
             return newCard

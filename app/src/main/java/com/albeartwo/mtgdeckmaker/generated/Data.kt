@@ -33,6 +33,7 @@ data class Data(
     val keywords: List<String>? = null ,
     val lang: String? = null ,
     val layout: String? = null ,
+    val loyalty: String? = null,
     val legalities: Legalities? = null ,
     val mana_cost: String? = null ,
     val mtgo_foil_id: Int? = null ,

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.albeartwo.mtgdeckmaker.viewmodels.DisplayCardInfoViewModel" />
@@ -96,43 +97,44 @@
                 android:id="@+id/creaturePower"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@{viewModel.singleCardData.power}"
                 android:textColor="@color/black"
                 android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/slash"
                 app:layout_constraintEnd_toStartOf="@+id/slash"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/oracleText"
+                app:layout_constraintTop_toTopOf="@+id/slash"
                 tools:text="6" />
 
             <TextView
                 android:id="@+id/creatureToughness"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="center"
                 android:text="@{viewModel.singleCardData.toughness}"
                 android:textColor="@color/black"
                 android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/slash"
                 app:layout_constraintTop_toBottomOf="@+id/oracleText"
+                app:layout_constraintVertical_bias="1.0"
                 tools:text="5" />
 
             <TextView
                 android:id="@+id/slash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/forward_slash"
+                android:visibility="@{viewModel.isCreatureOrPlaneswalker() ? View.VISIBLE : View.INVISIBLE}"
+                android:text="@{viewModel.isPlaneswalker() ? viewModel.singleCardData.loyalty : @string/forward_slash}"
                 android:textColor="@color/black"
-                android:textSize="34sp"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="@+id/creatureToughness"
+                app:layout_constraintEnd_toStartOf="@+id/creatureToughness"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/oracleText" />
+                app:layout_constraintTop_toTopOf="@+id/creatureToughness" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

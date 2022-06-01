@@ -43,7 +43,7 @@ class DisplayCardInfoFragment : Fragment() {
         val cardName = args.cardName
         val navigatedFrom = args.fragmentName
 
-        viewModel.getSingleCardData(cardName)
+        viewModel.getSingleCardData(cardName, requireContext())
 
         when (navigatedFrom) {
 
@@ -72,7 +72,7 @@ class DisplayCardInfoFragment : Fragment() {
                 YoYo.with(Techniques.BounceIn)
                     .duration(700)
                     .playOn(fab)
-                fab.setImageResource(R.drawable.check)
+                fab.setImageResource(R.drawable.ic_done_48px)
                 viewModel.saveCard()
                 val mySnackbar = Snackbar.make(fab , "${viewModel.singleCardData.value?.name} has been added to deck" , Snackbar.LENGTH_LONG)
                 mySnackbar.show()
