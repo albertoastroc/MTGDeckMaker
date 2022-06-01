@@ -8,7 +8,7 @@ class UtilityClass {
 
     companion object {
 
-        fun convertDataToCard(cardData :Data) : Card {
+        fun convertDataToCard(cardData : Data) : Card {
 
             val newCard = Card().apply {
 
@@ -29,71 +29,91 @@ class UtilityClass {
         //creating two lists so that symbols go in the right order
         fun getCmcArray(manaString : String) : List<String> {
 
+
             Timber.d("1.1 $manaString")
 
             var string = manaString
 
             val list = mutableListOf<String>()
 
-            val splitSymbolList = mutableListOf<String>()
+            if (string.contains("/")) {
 
-            while (string.contains("/")) {
+                val slashIndex = string.indexOf("/")
 
-                val splitSymbol = extractSplitMana(string)
-                splitSymbolList.add(splitSymbol)
-                string = string.replaceFirst(splitSymbol, "")
+                if ((string[slashIndex + 1]) == '/' || (string[slashIndex - 1]) == '/') {
+                    //handle split cards
+                }
+
+            } else {
+
+                val splitSymbolList = mutableListOf<String>()
+
+                while (string.contains("/")) {
+
+                    val splitSymbol = extractSplitMana(string)
+                    splitSymbolList.add(splitSymbol)
+                    string = string.replaceFirst(splitSymbol , "")
+
+                }
+
+                list.addAll(extractSimpleMana(string))
+                list.addAll(splitSymbolList)
+
+                Timber.d("1.2 $list")
 
             }
 
-            list.addAll(extractSimpleMana(string))
-            list.addAll(splitSymbolList)
-
-            Timber.d("1.2 $list")
             return list
         }
 
-        fun extractSplitMana(sample : String) : String{
+            fun extractSplitMana(sample : String) : String {
 
-            Timber.d("2.1 $sample")
+                Timber.d("2.1 $sample")
 
-            val regex = Regex("[^0-9a-zA-Z/]+")
+                val regex = Regex("[^0-9a-zA-Z/]+")
 
-            val symbols = regex.replace(sample, "")
+                val symbols = regex.replace(sample , "")
 
-            var splitSymbol = ""
+                var splitSymbol = ""
 
-            if (symbols.contains("/")) {
+                if (symbols.contains("/")) {
 
-                val slashIndex = symbols.indexOf("/")
+                    val slashIndex = symbols.indexOf("/")
 
-                splitSymbol += symbols[slashIndex-1]
-                splitSymbol += "/"
-                splitSymbol += symbols[slashIndex+1]
+                    if ((symbols[slashIndex + 1]) == '/' || (symbols[slashIndex - 1]) == '/') {
+                        //handle split cards
+                        return splitSymbol
+                    } else {
+
+                        splitSymbol += symbols[slashIndex - 1]
+                        splitSymbol += "/"
+                        splitSymbol += symbols[slashIndex + 1]
+                    }
+                }
+
+                Timber.d("2.2 $splitSymbol")
+
+                return splitSymbol
             }
 
-            Timber.d("2.2 $splitSymbol")
+            fun extractSimpleMana(sample : String) : List<String> {
 
-            return splitSymbol
-        }
+                Timber.d("3.1 $sample")
 
-        fun extractSimpleMana(sample : String) : List<String> {
+                val regex = Regex("[^0-9a-zA-Z]+")
 
-            Timber.d("3.1 $sample")
+                val symbols = regex.replace(sample , "")
 
-            val regex = Regex("[^0-9a-zA-Z]+")
+                val simpleList = mutableListOf<String>()
 
-            val symbols = regex.replace(sample, "")
+                for (i in symbols) {
 
-            val simpleList = mutableListOf<String>()
+                    simpleList.add(i.toString())
+                }
 
-            for (i in symbols) {
+                Timber.d("3.2 $simpleList")
 
-                simpleList.add(i.toString())
+                return simpleList
             }
-
-            Timber.d("3.2 $simpleList")
-
-            return simpleList
         }
     }
-}

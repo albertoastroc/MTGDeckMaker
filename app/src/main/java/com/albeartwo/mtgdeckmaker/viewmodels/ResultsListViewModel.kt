@@ -12,6 +12,7 @@ import com.albeartwo.mtgdeckmaker.database.Repository
 import com.albeartwo.mtgdeckmaker.generated.GetCardList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -36,6 +37,7 @@ class ResultsListViewModel @Inject constructor(
 
                 val result = repository.nwGetSearchResultsList(query)
                 _cardList.value = result
+                Timber.d("$result")
 
             }
         } else {
