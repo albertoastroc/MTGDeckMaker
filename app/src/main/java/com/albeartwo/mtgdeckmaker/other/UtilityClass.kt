@@ -2,6 +2,7 @@ package com.albeartwo.mtgdeckmaker.other
 
 import com.albeartwo.mtgdeckmaker.database.Card
 import com.albeartwo.mtgdeckmaker.generated.Data
+import timber.log.Timber
 
 class UtilityClass {
 
@@ -25,25 +26,35 @@ class UtilityClass {
             return newCard
         }
 
+        //creating two lists so that symbols go in the right order
         fun getCmcArray(manaString : String) : List<String> {
+
+            Timber.d("1.1 $manaString")
 
             var string = manaString
 
             val list = mutableListOf<String>()
 
+            val splitSymbolList = mutableListOf<String>()
+
             while (string.contains("/")) {
 
-                val splitSymbol = extractSplitSymbols(string)
-                list.add(splitSymbol)
-                string = string.replace(splitSymbol, "")
+                val splitSymbol = extractSplitMana(string)
+                splitSymbolList.add(splitSymbol)
+                string = string.replaceFirst(splitSymbol, "")
 
             }
 
             list.addAll(extractSimpleMana(string))
+            list.addAll(splitSymbolList)
+
+            Timber.d("1.2 $list")
             return list
         }
 
-        fun extractSplitSymbols(sample : String) : String{
+        fun extractSplitMana(sample : String) : String{
+
+            Timber.d("2.1 $sample")
 
             val regex = Regex("[^0-9a-zA-Z/]+")
 
@@ -60,10 +71,14 @@ class UtilityClass {
                 splitSymbol += symbols[slashIndex+1]
             }
 
+            Timber.d("2.2 $splitSymbol")
+
             return splitSymbol
         }
 
         fun extractSimpleMana(sample : String) : List<String> {
+
+            Timber.d("3.1 $sample")
 
             val regex = Regex("[^0-9a-zA-Z]+")
 
@@ -75,6 +90,8 @@ class UtilityClass {
 
                 simpleList.add(i.toString())
             }
+
+            Timber.d("3.2 $simpleList")
 
             return simpleList
         }

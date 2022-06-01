@@ -162,9 +162,9 @@ fun bindManaSymbols(linearLayout : LinearLayout, manaSymbols : String?){
         }
     }
 
-    Timber.d("$resourceList")
-    Timber.d("$manaArray")
-    Timber.d("$manaSymbols")
+//    Timber.d("$resourceList")
+//    Timber.d("$manaArray")
+//    Timber.d("$manaSymbols")
 
     for (i in resourceList.indices) {
 
