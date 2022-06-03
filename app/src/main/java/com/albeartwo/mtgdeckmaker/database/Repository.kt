@@ -8,13 +8,13 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val cardDatabaseDao : CardDatabaseDao ,
+    private val cardDao : CardDao ,
     private val retrofit : Retrofit
 ) {
 
-    suspend fun dbInsertCardCardTable(card : Card) : Long = cardDatabaseDao.insertCard(card)
+    suspend fun dbInsertCardCardTable(card : Card) : Long = cardDao.insertCard(card)
 
-    suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDatabaseDao.insertDeckCardCrossRef(crossRef)
+    suspend fun dbInsertDeckCardCrossRef(crossRef : DeckCardCrossRef) = cardDao.insertDeckCardCrossRef(crossRef)
 
     suspend fun insertCardIntoDb(card : Card , currentDeckId : Int) {
 
@@ -29,40 +29,34 @@ class Repository @Inject constructor(
         }
     }
 
-    suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDatabaseDao.removeFromDatabase(cardDbId)
+    suspend fun dbDeleteCardFromCardTable(cardDbId : Int?) : Int = cardDao.removeFromDatabase(cardDbId)
 
-    suspend fun dbCardExists(oracleId : String , deckId : Int) : Boolean = cardDatabaseDao.cardExists(oracleId , deckId)
-
-    suspend fun dbDeckExists(deckName : String) : Boolean = cardDatabaseDao.deckExists(deckName)
-
-    suspend fun dbGetCardByOracleDeckIds(oracleId : String, deckId : Int) : Int = cardDatabaseDao.getCardByDeckIdOracleId(oracleId, deckId)
-    // implement total deletion of single card here?
-    // check how it's done in deck card list and prob copy that
+    suspend fun dbCardExists(oracleId : String , deckId : Int) : Boolean = cardDao.cardExists(oracleId , deckId)
 
     suspend fun dbInsertDeck(deckName : String) : Long {
 
         val newDeck = Deck(deckName)
-        return cardDatabaseDao.insertDeck(newDeck)
+        return cardDao.insertDeck(newDeck)
     }
 
-    fun dbGetDecksList() : LiveData<List<Deck>> = cardDatabaseDao.getDecksList()
+    fun dbGetDecksList() : LiveData<List<Deck>> = cardDao.getDecksList()
 
-    fun dbGetCardsOfDeck(deckId : Int) : LiveData<List<DeckWithCards>> = cardDatabaseDao.getCardsOfDeck(deckId)
+    fun dbGetCardsOfDeck(deckId : Int) : LiveData<List<DeckWithCards>> = cardDao.getCardsOfDeck(deckId)
 
-    suspend fun dbDeleteCrossRef(oracleId : String , deckId : Int) = cardDatabaseDao.deleteFromCrossRef(oracleId , deckId)
+    suspend fun dbDeleteCrossRef(oracleId : String , deckId : Int) = cardDao.deleteFromCrossRef(oracleId , deckId)
 
-    suspend fun dbAddOneCardQuantity(cardDbId : Int?) : Int = cardDatabaseDao.plusOneCardQuantity(cardDbId)
+    suspend fun dbAddOneCardQuantity(cardDbId : Int?) : Int = cardDao.plusOneCardQuantity(cardDbId)
 
-    suspend fun dbSubtractOneCardQuantity(cardDbId : Int?) : Int = cardDatabaseDao.minusOneCardQuantity(cardDbId)
+    suspend fun dbSubtractOneCardQuantity(cardDbId : Int?) : Int = cardDao.minusOneCardQuantity(cardDbId)
 
-    suspend fun updateDeckName(deckName : String , deckId : Int) = cardDatabaseDao.changeDeckName(deckName , deckId)
+    suspend fun updateDeckName(deckName : String , deckId : Int) = cardDao.changeDeckName(deckName , deckId)
 
     suspend fun dbDeleteDeck(deckId : Int) {
 
-        val ids = cardDatabaseDao.getCardDbIdsToDelete(deckId)
-        cardDatabaseDao.deleteDeckContentsFromCardTable(ids)
-        cardDatabaseDao.deleteDeckContentsFromCrossRef(ids)
-        cardDatabaseDao.deleteDeckFromDeckTable(deckId)
+        val ids = cardDao.getCardDbIdsToDelete(deckId)
+        cardDao.deleteDeckContentsFromCardTable(ids)
+        cardDao.deleteDeckContentsFromCrossRef(ids)
+        cardDao.deleteDeckFromDeckTable(deckId)
 
     }
 

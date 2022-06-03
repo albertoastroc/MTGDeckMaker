@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface CardDatabaseDao {
+interface CardDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCard(card : Card) : Long
@@ -21,11 +21,11 @@ interface CardDatabaseDao {
     @Query("SELECT EXISTS (SELECT 1 FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId )")
     suspend fun cardExists(oracleId : String , deckId : Int) : Boolean
 
-    @Query("SELECT card_db_id FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId ")
-    suspend fun getCardByDeckIdOracleId(oracleId : String, deckId : Int) : Int
+//    @Query("SELECT card_db_id FROM deck_card_cross_ref WHERE oracle_id = :oracleId AND deck_db_id = :deckId ")
+//    suspend fun getCardByDeckIdOracleId(oracleId : String, deckId : Int) : Int
 
-    @Query("SELECT EXISTS (SELECT 1 FROM deck_table WHERE UPPER (deck_name) LIKE (:deckName))")
-    suspend fun deckExists(deckName : String) : Boolean
+//    @Query("SELECT EXISTS (SELECT 1 FROM deck_table WHERE UPPER (deck_name) LIKE (:deckName))")
+//    suspend fun deckExists(deckName : String) : Boolean
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertDeckCardCrossRef(crossRef : DeckCardCrossRef)

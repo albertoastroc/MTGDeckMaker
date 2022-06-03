@@ -6,5 +6,5 @@ import androidx.room.RoomDatabase
 @Database(entities = [Card::class , Deck::class , DeckCardCrossRef::class] , version = 2 , exportSchema = false)
 abstract class CardDatabase : RoomDatabase() {
 
-    abstract fun getCardDatabaseDao() : CardDatabaseDao
+    abstract fun getCardDatabaseDao() : CardDao
 }
