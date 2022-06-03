@@ -29,7 +29,6 @@ class UtilityClass {
         //creating two lists so that symbols go in the right order
         fun getCmcArray(manaString : String) : List<String> {
 
-
             Timber.d("1.1 $manaString")
 
             var string = manaString
@@ -47,8 +46,6 @@ class UtilityClass {
                     //handle split cards
                 } else {
 
-
-
                     while (string.contains("/")) {
 
                         val splitSymbol = extractSplitMana(string)
@@ -57,14 +54,8 @@ class UtilityClass {
 
                     }
 
-
-
                     Timber.d("1.2 $list")
-
                 }
-
-
-
             }
 
             list.addAll(extractSimpleMana(string))
