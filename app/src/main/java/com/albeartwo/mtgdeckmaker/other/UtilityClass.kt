@@ -36,84 +36,91 @@ class UtilityClass {
 
             val list = mutableListOf<String>()
 
+            val splitSymbolList = mutableListOf<String>()
+
             if (string.contains("/")) {
 
                 val slashIndex = string.indexOf("/")
 
                 if ((string[slashIndex + 1]) == '/' || (string[slashIndex - 1]) == '/') {
+                    return list
                     //handle split cards
+                } else {
+
+
+
+                    while (string.contains("/")) {
+
+                        val splitSymbol = extractSplitMana(string)
+                        splitSymbolList.add(splitSymbol)
+                        string = string.replaceFirst(splitSymbol , "")
+
+                    }
+
+
+
+                    Timber.d("1.2 $list")
+
                 }
 
-            } else {
 
-                val splitSymbolList = mutableListOf<String>()
-
-                while (string.contains("/")) {
-
-                    val splitSymbol = extractSplitMana(string)
-                    splitSymbolList.add(splitSymbol)
-                    string = string.replaceFirst(splitSymbol , "")
-
-                }
-
-                list.addAll(extractSimpleMana(string))
-                list.addAll(splitSymbolList)
-
-                Timber.d("1.2 $list")
 
             }
+
+            list.addAll(extractSimpleMana(string))
+            list.addAll(splitSymbolList)
 
             return list
         }
 
-            fun extractSplitMana(sample : String) : String {
+        fun extractSplitMana(sample : String) : String {
 
-                Timber.d("2.1 $sample")
+            Timber.d("2.1 $sample")
 
-                val regex = Regex("[^0-9a-zA-Z/]+")
+            val regex = Regex("[^0-9a-zA-Z/]+")
 
-                val symbols = regex.replace(sample , "")
+            val symbols = regex.replace(sample , "")
 
-                var splitSymbol = ""
+            var splitSymbol = ""
 
-                if (symbols.contains("/")) {
+            if (symbols.contains("/")) {
 
-                    val slashIndex = symbols.indexOf("/")
+                val slashIndex = symbols.indexOf("/")
 
-                    if ((symbols[slashIndex + 1]) == '/' || (symbols[slashIndex - 1]) == '/') {
-                        //handle split cards
-                        return splitSymbol
-                    } else {
+                if ((symbols[slashIndex + 1]) == '/' || (symbols[slashIndex - 1]) == '/') {
+                    //handle split cards
+                    return splitSymbol
+                } else {
 
-                        splitSymbol += symbols[slashIndex - 1]
-                        splitSymbol += "/"
-                        splitSymbol += symbols[slashIndex + 1]
-                    }
+                    splitSymbol += symbols[slashIndex - 1]
+                    splitSymbol += "/"
+                    splitSymbol += symbols[slashIndex + 1]
                 }
-
-                Timber.d("2.2 $splitSymbol")
-
-                return splitSymbol
             }
 
-            fun extractSimpleMana(sample : String) : List<String> {
+            Timber.d("2.2 $splitSymbol")
 
-                Timber.d("3.1 $sample")
+            return splitSymbol
+        }
 
-                val regex = Regex("[^0-9a-zA-Z]+")
+        fun extractSimpleMana(sample : String) : List<String> {
 
-                val symbols = regex.replace(sample , "")
+            Timber.d("3.1 $sample")
 
-                val simpleList = mutableListOf<String>()
+            val regex = Regex("[^0-9a-zA-Z]+")
 
-                for (i in symbols) {
+            val symbols = regex.replace(sample , "")
 
-                    simpleList.add(i.toString())
-                }
+            val simpleList = mutableListOf<String>()
 
-                Timber.d("3.2 $simpleList")
+            for (i in symbols) {
 
-                return simpleList
+                simpleList.add(i.toString())
             }
+
+            Timber.d("3.2 $simpleList")
+
+            return simpleList
         }
     }
+}
