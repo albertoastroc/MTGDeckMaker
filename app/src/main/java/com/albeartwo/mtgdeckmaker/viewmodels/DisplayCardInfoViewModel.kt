@@ -20,29 +20,27 @@ class DisplayCardInfoViewModel @Inject constructor(
 
     var currentDeckId : Int? = savedStateHandle["current_deck_id"]
 
-    val _singleCardData = MutableLiveData<Data?>()
+    private val _singleCardData = MutableLiveData<Data?>()
 
     val singleCardData : LiveData<Data?>
         get() = _singleCardData
 
-    val _inDeck = MutableLiveData<Boolean>()
+    private val _inDeck = MutableLiveData<Boolean>()
 
     val inDeck : LiveData<Boolean>
         get() = _inDeck
 
-    val _isCreatureOrPlaneswalker = MutableLiveData<Boolean>()
+    private val _isCreatureOrPlaneswalker = MutableLiveData<Boolean>()
 
     val isCreatureOrPlaneswalker : LiveData<Boolean>
         get() = _isCreatureOrPlaneswalker
 
-    val _isPlaneswalker = MutableLiveData<Boolean>()
+    private val _isPlaneswalker = MutableLiveData<Boolean>()
 
     val isPlaneswalker : LiveData<Boolean>
         get() = _isPlaneswalker
 
-    val _card = MutableLiveData<Card>()
-
-    val _manaSymbols = MutableLiveData<List<String>>()
+    private val _manaSymbols = MutableLiveData<List<String>>()
 
     val manaSymbols : LiveData<List<String>>
         get() = _manaSymbols
@@ -73,6 +71,8 @@ class DisplayCardInfoViewModel @Inject constructor(
     }
 
     fun getSingleCardData(query : String , context : Context) {
+
+        //Need to set up offline view
 
         if (isNetworkAvailable(context)) {
 

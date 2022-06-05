@@ -24,7 +24,7 @@ class ResultsListViewModel @Inject constructor(
 
     val deckId : Int? = savedStateHandle["current_deck_id"]
 
-    val _cardList = MutableLiveData<GetCardList?>()
+    private val _cardList = MutableLiveData<GetCardList?>()
 
     val cardList : LiveData<GetCardList?>
         get() = _cardList

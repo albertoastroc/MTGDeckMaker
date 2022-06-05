@@ -61,7 +61,7 @@ class DisplayCardInfoFragment : Fragment() {
 
     fun animateFab(fab : FloatingActionButton) {
 
-        when (viewModel._inDeck.value) {
+        when (viewModel.inDeck.value) {
             true  -> {
 
                 val mySnackbar = Snackbar.make(fab , "${viewModel.singleCardData.value?.name} is already in the deck" , Snackbar.LENGTH_LONG)
@@ -79,10 +79,5 @@ class DisplayCardInfoFragment : Fragment() {
             }
             else  -> {}
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel._singleCardData.value = null
     }
 }

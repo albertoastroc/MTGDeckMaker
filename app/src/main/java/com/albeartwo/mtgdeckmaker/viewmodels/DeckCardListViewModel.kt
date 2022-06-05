@@ -20,7 +20,7 @@ class DeckCardListViewModel @Inject constructor(
 
     val cardList = deckId?.let { repository.dbGetCardsOfDeck(it) }
 
-    internal val _singleCard = MutableLiveData<Card>()
+    val card = MutableLiveData<Card>()
 
     fun cardQuantAddOne(card : Card) {
 

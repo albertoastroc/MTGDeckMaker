@@ -36,7 +36,7 @@ class DeckCardListFragment : Fragment() {
 
         binding.deckCardsListView.adapter = (DeckCardListAdapter { card , action ->
 
-            viewModel._singleCard.value = card
+            viewModel.card.value = card
 
             when (action) {
 
