@@ -1,45 +1,11 @@
 # MTGDeckMaker
 
-Checklist
+Lookup cards and make a simple collection!
 
-- DeckCardList
-
-- Saved Decks
-
-- Home Fragment
-
-- Edit Deck Fragment
-
-Allow editing deck name of already saved deck
-add confirmation dialog when trying to delete deck
-
-- ResultList Fragment
-
-- DeckCardList Fragment
-
-remove type from list item, use recycler view categories to group cards
-remove all cards in deck from database
-
-- Detail Fragment
-
--Dependency Injection
-
--Repository
-
--Navigation drawer
+![screenshot2](https://user-images.githubusercontent.com/9427181/179847599-fc3c5da1-405b-4c87-93aa-7f6efccce048.png)
 
 
+![screenshot3](https://user-images.githubusercontent.com/9427181/179847623-e4617084-dd9a-49a2-9071-2ec0932ae2d4.png)
 
-Remove hard coded strings
 
-Make keyboard minimize when appropriate
-
-Make buttons look better
-
-Standardize naming convention
-
-Introduce transitions where appropriate
-
-Work on double faced cards
-
-Set up a dark theme
+![screenshot4](https://user-images.githubusercontent.com/9427181/179847637-afda76da-62e4-403c-ae09-9dfaf20a39fb.png)
